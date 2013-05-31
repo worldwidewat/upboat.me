@@ -1,4 +1,4 @@
-# Django settings for upboatme project.
+# Django settings for DjangoApplication project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'b))kc)v@y+=#mfxzm!x@l$-xe-(jf_^27gfw4tp8vq68b6voe='
+SECRET_KEY = 'rdb9vymhp7fu5c9)t60d63(*mc2z=40v*7ul)^r7hf$%u(m%&('
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -102,10 +102,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'upboatme.urls'
+ROOT_URLCONF = 'DjangoApplication.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'upboatme.wsgi.application'
+WSGI_APPLICATION = 'DjangoApplication.wsgi.application'
 
 import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'DjangoApplication.upboatme',
 )
 
 # A sample logging configuration. The only tangible logging
