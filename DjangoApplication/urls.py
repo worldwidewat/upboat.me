@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 'DjangoApplication.upboatme.views.home', name='home'),
+    url(r'^Home/$', 'DjangoApplication.upboatme.views.home', name='home'),
+    url(r'^Test/$', 'DjangoApplication.upboatme.views.test', name='test')
 )
