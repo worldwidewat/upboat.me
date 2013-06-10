@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'^Home/$', 'DjangoApplication.upboatme.views.home', name='home'),
-    url(r'^Test/$', 'DjangoApplication.upboatme.views.test', name='test')
+    url(r'^Test/$', 'DjangoApplication.upboatme.views.test', name='test'),
+    url(r'^TestText/$', 'DjangoApplication.upboatme.views.testText', name='testText')
 )
