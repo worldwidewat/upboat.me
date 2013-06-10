@@ -32,3 +32,7 @@ def testText(request):
     response = HttpResponse(mimetype="image/png")
     img.save(response, "PNG")
     return response
+
+
+def testParams(request, name, first, second):
+    return HttpResponse('<html><body>Name: ' + name + ', First: ' + first + ', Second: ' + second +'</body></html>')

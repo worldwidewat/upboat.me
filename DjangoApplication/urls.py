@@ -17,5 +17,7 @@ urlpatterns = patterns('',
 
     url(r'^Home/$', 'DjangoApplication.upboatme.views.home', name='home'),
     url(r'^Test/$', 'DjangoApplication.upboatme.views.test', name='test'),
-    url(r'^TestText/$', 'DjangoApplication.upboatme.views.testText', name='testText')
+    url(r'^TestText/$', 'DjangoApplication.upboatme.views.testText', name='testText'),
+    url(r'^TestParams/(?P<name>[\w-]+)/(?P<first>[\.\-~!$&\'()*+,;=:@\w]+)/(?P<second>[\.\-~!$&\'()*+,;=:@\w]+)$',
+        'DjangoApplication.upboatme.views.testParams', name='testParams')
 )
