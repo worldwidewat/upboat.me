@@ -3,57 +3,62 @@ from django.http import HttpResponse
 from PIL import Image, ImageFont, ImageDraw
 
 
-def home(request):
-    return HttpResponse('<html><body>This be \'upboat.me\'!</body></html>')
-
-
-def test(request):
-    module_dir = os.path.dirname(__file__)  # get current directory
-    file_path = os.path.join(module_dir, 'images/all-the-things-template.png')
-    img = Image.open(file_path)
-    response = HttpResponse(mimetype="image/png")
-    img.save(response, "PNG")
-    return response
-
-
-def testText(request):
-    module_dir = os.path.dirname(__file__)  # get current directory
-    file_path = os.path.join(module_dir, 'images/all-the-things-template.png')
-    font_path = os.path.join(module_dir, 'fonts/impact.ttf')
-
-    img = Image.open(file_path)
-
-    draw = ImageDraw.Draw(img)
-
-    # use a truetype font
-    font = ImageFont.truetype(font_path, 37)
-    draw.text((10, 25), "All the things!", font=font, fill="red")
-
-    response = HttpResponse(mimetype="image/png")
-    img.save(response, "PNG")
-    return response
-
-
-def testParams(request, name, first, second):
-    return HttpResponse('<html><body>Name: ' + name + ', First: ' + first + ', Second: ' + second + '</body></html>')
-
-
+# Draws two lines of text on the specified meme template name and returns it to the user as a PNG image
 def make(request, name, first, second):
-    module_dir = os.path.dirname(__file__)  # get current directory
-    file_path = os.path.join(module_dir, 'images/' + name + '-template.png')
-    font_path = os.path.join(module_dir, 'fonts/impact.ttf')
-    first = first.decode('utf-8').replace('-', ' ')
-    second = second.decode('utf-8').replace('-', ' ')
 
-    img = Image.open(file_path)
+    image = resolveImage(name)
 
-    draw = ImageDraw.Draw(img)
+    draw = ImageDraw.Draw(image)
 
-    # use a truetype font
-    font = ImageFont.truetype(font_path, 37)
-    draw.text((10, 25), first, font=font, fill="red")
-    draw.text((10, 300), second, font=font, fill="red")
+    writeText(draw, sanitizeLine(first), (20, 20))
+    writeText(draw, sanitizeLine(second), (20, 300))
 
     response = HttpResponse(mimetype="image/png")
-    img.save(response, "PNG")
+    image.save(response, "PNG")
+
     return response
+
+
+# Writes text to the image. Should be updated to wrap long lines, scale down font if necessary, etc.
+def writeText(draw, text, xy):
+    font = getDefaultFont(45)
+    shadowColor = 'black'
+    fillColor = 'white'
+    x = xy[0]
+    y = xy[1]
+    offset = 1
+
+    # border
+    draw.text((x - offset, y - offset), text, font=font, fill=shadowColor)
+    draw.text((x + offset, y - offset), text, font=font, fill=shadowColor)
+    draw.text((x - offset, y + offset), text, font=font, fill=shadowColor)
+    draw.text((x + offset, y + offset), text, font=font, fill=shadowColor)
+
+    # now draw the text over it
+    draw.text((x, y), text, font=font, fill=fillColor)
+
+
+# Returns the image object if the the image can be found (otherwise None)
+def resolveImage(name):
+    imagePath = getImagePath(name)
+    if not os.path.exists(imagePath):
+        return None
+    return Image.open(imagePath)
+
+
+# Gets the path where the .png image SHOULD live
+def getImagePath(name):
+    module_dir = os.path.dirname(__file__)
+    return os.path.join(module_dir, 'images/' + name + '-template.png')
+
+
+# Gets the default font to use at the specified size
+def getDefaultFont(size):
+    module_dir = os.path.dirname(__file__)
+    font_path = os.path.join(module_dir, 'fonts/impact.ttf')
+    return ImageFont.truetype(font_path, size)
+
+
+# Sanitizes the text to be written and converts to upper-case
+def sanitizeLine(line):
+    return line.decode('utf-8').replace('-', ' ').upper()
