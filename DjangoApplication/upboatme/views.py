@@ -9,10 +9,10 @@ def home(request):
 
 def test(request):
     module_dir = os.path.dirname(__file__)  # get current directory
-    file_path = os.path.join(module_dir, 'images/all-the-things-template.jpg')
+    file_path = os.path.join(module_dir, 'images/all-the-things-template.png')
     img = Image.open(file_path)
-    response = HttpResponse(mimetype="image/jpeg")
-    img.save(response, "JPEG")
+    response = HttpResponse(mimetype="image/png")
+    img.save(response, "PNG")
     return response
 
 
