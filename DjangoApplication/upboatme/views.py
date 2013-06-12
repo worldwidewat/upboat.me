@@ -1,4 +1,5 @@
 import os
+import textwrap
 from django.http import HttpResponse
 from PIL import Image, ImageFont, ImageDraw
 
@@ -8,10 +9,7 @@ def make(request, name, first, second):
 
     image = resolveImage(name)
 
-    draw = ImageDraw.Draw(image)
-
-    writeText(draw, sanitizeLine(first), (20, 20))
-    writeText(draw, sanitizeLine(second), (20, 300))
+    writeText(image, sanitizeLine(first), sanitizeLine(second))
 
     response = HttpResponse(mimetype="image/png")
     image.save(response, "PNG")
@@ -19,9 +17,40 @@ def make(request, name, first, second):
     return response
 
 
+# Write the first and second line of text to the image
+def writeText(image, first, second):
+
+    draw = ImageDraw.Draw(image)
+    imageSize = image.size
+    fontSize = 40
+    xBuffer = 20
+
+    # Attempt to figure out how wide each line should be. Black magic.
+    lineWidth = imageSize[0] / (fontSize / 2)
+
+    # writeText(draw,
+    # 'w: {0}, h: {1}, fw: {2} lw: {3}'.format(imageSize[0], imageSize[1], fontSize, lineWidth), (10, 200))
+
+    font = getDefaultFont(fontSize)
+
+    firstLines = textwrap.wrap(first, width=lineWidth)
+    secondLines = textwrap.wrap(second, width=lineWidth)
+
+    y_text = 0
+    for line in firstLines:
+        width, height = font.getsize(line)
+        writeSingleLine(draw, font, line, (xBuffer, y_text))
+        y_text += height
+
+    y_text = imageSize[1] - font.getsize(second)[1]
+    for line in reversed(secondLines):
+        width, height = font.getsize(line)
+        writeSingleLine(draw, font, line, (xBuffer, y_text))
+        y_text -= height
+
+
 # Writes text to the image. Should be updated to wrap long lines, scale down font if necessary, etc.
-def writeText(draw, text, xy):
-    font = getDefaultFont(45)
+def writeSingleLine(draw, font, line, xy):
     shadowColor = 'black'
     fillColor = 'white'
     x = xy[0]
@@ -29,13 +58,13 @@ def writeText(draw, text, xy):
     offset = 1
 
     # border
-    draw.text((x - offset, y - offset), text, font=font, fill=shadowColor)
-    draw.text((x + offset, y - offset), text, font=font, fill=shadowColor)
-    draw.text((x - offset, y + offset), text, font=font, fill=shadowColor)
-    draw.text((x + offset, y + offset), text, font=font, fill=shadowColor)
+    draw.text((x - offset, y - offset), line, font=font, fill=shadowColor)
+    draw.text((x + offset, y - offset), line, font=font, fill=shadowColor)
+    draw.text((x - offset, y + offset), line, font=font, fill=shadowColor)
+    draw.text((x + offset, y + offset), line, font=font, fill=shadowColor)
 
     # now draw the text over it
-    draw.text((x, y), text, font=font, fill=fillColor)
+    draw.text((x, y), line, font=font, fill=fillColor)
 
 
 # Returns the image object if the the image can be found (otherwise None)
