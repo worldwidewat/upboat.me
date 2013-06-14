@@ -118,6 +118,12 @@ def getFont(name, size):
     return ImageFont.truetype(font_path, size)
 
 
+from urllib import unquote
+
+
 # Sanitizes the text to be written and converts to upper-case
 def sanitizeLine(line):
-    return line.decode('utf-8').replace('-', ' ').upper()
+    unicodeLine = line.decode('utf-8')
+    decodedLine = unquote(unicodeLine)
+
+    return decodedLine.replace('-', ' ').upper()
