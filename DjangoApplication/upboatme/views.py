@@ -13,16 +13,17 @@ def make(request, name, first, second):
 
     if memes.has_key(memeKey):
         config = memes[memeKey]
-        firstClean = sanitizeLine(first);
-        secondClean = sanitizeLine(second);
+        firstClean = sanitizeLine(first)
+        secondClean = sanitizeLine(second)
     else:
         config = memes['default']
-        firstClean = sanitizeLine(u"404");
-        secondClean = sanitizeLine(u"Y U NO USE VALID MEME NAME?");
+        firstClean = sanitizeLine(u"404")
+        secondClean = sanitizeLine(u"Y U NO USE VALID MEME NAME?")
 
     image = Image.open(getImagePath(config.template))
 
-    writeText(image, config, firstClean, secondClean)
+    writeText(image, config, firstClean, config.topLineHeight)
+    writeText(image, config, secondClean, config.bottomLineHeight, True)
 
     response = HttpResponse(mimetype="image/png")
     image.save(response, "PNG")
@@ -38,33 +39,54 @@ def logRequest(request):
 
 
 # Write the first and second line of text to the image
-def writeText(image, config, first, second):
+def writeText(image, config, text, lineHeight, bottom=False):
     draw = ImageDraw.Draw(image)
     imageSize = image.size
     xBuffer = 30
+    done = False
+    fontSize = config.fontSize
 
-    # Attempt to figure out how wide each line should be. Black magic.
-    lineWidth = (imageSize[0] - xBuffer) / (config.fontSize / 2)
+    # Uncomment to draw bounding lines
+    # if not bottom:
+    #     draw.line([(0, lineHeight), (imageSize[0], lineHeight)], 'red')
+    # else:
+    #     draw.line([(0, imageSize[1] - lineHeight), (imageSize[0], imageSize[1] - lineHeight)], 'red')
 
-    # writeText(draw,
-    # 'w: {0}, h: {1}, fw: {2} lw: {3}'.format(imageSize[0], imageSize[1], fontSize, lineWidth), (10, 200))
+    while not done:
 
-    font = getFont(config.font, config.fontSize)
+        # Attempt to figure out how wide each line should be. Black magic.
+        lineWidth = (imageSize[0] - xBuffer) / (fontSize / 2)
 
-    firstLines = textwrap.wrap(first, width=lineWidth)
-    secondLines = textwrap.wrap(second, width=lineWidth)
+        font = getFont(config.font, fontSize)
 
-    y_text = 0
-    for line in firstLines:
-        width, height = font.getsize(line)
-        writeSingleLine(draw, font, config, line, (imageSize[0] / 2 - width / 2, y_text))
-        y_text += height
+        lines = textwrap.wrap(text, width=lineWidth)
 
-    y_text = imageSize[1] - font.getsize(second)[1]
-    for line in reversed(secondLines):
-        width, height = font.getsize(line)
-        writeSingleLine(draw, font, config, line, (imageSize[0] / 2 - width / 2, y_text))
-        y_text -= height
+        if getTotalHeight(lines, font) > lineHeight and fontSize > 10:
+            fontSize -= 2
+            continue
+
+        if not bottom:
+            y_text = 0
+            for line in lines:
+                width, height = font.getsize(line)
+                writeSingleLine(draw, font, config, line, (imageSize[0] / 2 - width / 2, y_text))
+                y_text += height
+
+        else:
+            y_text = imageSize[1] - font.getsize(text)[1]
+            for line in reversed(lines):
+                width, height = font.getsize(line)
+                writeSingleLine(draw, font, config, line, (imageSize[0] / 2 - width / 2, y_text))
+                y_text -= height
+
+        done = True
+
+
+def getTotalHeight(lines, font):
+    height = 0
+    for line in lines:
+        height += font.getsize(line)[1]
+    return height
 
 
 # Writes text to the image. Should be updated to wrap long lines, scale down font if necessary, etc.

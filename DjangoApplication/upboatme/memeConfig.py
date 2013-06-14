@@ -2,12 +2,17 @@ from DjangoApplication.upboatme.multi_key_dictionary import multi_key_dictionary
 
 
 class meme():
-    def __init__(self, template='y-u-no', font='Impact', fontSize=40, textFill='white', textStroke='black'):
+    def __init__(self, template='y-u-no',
+                 font='Impact', fontSize=60,
+                 textFill='white', textStroke='black',
+                 topLineHeight=130, bottomLineHeight=100):
         self.template = template + '-template.png'
         self.font = font + '.ttf'
         self.fontSize = fontSize
         self.textFill = textFill
         self.textStroke = textStroke
+        self.topLineHeight = topLineHeight
+        self.bottomLineHeight = bottomLineHeight
 
 memes = multi_key_dictionary()
 
@@ -53,7 +58,7 @@ memes[u'oag', u'overlyattachedgirlfriend'] = \
     meme(template='overly-attached-girlfriend')
 
 memes[u'omm', u'man', u'overlymanlyman'] = \
-    meme(template='overly-manly-man')
+    meme(template='overly-manly-man', topLineHeight=80)
 
 memes[u'ss', u'scumbag-steve'] = \
     meme(template='scumbag-steve')
