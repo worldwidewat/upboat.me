@@ -7,17 +7,20 @@ from DjangoApplication.upboatme.memeConfig import memes
 
 # Draws two lines of text on the specified meme template name and returns it to the user as a PNG image
 def make(request, name, first, second):
-
     memeKey = name.replace('-', '').lower()
 
     if memes.has_key(memeKey):
         config = memes[memeKey]
+        firstClean = sanitizeLine(first);
+        secondClean = sanitizeLine(second);
     else:
         config = memes['default']
+        firstClean = sanitizeLine(u"404");
+        secondClean = sanitizeLine(u"Y U NO USE VALID MEME NAME?");
 
     image = Image.open(getImagePath(config.template))
 
-    writeText(image, config, sanitizeLine(first), sanitizeLine(second))
+    writeText(image, config, firstClean, secondClean)
 
     response = HttpResponse(mimetype="image/png")
     image.save(response, "PNG")
@@ -27,7 +30,6 @@ def make(request, name, first, second):
 
 # Write the first and second line of text to the image
 def writeText(image, config, first, second):
-
     draw = ImageDraw.Draw(image)
     imageSize = image.size
     xBuffer = 30
