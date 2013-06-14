@@ -152,3 +152,7 @@ LOGGING = {
         },
     }
 }
+
+# via http://codespatter.com/2009/04/10/how-to-add-locations-to-python-path-for-reusable-django-apps/
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "site-packages"))

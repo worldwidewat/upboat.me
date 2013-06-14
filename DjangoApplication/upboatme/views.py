@@ -7,6 +7,8 @@ from DjangoApplication.upboatme.memeConfig import memes
 
 # Draws two lines of text on the specified meme template name and returns it to the user as a PNG image
 def make(request, name, first, second):
+    logRequest(request);
+
     memeKey = name.replace('-', '').lower()
 
     if memes.has_key(memeKey):
@@ -26,6 +28,13 @@ def make(request, name, first, second):
     image.save(response, "PNG")
 
     return response
+
+
+def logRequest(request):
+    #TODO
+    #ga = FlaskGATracker('upboat.me', 'UA-41725429-1')
+    #ga.track(request)
+    pass
 
 
 # Write the first and second line of text to the image
