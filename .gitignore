@@ -1,6 +1,10 @@
 *.log
 *.pot
 *.pyc
+*.suo
+*.csproj.user
+bin/
+obj/
 local_settings.py
 .idea/
 Thumbs.db
