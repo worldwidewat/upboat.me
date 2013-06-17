@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^terms/?$', 'DjangoApplication.upboatme.home.terms', name='terms'),
 
-    url(r'^about/?*$', 'DjangoApplication.upboatme.home.about', name='about'),
+    url(r'^about/?$', 'DjangoApplication.upboatme.home.about', name='about'),
 
     url(r'^static/(?P<path>.*)$', 'serve'),
 
