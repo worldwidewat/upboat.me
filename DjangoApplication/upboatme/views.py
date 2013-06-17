@@ -16,6 +16,9 @@ def route(request):
     # get_full_path includes the query string :)
     # strip off the leading '/'
     url = request.get_full_path()[1:]
+
+    print url
+
     firstSlash = url.find('/')
     secondSlash = url.find('/', firstSlash+1)
 
