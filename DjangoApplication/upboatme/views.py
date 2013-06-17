@@ -2,13 +2,41 @@ import os
 import textwrap
 from django.http import HttpResponse
 from PIL import Image, ImageFont, ImageDraw
+import sys
 from DjangoApplication.upboatme.memeConfig import memes
 
 
 # Draws two lines of text on the specified meme template name and returns it to the user as a PNG image
-def make(request, name, first, second):
-    logRequest(request);
 
+def route(request):
+    # urls look like this:  meme-name/first-line/second-line
+    # so we're basically delimiting on slashes
+    # if there are surprise slashes, they'll end up in the second line
+
+    # get_full_path includes the query string :)
+    # strip off the leading '/'
+    url = request.get_full_path()[1:]
+    firstSlash = url.find('/')
+    secondSlash = url.find('/', firstSlash+1)
+
+    if firstSlash > 0:
+        name = url[0:firstSlash]
+    else:
+        name = url
+        # we only have the meme name (and maybe not even that!). Time to bail out
+        return make(name, '', '')
+
+    if secondSlash > 0:
+        firstLine = url[(firstSlash+1):secondSlash]
+        secondLine = url[(secondSlash+1):]
+    else:
+        firstLine = url[(firstSlash+1):]
+        secondLine = ''
+
+    return make(name, firstLine, secondLine)
+
+
+def make(name, first, second):
     memeKey = name.replace('-', '').lower()
 
     if memes.has_key(memeKey):
@@ -29,13 +57,6 @@ def make(request, name, first, second):
     image.save(response, "PNG")
 
     return response
-
-
-def logRequest(request):
-    #TODO
-    #ga = FlaskGATracker('upboat.me', 'UA-41725429-1')
-    #ga.track(request)
-    pass
 
 
 # Write the first and second line of text to the image
