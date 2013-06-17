@@ -22,9 +22,6 @@ urlpatterns = patterns('',
 
     url(r'^about[/]*$', 'DjangoApplication.upboatme.home.about', name='about'),
 
-    url(r'^(?P<name>[\w-]+)/(?P<first>[ \.\-\?~!$&\'()*+,;=:@%\w]*)/?(?P<second>[ \.\-\?~!$&\'()*+,;=:@%\w]*)$',
-        'DjangoApplication.upboatme.views.make', name='make'),
-
     # this url dispatch business cannot (by design) match the querystring. So screw it, we'll do it live:
     url(r'^.*$', 'DjangoApplication.upboatme.views.route', name='route')
 )
