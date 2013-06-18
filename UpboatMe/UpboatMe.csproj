@@ -177,8 +177,6 @@
     <Content Include="newrelic\extensions\extension.xsd">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Properties\PublishProfiles\upboatme - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\upboatme - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\upboatme.pubxml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
