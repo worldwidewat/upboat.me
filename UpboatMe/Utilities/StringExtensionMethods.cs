@@ -8,6 +8,16 @@ namespace UpboatMe.Utilities
 {
     public static class StringExtensionMethods
     {
+        public static string Sanitize(this string text)
+        {
+            if (text == null)
+            {
+                return string.Empty;
+            }
+
+            return text.Replace('-', ' ');
+        }
+
         public static List<string> GetLines(this string text, int margin)
         {
             int start = 0, end;
