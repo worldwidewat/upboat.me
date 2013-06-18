@@ -25,7 +25,7 @@ namespace UpboatMe.Controllers
                 top = "404";
             }
 
-            var renderer = new Renderer(meme, top.Sanitize(), bottom.Sanitize());
+            var renderer = new Renderer(meme, top.SanitizeMemeText(), bottom.SanitizeMemeText());
 
             return new FileContentResult(renderer.Render(), meme.ImageType);   
         }

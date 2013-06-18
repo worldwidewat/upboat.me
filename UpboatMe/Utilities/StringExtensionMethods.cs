@@ -8,7 +8,7 @@ namespace UpboatMe.Utilities
 {
     public static class StringExtensionMethods
     {
-        public static string Sanitize(this string text)
+        public static string SanitizeMemeText(this string text)
         {
             if (text == null)
             {
