@@ -18,6 +18,8 @@ namespace UpboatMe.Utilities
             return text.Replace("--", "—").Replace('-', ' ');
         }
 
+        //From some super-awesome Stack Overflow post that I can't seem to find anymore... sorry dude :(
+        //Late-night coding FTL
         public static List<string> GetLines(this string text, int margin)
         {
             int start = 0, end;
