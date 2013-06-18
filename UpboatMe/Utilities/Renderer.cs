@@ -29,9 +29,9 @@ namespace UpboatMe.Utilities
             using (_image = Image.FromFile(HttpContext.Current.Server.MapPath(_meme.ImagePath)))
             using (_graphics = Graphics.FromImage(_image))
             {
-                DrawText(_top, false);
+                DrawText(_top, true);
 
-                DrawText(_bottom, true);
+                DrawText(_bottom, false);
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -45,7 +45,7 @@ namespace UpboatMe.Utilities
             }
         }
 
-        private void DrawText(string text, bool isBottom)
+        private void DrawText(string text, bool isTop)
         {
             var xBuffer = 30f;
             var done = false;
@@ -61,13 +61,13 @@ namespace UpboatMe.Utilities
 
                 var totalHeight = _graphics.MeasureString(text, font).Height * lines.Count;
 
-                if (totalHeight > (isBottom ? _meme.TopLineHeight : _meme.BottomLineHeight) && fontSize > 10)
+                if (totalHeight > (isTop ? _meme.TopLineHeight : _meme.BottomLineHeight) && fontSize > 10)
                 {
                     fontSize -= 2;
                     continue;
                 }
 
-                if (!isBottom)
+                if (isTop)
                 {
                     for (int x = 0; x < lines.Count; x++)
                     {

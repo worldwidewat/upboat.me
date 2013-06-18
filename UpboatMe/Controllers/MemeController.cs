@@ -17,10 +17,12 @@ namespace UpboatMe.Controllers
         public ActionResult Make(string name, string top, string bottom)
         {
             var meme = GlobalMemeConfiguration.Memes[name];
-
+            
             if (meme == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                meme = GlobalMemeConfiguration.NotFoundMeme;
+                bottom = "Y U NO USE VALID MEME NAME?";
+                top = "404";
             }
 
             var renderer = new Renderer(meme, top, bottom);
