@@ -14,6 +14,13 @@ namespace UpboatMe
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "StaticPages",
+                url: "{action}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { action = "Index|About|Terms" }
+            );
+
+            routes.MapRoute(
                 name: "Meme",
                 url: "{name}/{top}/{bottom}",
                 defaults: new { controller = "Meme", action = "Make", top = UrlParameter.Optional, bottom = UrlParameter.Optional }

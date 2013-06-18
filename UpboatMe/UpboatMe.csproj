@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Meme.cs" />
     <Compile Include="Models\GlobalMemeConfiguration.cs" />
     <Compile Include="App_Start\MemeConfig.cs" />
@@ -181,6 +182,9 @@
     <None Include="Properties\PublishProfiles\upboatme - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\upboatme - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\upboatme.pubxml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Terms.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
