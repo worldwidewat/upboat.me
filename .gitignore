@@ -10,3 +10,4 @@ local_settings.py
 Thumbs.db
 *.pubxml*
 newrelic.config
+*.PublishSettings
