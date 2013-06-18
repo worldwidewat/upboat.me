@@ -104,18 +104,54 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Meme.cs" />
+    <Compile Include="Models\GlobalMemeConfiguration.cs" />
+    <Compile Include="App_Start\MemeConfig.cs" />
     <Compile Include="Controllers\MemeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemeConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Renderer.cs" />
+    <Compile Include="Utilities\StringExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="Images\10-guy-template.png" />
+    <Content Include="Images\actual-advice-mallard-template.jpg" />
+    <Content Include="Images\actual-advice-mallard-template.png" />
+    <Content Include="Images\all-the-things-template.png" />
+    <Content Include="Images\bad-joke-eel-template.jpg" />
+    <Content Include="Images\bad-joke-eel-template.png" />
+    <Content Include="Images\bad-luck-brian-template.png" />
+    <Content Include="Images\everyone-loses-their-minds-template.png" />
+    <Content Include="Images\everyone-loses-their-minds.png" />
+    <Content Include="Images\first-world-problems-template.jpg" />
+    <Content Include="Images\first-world-problems-template.png" />
+    <Content Include="Images\futurama-fry-template.png" />
+    <Content Include="Images\good-guy-greg-template.png" />
+    <Content Include="Images\i%27ll-have-you-know.png" />
+    <Content Include="Images\ill-have-you-know-template.png" />
+    <Content Include="Images\malicious-advice-mallard-template.png" />
+    <Content Include="Images\overly-attached-girlfriend-template.png" />
+    <Content Include="Images\overly-manly-man-template.jpg" />
+    <Content Include="Images\overly-manly-man-template.png" />
+    <Content Include="Images\scumbag-steve-template.png" />
+    <Content Include="Images\socially-awesome-awkward-penguin-template.jpg" />
+    <Content Include="Images\socially-awesome-awkward-penguin-template.png" />
+    <Content Include="Images\socially-awkward-awesome-penguin-template.jpg" />
+    <Content Include="Images\socially-awkward-awesome-penguin-template.png" />
+    <Content Include="Images\socially-awkward-penguin-template.png" />
     <Content Include="Images\success-kid-template.png" />
+    <Content Include="Images\sudden-clarity-clarence-template.png" />
+    <Content Include="Images\the-most-interesting-man-in-the-world-template.jpg" />
+    <Content Include="Images\the-most-interesting-man-in-the-world-template.png" />
+    <Content Include="Images\y-u-no-template.jpg" />
+    <Content Include="Images\y-u-no-template.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -127,10 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\upboatme.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

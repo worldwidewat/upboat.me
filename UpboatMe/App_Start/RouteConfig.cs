@@ -15,8 +15,8 @@ namespace UpboatMe
 
             routes.MapRoute(
                 name: "Meme",
-                url: "{meme}/{first}/{last}",
-                defaults: new { controller = "Meme", action = "Make", first = UrlParameter.Optional, last = UrlParameter.Optional }
+                url: "{name}/{top}/{bottom}",
+                defaults: new { controller = "Meme", action = "Make", top = UrlParameter.Optional, bottom = UrlParameter.Optional }
             );
         }
     }
