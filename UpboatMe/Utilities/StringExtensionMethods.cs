@@ -15,7 +15,7 @@ namespace UpboatMe.Utilities
                 return string.Empty;
             }
 
-            return text.Replace("--", "—").Replace('-', ' ');
+            return text.Replace("--", "—").Replace('-', ' ').ToUpper();
         }
 
         //From some super-awesome Stack Overflow post that I can't seem to find anymore... sorry dude :(
