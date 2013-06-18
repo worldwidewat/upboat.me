@@ -15,7 +15,7 @@ namespace UpboatMe.Utilities
                 return string.Empty;
             }
 
-            return text.Replace('-', ' ');
+            return text.Replace("--", "—").Replace('-', ' ');
         }
 
         public static List<string> GetLines(this string text, int margin)
