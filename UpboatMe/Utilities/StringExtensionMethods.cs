@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace UpboatMe.Utilities
@@ -34,6 +35,21 @@ namespace UpboatMe.Utilities
             }
 
             return lines;
+        }
+
+        public static string AlphaOnly(this string text)
+        {
+            var builder = new StringBuilder();
+
+            foreach (char c in text)
+            {
+                if (Char.IsLetter(c))
+                {
+                    builder.Append(c);
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }

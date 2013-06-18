@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using UpboatMe.Utilities;
 
 namespace UpboatMe.Models
 {
@@ -12,7 +13,7 @@ namespace UpboatMe.Models
 
         public MemeConfiguration()
         {
-            _memes = new ConcurrentDictionary<string, Meme>();
+            _memes = new ConcurrentDictionary<string, Meme>(StringComparer.OrdinalIgnoreCase);
         }
 
         public void Add(Meme meme, params string[] aliases)
@@ -32,7 +33,7 @@ namespace UpboatMe.Models
             {
                 Meme result = null;
 
-                _memes.TryGetValue(key, out result);
+                _memes.TryGetValue(key.AlphaOnly(), out result);
 
                 return result;
             }

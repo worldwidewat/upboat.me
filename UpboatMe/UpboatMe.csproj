@@ -133,12 +133,10 @@
     <Content Include="Images\bad-joke-eel-template.png" />
     <Content Include="Images\bad-luck-brian-template.png" />
     <Content Include="Images\everyone-loses-their-minds-template.png" />
-    <Content Include="Images\everyone-loses-their-minds.png" />
     <Content Include="Images\first-world-problems-template.jpg" />
     <Content Include="Images\first-world-problems-template.png" />
     <Content Include="Images\futurama-fry-template.png" />
     <Content Include="Images\good-guy-greg-template.png" />
-    <Content Include="Images\i%27ll-have-you-know.png" />
     <Content Include="Images\ill-have-you-know-template.png" />
     <Content Include="Images\malicious-advice-mallard-template.png" />
     <Content Include="Images\overly-attached-girlfriend-template.png" />
