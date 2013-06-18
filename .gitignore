@@ -9,3 +9,4 @@ local_settings.py
 .idea/
 Thumbs.db
 *.pubxml*
+newrelic.config
