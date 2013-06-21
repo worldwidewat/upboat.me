@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
 using System.Web;
 using UpboatMe.Models;
 
@@ -11,102 +9,92 @@ namespace UpboatMe.Utilities
 {
     public class Renderer
     {
-        private Meme _meme;
-        private string _top;
-        private string _bottom;
-        private Image _image;
-        private Graphics _graphics;
-
-        public Renderer(Meme meme, string top, string bottom)
+        public byte[] Render(Meme _meme, string top, string bottom, bool drawBoxes)
         {
-            _meme = meme;
-            _top = top;
-            _bottom = bottom;
-        }
-
-        public byte[] Render()
-        {
-            using (_image = Image.FromFile(HttpContext.Current.Server.MapPath(_meme.ImagePath)))
-            using (_graphics = Graphics.FromImage(_image))
+            using (var image = Image.FromFile(HttpContext.Current.Server.MapPath(_meme.ImagePath)))
+            using (var graphics = Graphics.FromImage(image))
             {
-                DrawText(_top, true);
+                DrawText(graphics, image, _meme, top, true, drawBoxes);
 
-                DrawText(_bottom, false);
+                DrawText(graphics, image, _meme, bottom, false, drawBoxes);
 
                 using (var memoryStream = new MemoryStream())
                 {
-                    _image.Save(memoryStream, _image.RawFormat);
+                    image.Save(memoryStream, image.RawFormat);
 
-                    using (var streamReader = new StreamReader(memoryStream))
-                    {
-                        return memoryStream.ToArray();
-                    }
+                    return memoryStream.ToArray();
                 }
             }
         }
 
-        private void DrawText(string text, bool isTop)
+        private void DrawText(Graphics graphics, Image image, Meme meme, string text, bool isTop, bool drawBoxes)
         {
-            var xBuffer = 30f;
             var done = false;
-            var fontSize = _meme.FontSize;
+            var fontSize = meme.FontSize;
+            var maxHeight = isTop ? meme.TopLineHeight : meme.BottomLineHeight;
+            var stringFormat = new StringFormat(StringFormat.GenericTypographic);
+
+            stringFormat.Alignment = StringAlignment.Center;
 
             while (!done)
             {
-                int lineWidth = (int)Math.Ceiling((_image.Size.Width - xBuffer) / (fontSize / 1.5f));
+                var font = new Font(new FontFamily(meme.Font), fontSize, FontStyle.Regular);
 
-                var lines = text.GetLines(lineWidth);
+                var size = graphics.MeasureString(text, font, image.Width);
 
-                var font = new Font(new FontFamily(_meme.Font), fontSize, FontStyle.Regular);
-
-                var totalHeight = _graphics.MeasureString(text, font).Height * lines.Count;
-
-                if (totalHeight > (isTop ? _meme.TopLineHeight : _meme.BottomLineHeight) && fontSize > 10)
+                if (size.Height > maxHeight && fontSize > 10)
                 {
                     fontSize -= 2;
+
                     continue;
                 }
 
-                if (isTop)
+                var bounds = new Rectangle(0, 0, image.Width, (int)size.Height);
+
+                if (!isTop)
                 {
-                    for (int x = 0; x < lines.Count; x++)
-                    {
-                        var size = _graphics.MeasureString(lines[x], font);
-
-                        int centerX = (int)Math.Ceiling((_image.Size.Width / 2f) - (size.Width / 2f));
-
-                        DrawSingleLine(_graphics, lines[x], font, Brushes.Black, Brushes.White, new PointF(centerX, x * size.Height));
-                    }
+                    bounds.Y = image.Height - bounds.Height - 1;
                 }
-                else
+
+                using (var graphicsPath = new GraphicsPath())
                 {
-                    for (int x = 0; x < lines.Count; x++)
-                    {
-                        var size = _graphics.MeasureString(lines[x], font);
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-                        int centerX = (int)Math.Ceiling((_image.Size.Width / 2f) - (size.Width / 2f));
+                    float emSize = graphics.DpiY * fontSize / 72;
 
-                        DrawSingleLine(_graphics, lines[x], font, Brushes.Black, Brushes.White, new PointF(centerX, _image.Size.Height - (size.Height * lines.Count) + (x * size.Height)));
-                    }
+                    graphicsPath.AddString(text, font.FontFamily, (int)FontStyle.Regular, emSize, bounds, stringFormat);
+
+                    graphics.DrawPath(new Pen(meme.Stroke, 2) { LineJoin = LineJoin.Round }, graphicsPath);
+                    graphics.FillPath(meme.Fill, graphicsPath);
+
+                    graphics.SmoothingMode = SmoothingMode.Default;
+                }
+
+                if (drawBoxes)
+                {
+                    DrawBoxes(graphics, image.Width, image.Height, maxHeight, isTop);
                 }
 
                 done = true;
             }
         }
 
-        private static void DrawSingleLine(Graphics graphics, string line, Font font, Brush stroke, Brush fill, PointF point)
+        private void DrawBoxes(Graphics graphics, int width, int height, int maxHeight, bool isTop)
         {
-            using (var graphicsPath = new GraphicsPath())
+            graphics.CompositingMode = CompositingMode.SourceOver;
+
+            var brush = new SolidBrush(Color.FromArgb(150, Color.Red));
+
+            graphics.FillRectangle(brush, 0, isTop ? 0 : height - maxHeight, width, maxHeight);
+
+            for (int x = 0; x < height; x += 20)
             {
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                
-                graphicsPath.AddString(line, font.FontFamily, (int)FontStyle.Regular, font.Size, point, StringFormat.GenericDefault);
-
-                graphics.DrawPath(new Pen(stroke, 2), graphicsPath);
-                graphics.FillPath(fill, graphicsPath);
-
-                graphics.SmoothingMode = SmoothingMode.Default;
+                graphics.DrawString(x.ToString(), SystemFonts.DefaultFont, Brushes.Black, 0, x);
             }
+
+            graphics.DrawString(string.Format("H: {0}, W: {1}", height, width), SystemFonts.DefaultFont, Brushes.Black, width / 2, 20);
+
+            graphics.CompositingMode = CompositingMode.SourceCopy;
         }
     }
 }

@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using UpboatMe.App_Start;
-using UpboatMe.Models;
 using UpboatMe.Utilities;
 
 namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
-        public ActionResult Make(string name, string top, string bottom)
+        public ActionResult Make(string name, string top, string bottom, bool drawBoxes = false)
         {
             var meme = GlobalMemeConfiguration.Memes[name];
             
@@ -25,9 +17,11 @@ namespace UpboatMe.Controllers
                 top = "404";
             }
 
-            var renderer = new Renderer(meme, top.SanitizeMemeText(), bottom.SanitizeMemeText());
+            var renderer = new Renderer();
 
-            return new FileContentResult(renderer.Render(), meme.ImageType);   
+            var bytes = renderer.Render(meme, top.SanitizeMemeText(), bottom.SanitizeMemeText(), drawBoxes);
+
+            return new FileContentResult(bytes, meme.ImageType);   
         }
     }
 }
