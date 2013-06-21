@@ -14,6 +14,7 @@ namespace UpboatMe.Controllers
             
             if (meme == null)
             {
+                // TODO: update this flow to return a proper HTTP 404 code, too
                 meme = GlobalMemeConfiguration.NotFoundMeme;
                 bottom = "Y U NO USE VALID MEME NAME?";
                 top = "404";
