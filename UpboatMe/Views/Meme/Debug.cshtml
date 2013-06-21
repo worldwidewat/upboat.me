@@ -1,0 +1,20 @@
+﻿@using System.Linq;
+@model UpboatMe.Models.MemeDebugViewModel
+
+@{
+    ViewBag.Title = "Debug";
+}
+
+<h2>Debug</h2>
+
+@if (Model.DebugImages != null && Model.DebugImages.Any())
+{
+    foreach (var item in Model.DebugImages)
+    {
+        <div>
+            <img src="@item" />
+        </div>
+    
+        <br />
+    }
+}

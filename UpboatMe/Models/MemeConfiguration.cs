@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using UpboatMe.Utilities;
 
 namespace UpboatMe.Models
 {
-    public class MemeConfiguration
+    public class MemeConfiguration : IEnumerable<string>
     {
         private ConcurrentDictionary<string, Meme> _memes;
 
@@ -37,6 +37,16 @@ namespace UpboatMe.Models
 
                 return result;
             }
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return _memes.GroupBy(m => m.Value).Select(g => g.First().Key).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
