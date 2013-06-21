@@ -26,11 +26,19 @@ namespace UpboatMe.Controllers
             return new FileContentResult(bytes, meme.ImageType);   
         }
 
-        public ActionResult Debug()
+        public ActionResult Debug(string top, string bottom)
         {
             var viewModel = new MemeDebugViewModel();
 
-            viewModel.DebugImages = GlobalMemeConfiguration.Memes.Select(m => Url.Action("Make", new { name = m, drawBoxes = true })).ToList();
+            viewModel.DebugImages = GlobalMemeConfiguration.Memes.Select(m => Url.Action("Make",
+                new
+                {
+                    name = m,
+                    top = top,
+                    bottom = bottom,
+                    drawBoxes = Request.QueryString["drawBoxes"]
+                }))
+                .ToList();
 
             return View(viewModel);
         }
