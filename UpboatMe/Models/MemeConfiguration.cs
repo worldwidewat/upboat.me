@@ -41,7 +41,7 @@ namespace UpboatMe.Models
 
         public IEnumerator<string> GetEnumerator()
         {
-            return _memes.GroupBy(m => m.Value).Select(g => g.First().Key).GetEnumerator();
+            return _memes.GroupBy(m => m.Value).Select(g => g.First().Key).OrderBy(k => k).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
