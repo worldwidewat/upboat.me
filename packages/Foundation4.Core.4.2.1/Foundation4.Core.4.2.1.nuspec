@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Foundation4.Core</id>
+    <version>4.2.1</version>
+    <title>Foundation 4 Core files</title>
+    <authors>Ed Charbeneau</authors>
+    <owners>Ed Charbeneau</owners>
+    <licenseUrl>https://github.com/zurb/foundation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://www.responsivemvc.net/Foundation</projectUrl>
+    <iconUrl>http://www.codepalousa.com/images/ED/yeti-avatar.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Core CSS and JavaScript files for Foundation framework. For the complete package install Foundation4.MVC4</description>
+    <summary>Core CSS and JavaScript files for Foundation framework. For the complete package install Foundation4.MVC4</summary>
+    <releaseNotes>Updated to 4.2.1</releaseNotes>
+  </metadata>
+</package>

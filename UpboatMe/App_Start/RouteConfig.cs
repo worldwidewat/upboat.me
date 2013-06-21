@@ -29,7 +29,10 @@ namespace UpboatMe
             routes.MapRoute(
                 name: "Meme",
                 url: "{name}/{top}/{bottom}",
-                defaults: new { controller = "Meme", action = "Make", top = UrlParameter.Optional, bottom = UrlParameter.Optional }
+                defaults: new { controller = "Meme", action = "Make", top = UrlParameter.Optional, bottom = UrlParameter.Optional },
+                // match anything except these specific things:
+                // http://stackoverflow.com/questions/6830796/regex-to-match-anything-but-two-words
+                constraints: new { name = "^(?!bundles$|content$|scripts$).*" }
             );
         }
     }

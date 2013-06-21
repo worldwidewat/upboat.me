@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+
+    @*Set the viewport width to device width for mobile *@
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title - Welcome to Foundation</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @Styles.Render("~/Content/foundation/css")
+
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @RenderBody()
+    @* Zepto polyfill: If you need to support Internet Explorer, you can fall back on jQuery. http://zeptojs.com/ *@
+    <script>
+        document.write('<script src=' +
+        ('__proto__' in {} ? '@Url.Content("~/scripts/zepto.js")' : '@Url.Content("~/scripts/jquery.js")') +
+      '><\/script>')
+    </script>
+
+    @Scripts.Render("~/bundles/foundation")
+    <script>
+        $(document).foundation();
+    </script>
+    @*Use the Scripts section to define page specific scripts*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Foundation4.MVC4</id>
+    <version>1.0.421</version>
+    <title>Zurb Foundation 4.2.1 for MVC4</title>
+    <authors>Ed Charbeneau</authors>
+    <owners>Ed Charbeneau</owners>
+    <licenseUrl>https://github.com/zurb/foundation/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://www.responsivemvc.net/Foundation</projectUrl>
+    <iconUrl>http://www.codepalousa.com/images/ED/yeti-avatar.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Foundation is the most advanced responsive front-end framework in the world. With Foundation you can quickly prototype and build sites or apps that work on any kind of device, with tons of included layout constructs (like a full responsive grid), elements and best practices.
+
+Homepage: http://foundation.zurb.com
+Documentation: http://foundation.zurb.com/docs
+Download: http://foundation.zurb.com/download.php
+
+Foundation is MIT-licensed and absolutely free to use. Foundation wouldn't be possible without the support of the entire ZURB team, our friends and colleagues who gave feedback, and some luminaries who did some heavy lifting that we took advantage of (thanks guys).</description>
+    <summary>Zurb Foundation HTML Boilerplate, CSS, JS, Plugins
+An easy to use, powerful, and flexible framework for building prototypes and production code on any kind of device.</summary>
+    <releaseNotes>Updated core to 4.2.1</releaseNotes>
+    <copyright>MIT open source licensed</copyright>
+    <tags>HTML CSS MVC Template Boilerplate Javascript Prototyping Framework Foundation Zurb</tags>
+    <dependencies>
+      <dependency id="Foundation4.Core" version="4.2.1" />
+    </dependencies>
+  </metadata>
+</package>
