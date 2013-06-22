@@ -141,6 +141,7 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="Foundation_readme.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\10-guy-template.png" />

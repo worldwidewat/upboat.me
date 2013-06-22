@@ -17,7 +17,7 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("bad-luck-brian"), "blb", "badluckbrian");
             memes.Add(new Meme("everyone-loses-their-minds"), "eltm", "everyonelosestheirminds");
             memes.Add(new Meme("first-world-problems"), "fwp", "firstworldproblems");
-            memes.Add(new Meme("futurama-fry"), "ff", "futuramafry");
+            memes.Add(new Meme("futurama-fry"), "ff", "futuramafry", "fry");
             memes.Add(new Meme("good-guy-greg"), "ggg", "goodguygreg");
             memes.Add(new Meme("ill-have-you-know"), "ihyk", "illhaveyouknow");
             memes.Add(new Meme("malicious-advice-mallard"), "mam", "maliciousadvicemallard");
