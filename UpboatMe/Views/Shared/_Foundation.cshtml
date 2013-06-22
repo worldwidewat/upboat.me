@@ -19,11 +19,39 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div id="header" class="row">
+        <div class="large-12 columns">
+            <h2>UPBOAT.ME</h2>
+            <p>&#8220;@UpboatMe.Utilities.SloganUtilities.GetRandomSlogan()&#8221;</p>
+        </div>
+    </div>
     @RenderBody()
+    <div id="footer" class="row">
+        <hr/>
+        <div class="large-4 columns">
+            <ul>
+                <li>@Html.ActionLink("About This Site", "About", "Home")</li>
+                <li>@Html.ActionLink("Pricing", "Pricing", "Home")</li>
+            </ul>
+        </div>
+        <div class="large-4 columns">
+            <ul>
+                <li><a href="http://twitter.com/mharen">@@mharen</a></li>
+                <li><a href="http://twitter.com/pwninstein">@@pwninstein</a></li>
+            </ul>
+        </div>
+        <div class="large-4 columns">
+            <ul>
+                <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
+                <li>@Html.ActionLink("Privacy Policy", "Privacy", "Home")</li>
+            </ul>
+        </div>
+    </div>
+
     @* Zepto polyfill: If you need to support Internet Explorer, you can fall back on jQuery. http://zeptojs.com/ *@
     <script>
         document.write('<script src=' +
-        ('__proto__' in {} ? '@Url.Content("~/scripts/zepto.js")' : '@Url.Content("~/scripts/jquery.js")') +
+            ('__proto__' in {} ? '@Url.Content("~/scripts/zepto.js")' : '@Url.Content("~/scripts/jquery.js")') +
       '><\/script>')
     </script>
 

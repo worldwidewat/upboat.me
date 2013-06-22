@@ -5,3 +5,11 @@
 li > em {
     color: #777;
 }
+
+#footer div {
+    font-size: 75%;
+}
+#footer ul {
+    list-style-type: none;
+    margin-left: 0;
+}
