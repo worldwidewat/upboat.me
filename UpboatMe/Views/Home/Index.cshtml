@@ -1,10 +1,36 @@
-﻿<div class="row">
+﻿@model UpboatMe.Models.IndexViewModel
+
+<div class="row">
 		<div class="large-12 columns">
 			<h2>UPBOAT.ME</h2>
 			<p>&#8220;@UpboatMe.Utilities.SloganUtilities.GetRandomSlogan()&#8221;</p>
 			<hr />
 		</div>
 	</div>
+
+    <div class="row">
+        <div class="large-8 columns">
+            <h3>Heya</h3>
+
+            <p>
+                @Html.DropDownList("meme-name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"))
+            </p>
+            
+            <p>
+                <input type="text" id="first-line"/>
+            </p>
+            
+            <p>
+                <input type="text" id="second-line"/>
+            </p>
+            
+            <input type="button" value="Create!" id="create-meme"/>
+
+            <div>
+                <img id ="meme-preview"/>
+            </div>
+        </div>
+    </div>
 
 	<div class="row">
 		<div class="large-8 columns">

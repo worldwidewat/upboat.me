@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UpboatMe.Models;
 
 namespace UpboatMe.Controllers
 {
@@ -11,7 +12,12 @@ namespace UpboatMe.Controllers
         // Note: don't forget to explicitly enable new actions in the route config
         public ActionResult Index()
         {
-            return View();
+            var viewModel = new IndexViewModel()
+            {
+                Memes = GlobalMemeConfiguration.Memes.GetMemes()
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult Terms()

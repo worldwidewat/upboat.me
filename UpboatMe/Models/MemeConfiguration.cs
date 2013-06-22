@@ -1,52 +1,40 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using UpboatMe.Utilities;
 
 namespace UpboatMe.Models
 {
-    public class MemeConfiguration : IEnumerable<string>
+    public class MemeConfiguration
     {
-        private ConcurrentDictionary<string, Meme> _memes;
+        private ConcurrentBag<Meme> _memes;
 
         public MemeConfiguration()
         {
-            _memes = new ConcurrentDictionary<string, Meme>(StringComparer.OrdinalIgnoreCase);
+            _memes = new ConcurrentBag<Meme>();
         }
 
-        public void Add(Meme meme, params string[] aliases)
+        public void Add(Meme meme)
         {
-            foreach (var alias in aliases)
-            {
-                if (!_memes.TryAdd(alias, meme))
-                {
-                    throw new InvalidOperationException(string.Format("A meme with the alias '{0}' already exists", alias));
-                }
-            }
+            _memes.Add(meme);
         }
 
         public Meme this[string key]
         {
             get
             {
-                Meme result = null;
-
-                _memes.TryGetValue(key.AlphaOnly(), out result);
-
-                return result;
+                return _memes.FirstOrDefault(m => m.Aliases.Any(a => string.Equals(a, key, StringComparison.OrdinalIgnoreCase)));
             }
         }
 
-        public IEnumerator<string> GetEnumerator()
+        public List<string> GetMemeNames()
         {
-            return _memes.GroupBy(m => m.Value).Select(g => g.First().Key).OrderBy(k => k).GetEnumerator();
+            return _memes.Select(m => m.Aliases.First()).ToList();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public List<Meme> GetMemes()
         {
-            return GetEnumerator();
+            return _memes.ToList();
         }
     }
 }

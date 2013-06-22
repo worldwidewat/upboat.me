@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Web;
 
 namespace UpboatMe.Models
 {
@@ -18,18 +15,24 @@ namespace UpboatMe.Models
         public int FontSize { get; private set; }
         public int TopLineHeight { get; private set; }
         public int BottomLineHeight { get; private set; }
+        public string Description { get; private set; }
+        public IList<string> Aliases { get; set; }
 
         public Meme(
-            string imagePath, 
+            string description,
+            string imagePath,
+            IList<string> aliases,
             string imageType = "image/png",
-            string stroke = "black", 
-            string fill = "white", 
-            string font = "Impact", 
-            int fontSize = 40, 
-            int topLineHeight = 200, 
+            string stroke = "black",
+            string fill = "white",
+            string font = "Impact",
+            int fontSize = 40,
+            int topLineHeight = 200,
             int bottomLineHeight = 200)
         {
+            Description = description;
             ImagePath = string.Format(ImagePathFormat, imagePath);
+            Aliases = aliases;
             ImageType = imageType;
             Stroke = new SolidBrush(Color.FromName(stroke));
             Fill = new SolidBrush(Color.FromName(fill));
