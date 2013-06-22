@@ -6,6 +6,14 @@ li > em {
     color: #777;
 }
 
+#header a:link, #header a:visited {
+    color: #000;
+}
+
+#header a:hover, #header a:active{
+    color: #2ba6cb;
+}
+
 #footer div {
     font-size: 75%;
 }
