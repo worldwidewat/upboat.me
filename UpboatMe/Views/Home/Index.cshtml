@@ -21,29 +21,39 @@
     li:before {
         counter-increment: section;
     }
+    .step-divider {
+        background-image: url(@Url.Content("~/Content/vote-right.png"));
+        background-position: right top;
+        background-repeat: no-repeat;
+        width: 51px;
+        height: 51px;
+        opacity: .25;
+    }
 </style>
 <div class="row">
     <div class="large-8 columns">
-        <h3>WAT?</h3>
+        <h3>how does this work?</h3>
         <div class="row">
             <div class="large-4 columns">
-                <div class="panel">
+                <div class="">
                     <ol>
                         <li>Think of something funny<br />
                             <em>(the hard part)</em></li>
                     </ol>
                 </div>
             </div>
-            <div class="large-4 columns">
-                <div class="panel">
+            <div class="large-1 columns step-divider"></div>
+            <div class="large-3 columns">
+                <div class="">
                     <ol>
                         <li>Make a meme wherever you are<br />
                             <em>(just build it with the url)</em></li>
                     </ol>
                 </div>
             </div>
-            <div class="large-4 columns">
-                <div class="panel">
+            <div class="large-1 columns step-divider"></div>
+            <div class="large-3 columns">
+                <div class="">
                     <ol>
                         <li>Don't switch apps<br />
                             <em>(you're already done!)</em></li>
