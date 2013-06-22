@@ -10,6 +10,9 @@ namespace UpboatMe
             bundles.Add(new ScriptBundle("~/bundles/zepto").Include(
                     "~/Scripts/zepto.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                    "~/Scripts/site.js"));
+
             bundles.Add(new StyleBundle("~/Content/foundation/css").Include(
                        "~/Content/foundation/foundation.css",
                        "~/Content/foundation/foundation.mvc.css",

@@ -31,7 +31,7 @@ namespace UpboatMe.Controllers
         {
             var viewModel = new MemeDebugViewModel();
 
-            viewModel.DebugImages = GlobalMemeConfiguration.Memes.Select(m => Url.Action("Make",
+            viewModel.DebugImages = GlobalMemeConfiguration.Memes.GetMemeNames().Select(m => Url.Action("Make",
                 new
                 {
                     name = m,

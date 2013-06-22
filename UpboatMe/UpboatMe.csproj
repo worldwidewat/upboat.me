@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Utilities\SloganUtilities.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Meme.cs" />
@@ -192,6 +193,7 @@
     <Content Include="Scripts\foundation\foundation.tooltips.js" />
     <Content Include="Scripts\foundation\foundation.topbar.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\zepto.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

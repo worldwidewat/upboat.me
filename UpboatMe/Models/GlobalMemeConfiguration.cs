@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UpboatMe.Models;
 
-namespace UpboatMe.App_Start
+namespace UpboatMe.Models
 {
     public class GlobalMemeConfiguration
     {
