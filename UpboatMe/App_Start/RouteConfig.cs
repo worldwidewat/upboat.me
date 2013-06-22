@@ -17,7 +17,7 @@ namespace UpboatMe
                 name: "StaticPages",
                 url: "{action}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                constraints: new { action = "Index|About|Terms|Privacy" }
+                constraints: new { action = "Index|About|Terms|Privacy|Pricing" }
             );
 
             routes.MapRoute(

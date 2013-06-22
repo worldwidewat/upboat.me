@@ -25,6 +25,11 @@ namespace UpboatMe.Controllers
             return View();
         }
 
+        public ActionResult Pricing()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             return View();
