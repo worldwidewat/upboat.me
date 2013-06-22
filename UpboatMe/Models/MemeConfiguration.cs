@@ -34,7 +34,7 @@ namespace UpboatMe.Models
 
         public List<Meme> GetMemes()
         {
-            return _memes.ToList();
+            return _memes.OrderBy(m => m.Description).ToList();
         }
     }
 }

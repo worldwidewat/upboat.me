@@ -16,7 +16,6 @@
     @Styles.Render("~/Content/foundation/css")
     @Styles.Render("~/Content/styles.css")
     @RenderSection("head", required: false)
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div id="header" class="row">
@@ -57,9 +56,6 @@
 
     @Scripts.Render("~/bundles/foundation")
     @Scripts.Render("~/bundles/site")
-    <script>
-        $(document).foundation();
-    </script>
     @*Use the Scripts section to define page specific scripts*@
     @RenderSection("scripts", required: false)
 </body>

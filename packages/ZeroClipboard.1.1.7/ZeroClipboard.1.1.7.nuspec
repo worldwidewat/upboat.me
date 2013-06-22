@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ZeroClipboard</id>
+    <version>1.1.7</version>
+    <title>ZeroClipboard</title>
+    <authors>jhuckaby</authors>
+    <owners>jhuckaby</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://code.google.com/p/zeroclipboard/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Zero Clipboard library provides an easy way to copy text to the clipboard using an invisible Adobe Flash movie, and a JavaScript interface.</description>
+    <releaseNotes>Detailed release notes available at https://github.com/jonrohan/ZeroClipboard/blob/master/docs/releases.md#zeroclipboard-117
+     
+     1.14: 
+     [SECURITY] Removing flash.system.Security.allowDomain("*"); default. now should be set via flashvars.
+     [SECURITY] XSS Vunerability, the clipText returned from the flash object needs to be escaped.</releaseNotes>
+    <copyright />
+    <language />
+    <tags>copy-to-clipboard javascript</tags>
+    <references />
+  </metadata>
+</package>

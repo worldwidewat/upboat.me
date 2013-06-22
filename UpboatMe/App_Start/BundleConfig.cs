@@ -11,6 +11,7 @@ namespace UpboatMe
                     "~/Scripts/zepto.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                    "~/Scripts/ZeroClipboard.js",
                     "~/Scripts/site.js"));
 
             bundles.Add(new StyleBundle("~/Content/foundation/css").Include(

@@ -31,7 +31,7 @@
                         <li>Think of something funny<br />
                             <em>(the hard part)</em></li>
                     </ol>
-                </div>
+                </div>  
             </div>
             <div class="large-1 columns step-divider"></div>
             <div class="large-3 columns">
@@ -52,47 +52,46 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <h3>Heya</h3>
-        <div class="row">
-            <div class="large-6 columns">
-
-                <p>
-                    @Html.DropDownList("meme-name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"))
-                </p>
-
-                <p>
-                    <input type="text" id="first-line" />
-                </p>
-
-                <p>
-                    <input type="text" id="second-line" />
-                </p>
-
-                <input type="button" value="Create!" class="small button" id="create-meme" />
-            </div>
-            <div class="large-6 columns">
-
-                <div>
-                    <img id="meme-preview" />
+    <div class="row">
+        <div class="large-6 columns">
+            <form class="custom" style="display:block;">
+                @Html.DropDownList("meme-name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"), new { @class = "large" })
+                <input type="text" id="first-line" placeholder="Top Line"/>
+                <input type="text" id="second-line" placeholder="Bottom Line"/>
+                <div style="text-align:center">
+                    <input class="small button" type="button" value="Create!" id="create-meme" />
+                </div>
+            </form>
+            
+            <div class="row">
+                <div class="large-10 columns">
+                    <input id="share-url" type="text" disabled="disabled" placeholder="Create a meme to share it!">
+                </div>
+                <div class="small-2 columns">
+                    <input id="copy-button" type="button" data-clipboard-target="share-url" class="right inline small button" value="Copy" />
                 </div>
             </div>
         </div>
-</div>
+        <div class="large-6 columns">
+            <img id="meme-preview" />
+        </div>
+    </div>
 
-<div class="large-4 columns">
-    <h4>Recent Memes</h4>
-    <p>
-        <img src="/sap/wears-suit-and-tie-to-interview/phone-interview" alt="socially awkward penguin: wears suit and tie to interview @Environment.NewLine phone interview" title="socially awkward penguin"/>
-    </p>
-    <p>
-        <img src="/fry/not-sure-if-sunny-outside/or-hungover" alt="futurama fry: not sure if sunny outside @Environment.NewLine or hungover" title="futurama fry"/>
-    </p>
-    <p>
-        <img src="/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life" alt="sudden clarity clarence: i don't buy things with money @Environment.NewLine i buy them with hours of my life" title="sudden clarity clarence"/>
-    </p>
-    <p>
-        <img src="/blb/has-pet-rock/it-runs-away" alt="bad luck brian: has pet rock @Environment.NewLine it runs away" title="bad luck brian"/>
-    </p>
-</div>
+    <div class="large-4 columns">
+        <h4>Recent Memes</h4>
+        <p>
+            <img src="/sap/wears-suit-and-tie-to-interview/phone-interview" alt="socially awkward penguin: wears suit and tie to interview @Environment.NewLine phone interview" title="socially awkward penguin"/>
+        </p>
+        <p>
+            <img src="/fry/not-sure-if-sunny-outside/or-hungover" alt="futurama fry: not sure if sunny outside @Environment.NewLine or hungover" title="futurama fry"/>
+        </p>
+        <p>
+            <img src="/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life" alt="sudden clarity clarence: i don't buy things with money @Environment.NewLine i buy them with hours of my life" title="sudden clarity clarence"/>
+        </p>
+        <p>
+            <img src="/blb/has-pet-rock/it-runs-away" alt="bad luck brian: has pet rock @Environment.NewLine it runs away" title="bad luck brian"/>
+        </p>
+    </div>
 </div>
