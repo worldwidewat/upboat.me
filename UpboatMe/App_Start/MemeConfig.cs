@@ -14,7 +14,7 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Bad Luck Brian", "bad-luck-brian", new List<string> { "blb", "badluckbrian" }));
             memes.Add(new Meme("Everyone Loses Their Minds", "everyone-loses-their-minds", new List<string> { "eltm", "everyonelosestheirminds" }));
             memes.Add(new Meme("First World Problems", "first-world-problems", new List<string> { "fwp", "firstworldproblems" }));
-            memes.Add(new Meme("Futurama Fry", "futurama-fry", new List<string> { "ff", "fry", "futuramafry" }));
+            memes.Add(new Meme("Futurama Fry", "futurama-fry", new List<string> { "ff", "fry", "futuramafry", "notsureiffry" }));
             memes.Add(new Meme("Good Guy Greg", "good-guy-greg", new List<string> { "ggg", "goodguygreg" }));
             memes.Add(new Meme("I'll Have You Know", "ill-have-you-know", new List<string> { "ihyk", "illhaveyouknow" }));
             memes.Add(new Meme("Internet Grandma Surprise", "internet-grandma-surprise", new List<string> { "grandma", "igs", "internetgrandma", "internetgrandmasurprise", "grandmasurprise" }));
