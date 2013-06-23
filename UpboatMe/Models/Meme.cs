@@ -13,6 +13,7 @@ namespace UpboatMe.Models
         public Brush Fill { get; private set; }
         public string Font { get; private set; }
         public int FontSize { get; private set; }
+        public int StrokeWidth { get; private set; }
         public float TopLineHeightPercent { get; private set; }
         public float BottomLineHeightPercent { get; private set; }
         public string Description { get; private set; }
@@ -27,6 +28,7 @@ namespace UpboatMe.Models
             string fill = "white",
             string font = "Impact",
             int fontSize = 40,
+            int strokeWidth = 5,
             float topLineHeightPercent = 25,
             float bottomLineHeightPercent = 25)
         {
@@ -38,6 +40,7 @@ namespace UpboatMe.Models
             Fill = new SolidBrush(Color.FromName(fill));
             Font = font;
             FontSize = fontSize;
+            StrokeWidth = strokeWidth;
             TopLineHeightPercent = topLineHeightPercent;
             BottomLineHeightPercent = bottomLineHeightPercent;
         }

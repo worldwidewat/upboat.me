@@ -9,7 +9,9 @@
         foreach (var recentMeme in Model)
         {
             <div class="large-3 columns">
-                <img src="@recentMeme.Url" alt="@recentMeme.Alt" title="@recentMeme.Title"/>
+                <a href="@recentMeme.Url">
+                    <img src="@recentMeme.Url" alt="@recentMeme.Alt" title="@recentMeme.Title"/>
+                </a>
             </div>
         }
     }
