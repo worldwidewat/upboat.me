@@ -3,6 +3,7 @@ using UpboatMe.App_Start;
 using UpboatMe.Models;
 using UpboatMe.Utilities;
 using System.Linq;
+using GoogleAnalyticsTracker;
 
 namespace UpboatMe.Controllers
 {
@@ -22,6 +23,8 @@ namespace UpboatMe.Controllers
             var renderer = new Renderer();
 
             var bytes = renderer.Render(meme, top.SanitizeMemeText(), bottom.SanitizeMemeText(), drawBoxes);
+
+            Analytics.TrackMeme(HttpContext, name);
 
             return new FileContentResult(bytes, meme.ImageType);   
         }
