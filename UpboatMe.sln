@@ -4,15 +4,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpboatMe", "UpboatMe\UpboatMe.csproj", "{292B8EBA-5E58-46F1-9E04-1EA563325262}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpboatMeTests", "UpboatMeTests\UpboatMeTests.csproj", "{088E1E45-ABC1-4660-A810-499C6778EEAB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{ECCBAE39-1135-4AB7-B47A-41CF49BEF396}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment\newrelic.dev.config = Deployment\newrelic.dev.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		ProdDeploy|Any CPU = ProdDeploy|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292B8EBA-5E58-46F1-9E04-1EA563325262}.ProdDeploy|Any CPU.ActiveCfg = ProdDeploy|Any CPU
+		{292B8EBA-5E58-46F1-9E04-1EA563325262}.ProdDeploy|Any CPU.Build.0 = ProdDeploy|Any CPU
+		{292B8EBA-5E58-46F1-9E04-1EA563325262}.ProdDeploy|Any CPU.Deploy.0 = ProdDeploy|Any CPU
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Release|Any CPU.Build.0 = Release|Any CPU
 		{088E1E45-ABC1-4660-A810-499C6778EEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

@@ -12,3 +12,4 @@ Thumbs.db
 newrelic.config
 *.PublishSettings
 local-docs/
+newrelic.prod.config
