@@ -62,5 +62,6 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABL
 
 Signed,
 Michael Haren, 23-Jun-2013
+Mark Carpenter, 23-Jun-2013
 
 (future contributors listed here)
