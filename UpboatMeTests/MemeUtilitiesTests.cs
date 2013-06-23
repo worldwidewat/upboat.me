@@ -16,10 +16,10 @@ namespace UpboatMeTests
             _MemeConfig = new MemeConfiguration();
             _MemeConfig.Add(new Meme("success-kid", "", new[] { "sk", "successkid" }));
             _MemeConfig.Add(new Meme("foo", "", new[] { "" }));
-
         }
+
         [TestMethod]
-        public void FindMemeByNameWithDashesWorks()
+        public void FindMemeByNameWithDashes()
         {
             // arrange
             const string searchName = "success-kid";
@@ -31,6 +31,34 @@ namespace UpboatMeTests
             // assert
             Assert.IsNotNull(actualMeme);
             Assert.AreEqual(expectedName, actualMeme.Description);
+        }
+
+        [TestMethod]
+        public void FindMemeByNameWithoutDashes()
+        {
+            // arrange
+            const string searchName = "successkid";
+            const string expectedName = "success-kid";
+
+            // act
+            var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
+
+            // assert
+            Assert.IsNotNull(actualMeme);
+            Assert.AreEqual(expectedName, actualMeme.Description);
+        }
+
+        [TestMethod]
+        public void FindMemeNoMatchReturnsNull()
+        {
+            // arrange
+            const string searchName = "foobar";
+
+            // act
+            var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
+
+            // assert
+            Assert.IsNull(actualMeme);
         }
     }
 }
