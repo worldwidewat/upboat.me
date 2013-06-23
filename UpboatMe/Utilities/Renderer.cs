@@ -66,7 +66,7 @@ namespace UpboatMe.Utilities
 
                     graphicsPath.AddString(text, font.FontFamily, (int)FontStyle.Regular, emSize, bounds, stringFormat);
 
-                    graphics.DrawPath(new Pen(meme.Stroke, 2) { LineJoin = LineJoin.Round }, graphicsPath);
+                    graphics.DrawPath(new Pen(meme.Stroke, meme.StrokeWidth) { LineJoin = LineJoin.Round }, graphicsPath);
                     graphics.FillPath(meme.Fill, graphicsPath);
 
                     graphics.SmoothingMode = SmoothingMode.Default;
