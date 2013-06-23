@@ -2,7 +2,7 @@
 *.pot
 *.pyc
 *.suo
-*.csproj.user
+*.user
 bin/
 obj/
 local_settings.py

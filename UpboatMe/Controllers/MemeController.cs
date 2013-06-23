@@ -10,14 +10,7 @@ namespace UpboatMe.Controllers
     {
         public ActionResult Make(string name, string top, string bottom, bool drawBoxes = false)
         {
-            var sanitizedName = "";
-            if (!string.IsNullOrEmpty(name))
-            {
-                sanitizedName = name.Replace("-", "");
-            }
-
-            var meme = GlobalMemeConfiguration.Memes[sanitizedName];
-            
+            var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, name);
             if (meme == null)
             {
                 // TODO: update this flow to return a proper HTTP 404 code, too
