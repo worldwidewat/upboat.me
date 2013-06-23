@@ -142,7 +142,11 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
+    <Content Include="Content\step2.png" />
+    <Content Include="Content\step3.png" />
+    <Content Include="Content\step4.png" />
     <Content Include="Content\styles.css" />
+    <Content Include="Content\url-example.png" />
     <Content Include="Content\vote-right.png" />
     <Content Include="Content\vote-up.png" />
     <Content Include="Foundation_readme.txt" />
