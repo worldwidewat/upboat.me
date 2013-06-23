@@ -1,5 +1,8 @@
 ﻿body {
+}
 
+.row + .row {
+    margin-top: 40px;
 }
 
 li > em {
@@ -10,13 +13,14 @@ li > em {
     color: #000;
 }
 
-#header a:hover, #header a:active{
+#header a:hover, #header a:active {
     color: #2ba6cb;
 }
 
 #footer div {
     font-size: 75%;
 }
+
 #footer ul {
     list-style-type: none;
     margin-left: 0;
