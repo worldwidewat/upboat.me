@@ -10,7 +10,13 @@ namespace UpboatMe.Controllers
     {
         public ActionResult Make(string name, string top, string bottom, bool drawBoxes = false)
         {
-            var meme = GlobalMemeConfiguration.Memes[name];
+            var sanitizedName = "";
+            if (!string.IsNullOrEmpty(name))
+            {
+                sanitizedName = name.Replace("-", "");
+            }
+
+            var meme = GlobalMemeConfiguration.Memes[sanitizedName];
             
             if (meme == null)
             {
