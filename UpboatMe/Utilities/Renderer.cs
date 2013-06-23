@@ -31,7 +31,8 @@ namespace UpboatMe.Utilities
         {
             var done = false;
             var fontSize = meme.FontSize;
-            var maxHeight = isTop ? meme.TopLineHeight : meme.BottomLineHeight;
+            var maxHeightPercent = isTop ? meme.TopLineHeightPercent : meme.BottomLineHeightPercent;
+            var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100 ));
             var stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
             stringFormat.Alignment = StringAlignment.Center;
@@ -54,6 +55,7 @@ namespace UpboatMe.Utilities
                 if (!isTop)
                 {
                     bounds.Y = image.Height - bounds.Height - 1;
+                    stringFormat.LineAlignment = StringAlignment.Far;
                 }
 
                 using (var graphicsPath = new GraphicsPath())

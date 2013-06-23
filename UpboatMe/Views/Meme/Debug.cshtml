@@ -11,10 +11,11 @@
 {
     foreach (var item in Model.DebugImages)
     {
-        <div>
-            <img src="@item" />
-        </div>
+    <div>
+        <img src="@item" />
+        <p><a href="@item">Go to this one</a></p>
+    </div>
     
-        <br />
+    <br />
     }
 }
