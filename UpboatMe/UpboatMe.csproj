@@ -167,6 +167,7 @@
     <Content Include="Images\futurama-fry-template.png" />
     <Content Include="Images\good-guy-greg-template.png" />
     <Content Include="Images\ill-have-you-know-template.png" />
+    <Content Include="Images\internet-grandma-surprise-template.png" />
     <Content Include="Images\malicious-advice-mallard-template.png" />
     <Content Include="Images\overly-attached-girlfriend-template.png" />
     <Content Include="Images\overly-manly-man-template.jpg" />
@@ -181,6 +182,7 @@
     <Content Include="Images\sudden-clarity-clarence-template.png" />
     <Content Include="Images\the-most-interesting-man-in-the-world-template.jpg" />
     <Content Include="Images\the-most-interesting-man-in-the-world-template.png" />
+    <Content Include="Images\unhelpful-high-school-teacher-template.png" />
     <Content Include="Images\y-u-no-template.jpg" />
     <Content Include="Images\y-u-no-template.png" />
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
