@@ -197,6 +197,9 @@
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\zepto.js" />
+    <Content Include="Scripts\ZeroClipboard.js" />
+    <Content Include="Scripts\ZeroClipboard.min.js" />
+    <Content Include="Scripts\ZeroClipboard.swf" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
