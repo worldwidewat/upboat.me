@@ -1,59 +1,26 @@
 ﻿@model UpboatMe.Models.IndexViewModel
-<style>
-    .row {
-        counter-reset: section;
-    }
-
-    ol {
-        list-style-type: none;
-        margin-left: 0;
-    }
-
-    li:before {
-        counter-increment: section;
-    }
-    .step-divider {
-        background-image: url(@Url.Content("~/Content/vote-right.png"));
-        background-position: right top;
-        background-repeat: no-repeat;
-        width: 51px;
-        height: 51px;
-        opacity: .25;
-    }
-</style>
 <div class="row">
-    <div class="large-8 columns">
-        <h3>how does this work?</h3>
+    <div class="large-12 columns">
+        <h2>how does this work?</h2>
         <div class="row">
             <div class="large-4 columns">
-                <div class="">
-                    <ol>
-                        <li>Think of something funny<br />
-                            <em>(the hard part)</em></li>
-                    </ol>
-                </div>
+                <h4>Think of something funny<br />
+                    <small>(the hard part)</small></h4>
             </div>
-            <div class="large-1 columns step-divider"></div>
-            <div class="large-3 columns">
-                <div class="">
-                    <ol>
-                        <li>Make a meme wherever you are<br />
-                            <em>(just build it with the url)</em></li>
-                    </ol>
-                </div>
+            <div class="large-4 columns">
+                <h4>Make a meme wherever you are<br />
+                    <small>(just build it with the url)</small></h4>
             </div>
-            <div class="large-1 columns step-divider"></div>
-            <div class="large-3 columns">
-                <div class="">
-                    <ol>
-                        <li>Don't switch apps<br />
-                            <em>(you're already done!)</em></li>
-                    </ol>
-                </div>
+            <div class="large-4 columns">
+                <h4>Don't switch apps<br />
+                    <small>(you're already done!)</small></h4>
             </div>
         </div>
-
-        <h3>Heya</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Helper</h2>
         <div class="row">
             <div class="large-6 columns">
 
@@ -78,21 +45,22 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
-
-<div class="large-4 columns">
-    <h4>Recent Memes</h4>
-    <p>
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Recent Memes</h2>
+    </div>
+    <div class="large-3 columns">
         <img src="/sap/wears-suit-and-tie-to-interview/phone-interview" alt="socially awkward penguin: wears suit and tie to interview @Environment.NewLine phone interview" title="socially awkward penguin"/>
-    </p>
-    <p>
+    </div>
+    <div class="large-3 columns">
         <img src="/fry/not-sure-if-sunny-outside/or-hungover" alt="futurama fry: not sure if sunny outside @Environment.NewLine or hungover" title="futurama fry"/>
-    </p>
-    <p>
+    </div>
+    <div class="large-3 columns">
         <img src="/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life" alt="sudden clarity clarence: i don't buy things with money @Environment.NewLine i buy them with hours of my life" title="sudden clarity clarence"/>
-    </p>
-    <p>
+    </div>
+    <div class="large-3 columns">
         <img src="/blb/has-pet-rock/it-runs-away" alt="bad luck brian: has pet rock @Environment.NewLine it runs away" title="bad luck brian"/>
-    </p>
-</div>
+    </div>
 </div>

@@ -144,6 +144,7 @@
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\vote-right.png" />
+    <Content Include="Content\vote-up.png" />
     <Content Include="Foundation_readme.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\10-guy-template.png" />
