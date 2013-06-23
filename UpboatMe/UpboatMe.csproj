@@ -235,6 +235,7 @@
     <Content Include="Views\Home\MemeBuilder.cshtml" />
     <Content Include="Views\Home\RecentMemes.cshtml" />
     <Content Include="Views\Home\HowTo.cshtml" />
+    <Content Include="Views\Meme\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,29 @@
+﻿@model System.Collections.Generic.List<UpboatMe.Models.Meme>
+
+@{
+    ViewBag.Title = "List";
+}
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Memes</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns newspaper">
+
+        @foreach (var meme in Model)
+        {
+            <div class="panel">
+                <h5>@Html.ActionLink(meme.Description, "Make", "Meme", new { name = meme.Aliases[0], top = "top-line", bottom = "bottom-line" }, null)
+                    <small>aka 
+                        @for (var i = 0; i < meme.Aliases.Count; ++i)
+                        {
+                            var alias = meme.Aliases[i];
+                            @(i==0?"":", ")@Html.ActionLink(alias, "Make", "Meme", new { name = alias, top = "top-line", bottom = "bottom-line" }, null);
+                        }
+                    </small>
+                </h5>
+            </div>
+        }
+    </div>
+</div>
