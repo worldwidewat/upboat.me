@@ -1,72 +1,13 @@
 ﻿@model UpboatMe.Models.IndexViewModel
-@{
-    ViewBag.Title = "Home";
-}
-<div class="row">
-    <div class="large-12 columns">
-        <h2>how does this work?</h2>
-        <p>Build a meme from anywhere by linking to <em>upboat.me</em>. Put your meme info right in the url.</p>
-        <div class="row" style="text-align: center;">
-            <img src="@Url.Content("~/Content/url-example.png")"/>
-        </div>
-        <p>In other words...</p>
-        <div class="row">
-            <div class="large-4 columns">
-                <h4>Think of something funny<br />
-                    <small>(the hard part)</small></h4>
-                <img src="@Url.Content("~/Content/step2.png")" alt="Step 1"/>
-            </div>
-            <div class="large-4 columns">
-                <h4>Make a meme via url<br />
-                    <small>(just build it with the url)</small></h4>
-                <img src="@Url.Content("~/Content/step3.png")" alt="Step 2"/>
-            </div>
-            <div class="large-4 columns">
-                <h4>Don't switch apps<br />
-                    <small>(you're already done!)</small></h4>
-                <img src="@Url.Content("~/Content/step4.png")" alt="Step 3"/>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="large-6 columns">
-        <h2>helper</h2>
-        <form class="custom" style="display: block;">
-            @Html.DropDownList("meme-name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"), new { @class = "large" })
-            <input type="text" id="first-line" placeholder="Top Line" />
-            <input type="text" id="second-line" placeholder="Bottom Line" />
-            <div style="text-align: center">
-                <input class="small button" type="button" value="Create!" id="create-meme" />
-            </div>
-        </form>
-        <div class="row">
-            <div class="large-10 columns">
-                <input id="share-url" type="text" disabled="disabled" placeholder="Create a meme to share it!">
-            </div>
-            <div class="small-2 columns">
-                <input id="copy-button" type="button" data-clipboard-target="share-url" class="right inline small button" value="Copy" />
-            </div>
-        </div>
-    </div>
-    <div class="large-6 columns">
-        <img id="meme-preview" src="/ihyk/I'll-have-you-know-I-tried-other-meme-generators/and-only-wasted-hours-and-hours-of-my-life" />
-    </div>
-</div>
-<div class="row">
-    <div class="large-12 columns">
-        <h2>Recent Memes</h2>
-    </div>
-    <div class="large-3 columns">
-        <img src="/sap/wears-suit-and-tie-to-interview/phone-interview" alt="socially awkward penguin: wears suit and tie to interview @Environment.NewLine phone interview" title="socially awkward penguin"/>
-    </div>
-    <div class="large-3 columns">
-        <img src="/fry/not-sure-if-sunny-outside/or-hungover" alt="futurama fry: not sure if sunny outside @Environment.NewLine or hungover" title="futurama fry"/>
-    </div>
-    <div class="large-3 columns">
-        <img src="/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life" alt="sudden clarity clarence: i don't buy things with money @Environment.NewLine i buy them with hours of my life" title="sudden clarity clarence"/>
-    </div>
-    <div class="large-3 columns">
-        <img src="/blb/has-pet-rock/it-runs-away" alt="bad luck brian: has pet rock @Environment.NewLine it runs away" title="bad luck brian"/>
-    </div>
-</div>
+
+<div class="row"><hr /></div>
+
+@Html.Partial("HowTo")
+
+<div class="row"><hr /></div>
+
+@Html.Partial("MemeBuilder", Model.Memes)
+
+<div class="row"><hr /></div>
+
+@Html.Partial("RecentMemes", Model.RecentMemes)

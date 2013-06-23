@@ -10,7 +10,7 @@
     @*Set the viewport width to device width for mobile *@
     <meta name="viewport" content="width=device-width" />
 
-    <title>@ViewBag.Title - UPBOAT.ME</title>
+    <title>@(ViewBag.Title ?? "upboat.me")</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     @Styles.Render("~/Content/foundation/css")

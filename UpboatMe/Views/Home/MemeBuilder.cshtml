@@ -1,0 +1,27 @@
+﻿@model IList<UpboatMe.Models.Meme>
+
+<div class="row">
+    <div class="large-6 columns">
+        <h2>builder</h2>
+        <form>
+            @Html.DropDownList("meme-name", new SelectList(Model.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"))
+            <input type="text" id="first-line" placeholder="Top Line" />
+            <input type="text" id="second-line" placeholder="Bottom Line" />
+            <div style="text-align: center">
+                <input class="small button" type="button" value="Create!" id="create-meme" />
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="large-10 columns">
+                <input id="share-url" type="text" disabled="disabled" placeholder="Create a meme to share it!">
+            </div>
+            <div class="small-2 columns">
+                <input id="copy-button" type="button" data-clipboard-target="share-url" class="right inline small button" value="Copy" />
+            </div>
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <img id="meme-preview" src="/ihyk/I'll-have-you-know-I-tried-other-meme-generators/and-only-wasted-hours-and-hours-of-my-life"/>
+    </div>
+</div>

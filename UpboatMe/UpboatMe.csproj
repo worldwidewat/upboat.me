@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\RecentMeme.cs" />
     <Compile Include="Utilities\SloganUtilities.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Meme.cs" />
@@ -149,6 +150,7 @@
     <Content Include="Content\url-example.png" />
     <Content Include="Content\vote-right.png" />
     <Content Include="Content\vote-up.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Foundation_readme.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\10-guy-template.png" />
@@ -233,6 +235,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Pricing.cshtml" />
+    <Content Include="Views\Home\MemeBuilder.cshtml" />
+    <Content Include="Views\Home\RecentMemes.cshtml" />
+    <Content Include="Views\Home\HowTo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

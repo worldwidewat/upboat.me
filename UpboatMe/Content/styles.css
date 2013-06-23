@@ -1,9 +1,11 @@
 ﻿body {
 }
 
+/*
 .row + .row {
     margin-top: 40px;
 }
+*/
 
 li > em {
     color: #777;
@@ -24,4 +26,15 @@ li > em {
 #footer ul {
     list-style-type: none;
     margin-left: 0;
+}
+
+hr {
+  border-top: 1px dashed #b1b1b1;
+  color: #fff;
+  background-color: #fff;
+  height: 1px;
+}
+
+#share-url {
+    background-color: #fff;
 }
