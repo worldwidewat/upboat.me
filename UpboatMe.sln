@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpboatMe", "UpboatMe\UpboatMe.csproj", "{292B8EBA-5E58-46F1-9E04-1EA563325262}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpboatMeTests", "UpboatMeTests\UpboatMeTests.csproj", "{088E1E45-ABC1-4660-A810-499C6778EEAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{292B8EBA-5E58-46F1-9E04-1EA563325262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088E1E45-ABC1-4660-A810-499C6778EEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088E1E45-ABC1-4660-A810-499C6778EEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088E1E45-ABC1-4660-A810-499C6778EEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088E1E45-ABC1-4660-A810-499C6778EEAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
