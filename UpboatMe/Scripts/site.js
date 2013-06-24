@@ -7,6 +7,9 @@ $(function () {
     $('#create-meme').click(function () {
         var name = $('#meme-name').val();
         var first = $('#first-line').val().replace(/ /g, "-");
+        if (first==="") {
+            first = "-";
+        }
         var second = $('#second-line').val().replace(/ /g, "-");
         var url = '/' + name + '/' + encodeURIComponent(first) + '/' + encodeURIComponent(second);
         
