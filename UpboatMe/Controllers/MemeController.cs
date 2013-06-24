@@ -10,7 +10,7 @@ namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
-        private static Regex _StripRegex = new Regex(@"&?drawboxes=true|\.png|\.jpe?g", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex _StripRegex = new Regex(@"&?drawboxes=true|\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         
         // ignore the parameters and figure it out manually from Request.RawUrl
         // this allows us to keep using routes to generate our own links, which is handy
