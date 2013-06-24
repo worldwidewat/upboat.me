@@ -66,4 +66,6 @@ Michael Haren, 23-Jun-2013
 
 Mark Carpenter, 23-Jun-2013
 
+Xander Dumaine, 24-Jun-2013
+
 (future contributors listed here)
