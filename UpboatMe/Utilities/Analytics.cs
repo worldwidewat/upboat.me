@@ -9,13 +9,25 @@ namespace UpboatMe.Utilities
     {
         public static void TrackMeme(HttpContextBase context, string meme)
         {
-            if (string.Equals(ConfigurationManager.AppSettings["EnableGoogleAnalytics"], "true", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(ConfigurationManager.AppSettings["EnableGoogleAnalytics"], "true", StringComparison.OrdinalIgnoreCase)
+                && !IsFromUpboatMe(context.Request.UrlReferrer))
             {
+
                 using (var tracker = new Tracker("UA-41725429-1", "upboat.me"))
                 {
                     tracker.TrackPageView(context, "Generate Meme", string.Format("meme/make/{0}", meme));
                 }
             }
+        }
+
+        private static bool IsFromUpboatMe(Uri uri)
+        {
+            if (uri == null)
+            {
+                return false;
+            }
+
+            return string.Equals(uri.Host, "upboat.me", StringComparison.OrdinalIgnoreCase);
         }
     }
 }
