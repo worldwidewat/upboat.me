@@ -9,24 +9,35 @@ namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
-        public ActionResult Make(string name, string top, string bottom, bool drawBoxes = false)
+        // ignore the parameters and figure it out manually from Request.RawUrl
+        // this allows us to keep using routes to generate our own links, which is handy
+        public ActionResult Make(string name, string top, string bottom)
         {
-            var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, name);
+            
+            var url = Request.RawUrl;
+            
+            // todo - handle this more elegantly, or don't do such things via this action
+            var drawBoxes = url.Contains("drawBoxes=true");
+            url = url.Replace("drawBoxes=true", "");
+
+            var memeRequest = MemeUtilities.GetMemeRequest(url);
+
+            var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, memeRequest.Name);
             if (meme == null)
             {
                 // TODO: update this flow to return a proper HTTP 404 code, too
                 meme = GlobalMemeConfiguration.NotFoundMeme;
-                bottom = "Y U NO USE VALID MEME NAME?";
-                top = "404";
+                memeRequest.Top = "404";
+                memeRequest.Bottom = "Y U NO USE VALID MEME NAME?";
             }
 
             var renderer = new Renderer();
 
-            var bytes = renderer.Render(meme, top.SanitizeMemeText(), bottom.SanitizeMemeText(), drawBoxes);
+            var bytes = renderer.Render(meme, memeRequest.Top.SanitizeMemeText(), memeRequest.Bottom.SanitizeMemeText(), drawBoxes);
 
-            Analytics.TrackMeme(HttpContext, name);
+            Analytics.TrackMeme(HttpContext, memeRequest.Name);
 
-            return new FileContentResult(bytes, meme.ImageType);   
+            return new FileContentResult(bytes, meme.ImageType);
         }
 
         public ActionResult Debug(string top, string bottom)

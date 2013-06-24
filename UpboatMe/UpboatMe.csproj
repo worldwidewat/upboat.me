@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\MemeRequest.cs" />
     <Compile Include="Models\RecentMeme.cs" />
     <Compile Include="Utilities\Analytics.cs" />
     <Compile Include="Utilities\MemeUtilities.cs" />
