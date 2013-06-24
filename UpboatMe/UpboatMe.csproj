@@ -174,11 +174,13 @@
     <Content Include="Images\i-should-buy-a-boat-cat-template.png" />
     <Content Include="Images\ill-have-you-know-template.png" />
     <Content Include="Images\internet-grandma-surprise-template.png" />
+    <Content Include="Images\irrationally-hostile-mark-template.png" />
     <Content Include="Images\malicious-advice-mallard-template.png" />
     <Content Include="Images\overly-attached-girlfriend-template.png" />
     <Content Include="Images\overly-manly-man-template.png" />
     <Content Include="Images\philosoraptor-template.png" />
     <Content Include="Images\scumbag-steve-template.png" />
+    <Content Include="Images\slowpoke-template.png" />
     <Content Include="Images\socially-awesome-awkward-penguin-template.png" />
     <Content Include="Images\socially-awkward-awesome-penguin-template.png" />
     <Content Include="Images\socially-awkward-penguin-template.png" />
