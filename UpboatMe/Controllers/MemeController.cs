@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Text.RegularExpressions;
+using System.Web.Mvc;
 using UpboatMe.App_Start;
 using UpboatMe.Models;
 using UpboatMe.Utilities;
@@ -9,17 +10,20 @@ namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
+        private static Regex _StripRegex = new Regex(@"&?drawboxes=true|\.png|\.jpe?g", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        
         // ignore the parameters and figure it out manually from Request.RawUrl
         // this allows us to keep using routes to generate our own links, which is handy
         public ActionResult Make(string name, string top, string bottom)
         {
-            
             var url = Request.RawUrl;
             
             // todo - handle this more elegantly, or don't do such things via this action
             var drawBoxes = url.Contains("drawBoxes=true");
-            url = url.Replace("drawBoxes=true", "");
-
+            
+            // strip off any file extensions
+            url = _StripRegex.Replace(url, "");
+            
             var memeRequest = MemeUtilities.GetMemeRequest(url);
 
             var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, memeRequest.Name);
