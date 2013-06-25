@@ -16,6 +16,7 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Bad Luck Brian", "bad-luck-brian", new List<string> { "blb", "badluckbrian" }));
             memes.Add(new Meme("Brace Yourselves", "brace-yourselves", new List<string> { "by", "braceyourselves", }));
             memes.Add(new Meme("Business Cat", "business-cat", new List<string>{"bc", "business-cat", "suit-cat"}));
+            memes.Add(new Meme("Condescending Wonka", "condescending-wonka", new List<string> { "cw", "condescendingwonka", "wonka" }));
             memes.Add(new Meme("Drunk Baby", "drunk-baby", new List<string> {"db", "drunk-baby"}));
             memes.Add(new Meme("Ermahgerd", "ermahgerd", new List<string>{ "emg", "ermahgerd", "ermagerd", "ermagod", "ermahgod" }));
             memes.Add(new Meme("Everyone Loses Their Minds", "everyone-loses-their-minds", new List<string> { "eltm", "everyonelosestheirminds" }));
