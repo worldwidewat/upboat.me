@@ -30,7 +30,7 @@ something that we can't merge later!
     * Type: png
     * Bit depth: 8-bit (many apps, like [Paint.Net](http://www.getpaint.net/), let you set this when you save)
     * If you can't get the file size down, don't worry about it. Commit anyway (we'll fix it up!)
-    * Include both the original _and_ the smaller version with your commit (so we can rebuild the smaller one later if we need to)
+* Include both the original _and_ the smaller version with your commit (so we can rebuild the smaller one later if we need to)
 * Update [`UpboatMe/App_Start/MemeConfig.cs`](https://github.com/worldwidewat/upboat.me/blob/master/UpboatMe/App_Start/MemeConfig.cs) 
   with the new meme's metadata (it's pretty obvious...)
 * If you didn't add the new image from within Visual Studio, be sure to include the new image in the project file. Do this by 
