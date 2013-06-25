@@ -16,7 +16,9 @@ namespace UpboatMe.Controllers
         // this allows us to keep using routes to generate our own links, which is handy
         public ActionResult Make(string name, string top, string bottom)
         {
-            var url = Request.RawUrl;
+            // Request.RawUrl doesn't handle double slashes correctly, e.g. /sk//foo,
+            // but this server variable does, apparently
+            var url = Request.ServerVariables["UNENCODED_URL"]; // Request.RawUrl;
             
             // todo - handle this more elegantly, or don't do such things via this action
             var drawBoxes = url.Contains("drawBoxes=true");
