@@ -18,14 +18,17 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Futurama Fry", "futurama-fry", new List<string> { "ff", "fry", "futuramafry", "notsureiffry" }));
             memes.Add(new Meme("Good Guy Greg", "good-guy-greg", new List<string> { "ggg", "goodguygreg" }));
             memes.Add(new Meme("Grumpy Cat", "grumpy-cat", new List<string>{"gc", "grumpycat", "sadcat"}));
+            memes.Add(new Meme("I don't want to live on this planet anymore", "i-don't-want-to-live-on-this-plant-anymore", new List<string> { "farnsworth", "idwtlotpa", "idontwanttoliveonthisplanetanymore", "idontwanttoliveonthisplanet" }));
             memes.Add(new Meme("I Should Buy a Boat Cat", "i-should-buy-a-boat-cat", new List<string> {"isbabc", "babc", "boatcat", "ishouldbuyaboatcat", "buyaboatcat"}));
             memes.Add(new Meme("I'll Have You Know", "ill-have-you-know", new List<string> { "ihyk", "illhaveyouknow" }));
             memes.Add(new Meme("Internet Grandma Surprise", "internet-grandma-surprise", new List<string> { "grandma", "igs", "internetgrandma", "internetgrandmasurprise", "grandmasurprise" }));
+            memes.Add(new Meme("Irrationally Hostile Mark", "irrationally-hostile-mark", new List<string> { "irrationallyhostilemark", "hostilemark", "ihm" }));
             memes.Add(new Meme("Malicious Advice Mallard", "malicious-advice-mallard", new List<string> { "mam", "maliciousadvicemallard" }));
             memes.Add(new Meme("Overly Attached Girlfriend", "overly-attached-girlfriend", new List<string> { "oag", "overlyattachedgirlfriend" }));
             memes.Add(new Meme("Overly Manly Man", "overly-manly-man", new List<string> { "omm", "overlymanlyman" }));
             memes.Add(new Meme("Philosoraptor", "philosoraptor", new List<string> { "raptor", "philosoraptor", "pr" }));
             memes.Add(new Meme("Scumbag Steve", "scumbag-steve", new List<string> { "ss", "scumbagsteve" }));
+            memes.Add(new Meme("Slowpoke", "slowpoke", new List<string> { "slowpoke" }));
             memes.Add(new Meme("Socially Awesome Awkward Penguin", "socially-awesome-awkward-penguin", new List<string> { "sociallyawesomeawkwardpenguin", "awesomeawkwardpenguin" }));
             memes.Add(new Meme("Socially Awkward Awesome Penguin", "socially-awkward-awesome-penguin", new List<string> { "sociallyawkwardawesomepenguin", "awkwardawesomepenguin" }));
             memes.Add(new Meme("Socially Awkward Penguin", "socially-awkward-penguin", new List<string> { "sap", "sociallyawkwardpenguin" }));
