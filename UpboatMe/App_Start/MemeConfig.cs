@@ -10,10 +10,13 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("10 Guy", "10-guy", new List<string> { "10guy", "tenguy" }));
             memes.Add(new Meme("Actual Advice Mallard", "actual-advice-mallard", new List<string> { "aam", "actualadvicemallard" }));
             memes.Add(new Meme("All the Things", "all-the-things", new List<string> { "att", "allthethings" }));
+            memes.Add(new Meme("Angry Walter", "angry-walter", new List<string> { "angrywalter", "amitheonlyone", "aitoo" }));
             memes.Add(new Meme("Annoyed Picard", "annoyed-picard", new List<string> { "ap", "picard", "annoyed-picard", "why-the-fuck" }));
             memes.Add(new Meme("Bad Joke Eel", "bad-joke-eel", new List<string> { "bje", "badjokeeel" }));
             memes.Add(new Meme("Bad Luck Brian", "bad-luck-brian", new List<string> { "blb", "badluckbrian" }));
+            memes.Add(new Meme("Brace Yourselves", "brace-yourselves", new List<string> { "by", "braceyourselves", }));
             memes.Add(new Meme("Business Cat", "business-cat", new List<string>{"bc", "business-cat", "suit-cat"}));
+            memes.Add(new Meme("Condescending Wonka", "condescending-wonka", new List<string> { "cw", "condescendingwonka", "wonka" }));
             memes.Add(new Meme("Drunk Baby", "drunk-baby", new List<string> {"db", "drunk-baby"}));
             memes.Add(new Meme("Ermahgerd", "ermahgerd", new List<string>{ "emg", "ermahgerd", "ermagerd", "ermagod", "ermahgod" }));
             memes.Add(new Meme("Everyone Loses Their Minds", "everyone-loses-their-minds", new List<string> { "eltm", "everyonelosestheirminds" }));
@@ -27,10 +30,13 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Internet Grandma Surprise", "internet-grandma-surprise", new List<string> { "grandma", "igs", "internetgrandma", "internetgrandmasurprise", "grandmasurprise" }));
             memes.Add(new Meme("Irrationally Hostile Mark", "irrationally-hostile-mark", new List<string> { "irrationallyhostilemark", "hostilemark", "ihm" }));
             memes.Add(new Meme("Malicious Advice Mallard", "malicious-advice-mallard", new List<string> { "mam", "maliciousadvicemallard" }));
+            memes.Add(new Meme("Office Space Lumbergh", "office-space-lumbergh", new List<string> { "osl", "lumbergh", "officespacelumbergh", "yeah" }));
+            memes.Add(new Meme("One Does Not Simply", "one-does-not-simply", new List<string> { "odns", "boromir", "mordor", "onedoesnotsimply" }));
             memes.Add(new Meme("Overly Attached Girlfriend", "overly-attached-girlfriend", new List<string> { "oag", "overlyattachedgirlfriend" }));
             memes.Add(new Meme("Overly Manly Man", "overly-manly-man", new List<string> { "omm", "overlymanlyman" }));
             memes.Add(new Meme("Philosoraptor", "philosoraptor", new List<string> { "raptor", "philosoraptor", "pr" }));
             memes.Add(new Meme("Scumbag Steve", "scumbag-steve", new List<string> { "ss", "scumbagsteve" }));
+            memes.Add(new Meme("Shrute Facts", "shrute-facts", new List<string> { "shrute", "shrutefacts", "dwight", "correction", "false" }));
             memes.Add(new Meme("Slowpoke", "slowpoke", new List<string> { "slowpoke" }));
             memes.Add(new Meme("Socially Awesome Awkward Penguin", "socially-awesome-awkward-penguin", new List<string> { "sociallyawesomeawkwardpenguin", "awesomeawkwardpenguin" }));
             memes.Add(new Meme("Socially Awkward Awesome Penguin", "socially-awkward-awesome-penguin", new List<string> { "sociallyawkwardawesomepenguin", "awkwardawesomepenguin" }));

@@ -164,10 +164,13 @@
     <Content Include="Images\10-guy-template.png" />
     <Content Include="Images\actual-advice-mallard-template.png" />
     <Content Include="Images\all-the-things-template.png" />
+    <Content Include="Images\angry-walter-template.png" />
     <Content Include="Images\annoyed-picard-template.png" />
     <Content Include="Images\bad-joke-eel-template.png" />
     <Content Include="Images\bad-luck-brian-template.png" />
+    <Content Include="Images\brace-yourselves-template.png" />
     <Content Include="Images\business-cat-template.png" />
+    <Content Include="Images\condescending-wonka-template.png" />
     <Content Include="Images\drunk-baby-template.png" />
     <Content Include="Images\ermahgerd-template.png" />
     <Content Include="Images\everyone-loses-their-minds-template.png" />
@@ -181,10 +184,13 @@
     <Content Include="Images\internet-grandma-surprise-template.png" />
     <Content Include="Images\irrationally-hostile-mark-template.png" />
     <Content Include="Images\malicious-advice-mallard-template.png" />
+    <Content Include="Images\office-space-lumbergh-template.png" />
+    <Content Include="Images\one-does-not-simply-template.png" />
     <Content Include="Images\overly-attached-girlfriend-template.png" />
     <Content Include="Images\overly-manly-man-template.png" />
     <Content Include="Images\philosoraptor-template.png" />
     <Content Include="Images\scumbag-steve-template.png" />
+    <Content Include="Images\shrute-facts-template.png" />
     <Content Include="Images\slowpoke-template.png" />
     <Content Include="Images\socially-awesome-awkward-penguin-template.png" />
     <Content Include="Images\socially-awkward-awesome-penguin-template.png" />
