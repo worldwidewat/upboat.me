@@ -18,7 +18,7 @@ namespace UpboatMe.Controllers
         {
             // Request.RawUrl doesn't handle double slashes correctly, e.g. /sk//foo,
             // but this server variable does, apparently
-            var url = Request.ServerVariables["UNENCODED_URL"]; // Request.RawUrl;
+            var url = Request.ServerVariables["UNENCODED_URL"];
             
             // todo - handle this more elegantly, or don't do such things via this action
             var drawBoxes = url.Contains("drawBoxes=true");
