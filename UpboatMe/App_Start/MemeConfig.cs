@@ -32,6 +32,7 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Overly Manly Man", "overly-manly-man", new List<string> { "omm", "overlymanlyman" }));
             memes.Add(new Meme("Philosoraptor", "philosoraptor", new List<string> { "raptor", "philosoraptor", "pr" }));
             memes.Add(new Meme("Scumbag Steve", "scumbag-steve", new List<string> { "ss", "scumbagsteve" }));
+            memes.Add(new Meme("Shrute Facts", "shrute-facts", new List<string> { "shrute", "shrutefacts", "dwight", "correction", "false" }));
             memes.Add(new Meme("Slowpoke", "slowpoke", new List<string> { "slowpoke" }));
             memes.Add(new Meme("Socially Awesome Awkward Penguin", "socially-awesome-awkward-penguin", new List<string> { "sociallyawesomeawkwardpenguin", "awesomeawkwardpenguin" }));
             memes.Add(new Meme("Socially Awkward Awesome Penguin", "socially-awkward-awesome-penguin", new List<string> { "sociallyawkwardawesomepenguin", "awkwardawesomepenguin" }));
