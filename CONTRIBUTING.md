@@ -23,7 +23,11 @@ something that we can't merge later!
 
 ### Adding a new meme
 
-* Add a blank template image to [`UpboatMe/Images`](https://github.com/worldwidewat/upboat.me/tree/master/UpboatMe/Images)
+* Add a blank template image to [`UpboatMe/Images/Originals`](https://github.com/worldwidewat/upboat.me/tree/master/UpboatMe/Images/Original)
+* Re-save your "raw" template as a relatively low quality png to [`UpboatMe/Images`](https://github.com/worldwidewat/upboat.me/tree/master/UpboatMe/Images) with the following settings (this often has a *dramatic* impact on file size):
+    * Width <= 400px
+    * Type: png
+    * Bit depth: 8-bit
 * Update [`UpboatMe/App_Start/MemeConfig.cs`](https://github.com/worldwidewat/upboat.me/blob/master/UpboatMe/App_Start/MemeConfig.cs) 
   with the new meme's metadata (it's pretty obvious...)
 * If you didn't add the new image from within Visual Studio, be sure to include the new image in the project file. Do this by 
