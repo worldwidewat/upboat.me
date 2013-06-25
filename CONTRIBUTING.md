@@ -33,6 +33,7 @@ something that we can't merge later!
 * Include both the original _and_ the smaller version with your commit (so we can rebuild the smaller one later if we need to)
 * Update [`UpboatMe/App_Start/MemeConfig.cs`](https://github.com/worldwidewat/upboat.me/blob/master/UpboatMe/App_Start/MemeConfig.cs) 
   with the new meme's metadata (it's pretty obvious...)
+    * Put your new meme in alphabetical order with the others (please!)
 * If you didn't add the new image from within Visual Studio, be sure to include the new image in the project file. Do this by 
   clicking the "Show all files" button in Solution Explorer, then right click on the image and choose "Include in project"
 * Test your new meme (don't forget to rebuild!)
