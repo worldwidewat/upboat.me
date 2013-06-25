@@ -39,6 +39,7 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Sudden Clarity Clarence", "sudden-clarity-clarence", new List<string> { "scc", "suddenclarityclarence" }));
             memes.Add(new Meme("The Most Interesting Man in the World", "the-most-interesting-man-in-the-world", new List<string> { "mim", "tmim", "tmimitw", "themostinterestingmanintheworld", "mostinterestingman" }));
             memes.Add(new Meme("Unhelpful High School Teacher", "unhelpful-high-school-teacher", new List<string>{"uhst", "unhelpfulhighschoolteacher", "scumbagteacher", "st"}));
+            memes.Add(new Meme("Why Not Zoidberg?", "why-not-zoidberg", new List<string>{"wnz", "ynz", "whynotzoidberg", "zoidberg"}));
             memes.Add(new Meme("Y U NO", "y-u-no", new List<string> { "yuno" } ));
         }
     }

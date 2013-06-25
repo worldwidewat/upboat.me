@@ -192,6 +192,7 @@
     <Content Include="Images\sudden-clarity-clarence-template.png" />
     <Content Include="Images\the-most-interesting-man-in-the-world-template.png" />
     <Content Include="Images\unhelpful-high-school-teacher-template.png" />
+    <Content Include="Images\why-not-zoidberg-template.png" />
     <Content Include="Images\y-u-no-template.png" />
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\NewRelic.Agent.Core.dll" />
