@@ -10,6 +10,7 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("10 Guy", "10-guy", new List<string> { "10guy", "tenguy" }));
             memes.Add(new Meme("Actual Advice Mallard", "actual-advice-mallard", new List<string> { "aam", "actualadvicemallard" }));
             memes.Add(new Meme("All the Things", "all-the-things", new List<string> { "att", "allthethings" }));
+            memes.Add(new Meme("Angry Walter", "angry-walter", new List<string> { "angrywalter", "amitheonlyone", "aitoo" }));
             memes.Add(new Meme("Annoyed Picard", "annoyed-picard", new List<string> { "ap", "picard", "annoyed-picard", "why-the-fuck" }));
             memes.Add(new Meme("Bad Joke Eel", "bad-joke-eel", new List<string> { "bje", "badjokeeel" }));
             memes.Add(new Meme("Bad Luck Brian", "bad-luck-brian", new List<string> { "blb", "badluckbrian" }));
