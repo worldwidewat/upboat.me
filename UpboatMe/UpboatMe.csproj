@@ -125,6 +125,7 @@
     <Compile Include="Models\MemeRequest.cs" />
     <Compile Include="Models\RecentMeme.cs" />
     <Compile Include="Utilities\Analytics.cs" />
+    <Compile Include="Utilities\HtmlHelperExtensions.cs" />
     <Compile Include="Utilities\MemeUtilities.cs" />
     <Compile Include="Utilities\SloganUtilities.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -163,14 +164,18 @@
     <Content Include="Images\10-guy-template.png" />
     <Content Include="Images\actual-advice-mallard-template.png" />
     <Content Include="Images\all-the-things-template.png" />
+    <Content Include="Images\annoyed-picard-template.png" />
     <Content Include="Images\bad-joke-eel-template.png" />
     <Content Include="Images\bad-luck-brian-template.png" />
     <Content Include="Images\business-cat-template.png" />
+    <Content Include="Images\drunk-baby-template.png" />
+    <Content Include="Images\ermahgerd-template.png" />
     <Content Include="Images\everyone-loses-their-minds-template.png" />
     <Content Include="Images\first-world-problems-template.png" />
     <Content Include="Images\futurama-fry-template.png" />
     <Content Include="Images\good-guy-greg-template.png" />
     <Content Include="Images\grumpy-cat-template.png" />
+    <Content Include="Images\i-don%27t-want-to-live-on-this-planet-anymore-template.png" />
     <Content Include="Images\i-should-buy-a-boat-cat-template.png" />
     <Content Include="Images\ill-have-you-know-template.png" />
     <Content Include="Images\internet-grandma-surprise-template.png" />
@@ -188,6 +193,7 @@
     <Content Include="Images\sudden-clarity-clarence-template.png" />
     <Content Include="Images\the-most-interesting-man-in-the-world-template.png" />
     <Content Include="Images\unhelpful-high-school-teacher-template.png" />
+    <Content Include="Images\why-not-zoidberg-template.png" />
     <Content Include="Images\y-u-no-template.png" />
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\NewRelic.Agent.Core.dll" />
@@ -242,10 +248,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Pricing.cshtml" />
-    <Content Include="Views\Home\MemeBuilder.cshtml" />
+    <Content Include="Views\Shared\BuilderPartial.cshtml" />
     <Content Include="Views\Home\RecentMemes.cshtml" />
     <Content Include="Views\Home\HowTo.cshtml" />
     <Content Include="Views\Meme\List.cshtml" />
+    <Content Include="Views\Meme\Builder.cshtml" />
     <None Include="Web.ProdDeploy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

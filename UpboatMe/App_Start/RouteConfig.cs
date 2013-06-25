@@ -27,6 +27,12 @@ namespace UpboatMe
             );
 
             routes.MapRoute(
+                name: "Builder",
+                url: "Builder",
+                defaults: new { controller = "Meme", action = "Builder" }
+            );
+
+            routes.MapRoute(
                 name: "Debug",
                 url: "Debug/{top}/{bottom}",
                 defaults: new { controller = "Meme", action = "Debug", top = UrlParameter.Optional, bottom = UrlParameter.Optional }

@@ -3,11 +3,19 @@
 @{
     ViewBag.Title = "List";
 }
-<div class="row">
-    <div class="large-12 columns">
-        <h2>Memes</h2>
+
+@using (Html.BeginForm("List", "Meme", FormMethod.Get))
+{
+<div class="row collapse">    
+    <div class="large-10 columns" style="padding-right:5px">
+        <input type="text" id="query" name="query" placeholder="search for a meme" value="@Request.QueryString["query"]"/>
     </div>
+    <div class="large-2 columns">
+        <input type="submit" value="Search" class="postfix small button middle"/>
+    </div>   
 </div>
+}
+
 <div class="row">
     <div class="large-12 columns newspaper">
 
@@ -24,6 +32,11 @@
                     </small>
                 </h5>
             </div>
+        }
+
+        @if (!Model.Any())
+        {
+            <em>No matches found - try again!</em>
         }
     </div>
 </div>
