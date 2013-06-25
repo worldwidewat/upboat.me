@@ -23,6 +23,17 @@
             <h1>@Html.ActionLink("UPBOAT.ME", "Index", "Home") <div style="float:right"><small>&#8220;<small>@UpboatMe.Utilities.SloganUtilities.GetRandomSlogan()</small>&#8221;</small></div></h1>
         </div>
     </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <ul class="inline-list right">
+                <li>@Html.TopNavLink("Home", "Index", "Home", null, new { @class = "medium button" })</li>
+                <li>@Html.TopNavLink("Builder", "Builder", "Meme", null, new { @class = "medium button" })</li>
+                <li>@Html.TopNavLink("Meme Index", "List", "Meme", null, new { @class = "medium button" })</li>
+            </ul>
+        </div>
+        <hr />
+    </div>
+    
     @RenderBody()
     <div id="footer" class="row">
         <hr/>

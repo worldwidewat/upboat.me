@@ -125,6 +125,7 @@
     <Compile Include="Models\MemeRequest.cs" />
     <Compile Include="Models\RecentMeme.cs" />
     <Compile Include="Utilities\Analytics.cs" />
+    <Compile Include="Utilities\HtmlHelperExtensions.cs" />
     <Compile Include="Utilities\MemeUtilities.cs" />
     <Compile Include="Utilities\SloganUtilities.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -247,10 +248,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Pricing.cshtml" />
-    <Content Include="Views\Home\MemeBuilder.cshtml" />
+    <Content Include="Views\Shared\BuilderPartial.cshtml" />
     <Content Include="Views\Home\RecentMemes.cshtml" />
     <Content Include="Views\Home\HowTo.cshtml" />
     <Content Include="Views\Meme\List.cshtml" />
+    <Content Include="Views\Meme\Builder.cshtml" />
     <None Include="Web.ProdDeploy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
