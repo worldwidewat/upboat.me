@@ -2,7 +2,6 @@
 
 <div class="row">
     <div class="large-6 columns">
-        <h2>builder <small><small>@Html.ActionLink("all memes and abbreviations »", "List", "Meme")</small></small></h2>
         <form>
             @Html.DropDownList("meme-name", new SelectList(Model.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"))
             <input type="text" id="first-line" placeholder="Top Line" />

@@ -1,12 +1,10 @@
 ﻿@model UpboatMe.Models.IndexViewModel
 
-<div class="row"><hr /></div>
-
 @Html.Partial("HowTo")
 
 <div class="row"><hr /></div>
 
-@Html.Partial("MemeBuilder", Model.Memes)
+@Html.Partial("BuilderPartial", Model.Memes)
 
 <div class="row"><hr /></div>
 

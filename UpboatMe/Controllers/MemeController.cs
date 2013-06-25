@@ -69,5 +69,12 @@ namespace UpboatMe.Controllers
 
             return View(list);
         }
+
+        public ActionResult Builder()
+        {
+            var viewModel = GlobalMemeConfiguration.Memes.GetMemes();
+
+            return View(viewModel);
+        }
     }
 }
