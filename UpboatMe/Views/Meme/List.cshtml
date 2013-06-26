@@ -4,16 +4,18 @@
     ViewBag.Title = "List";
 }
 
-@using (Html.BeginForm("List", "Meme", FormMethod.Get))
+@using (Html.BeginForm("List", "Meme", FormMethod.Get, new { id = "list-search-form" }))
 {
-<div class="row collapse">    
-    <div class="large-10 columns" style="padding-right:5px">
+    
+<div class="row">    
+    <div class="large-5 columns">
         <input type="text" id="query" name="query" placeholder="search for a meme" value="@Request.QueryString["query"]"/>
     </div>
-    <div class="large-2 columns">
+    <div class="large-2 columns left">
         <input type="submit" value="Search" class="postfix small button middle"/>
-    </div>   
+    </div>
 </div>
+
 }
 
 <div class="row">
@@ -21,7 +23,7 @@
 
         @foreach (var meme in Model)
         {
-            <div class="panel">
+            <div class="meme panel">
                 <h5>@Html.ActionLink(meme.Description, "Make", "Meme", new { name = meme.Aliases[0], top = "top-line", bottom = "bottom-line" }, null)
                     <small>aka 
                         @for (var i = 0; i < meme.Aliases.Count; ++i)

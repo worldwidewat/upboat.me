@@ -28,4 +28,24 @@ $(function () {
 
         setTimeout(function () { button.removeClass('success'); }, 1000);
     });
+
+    $('#list-search-form #query').on('keyup', function (e) {
+        var value = $(this).val().toLowerCase();
+
+        doListSearch(value);
+    });
+
+    $('#list-search-form').on('submit', function (e) {
+        var value = $(this).find('#query').val().toLowerCase();
+
+        doListSearch(value);
+
+        return false;
+    });
 });
+
+function doListSearch(value) {
+    $('.meme.panel').hide().filter(function (index) {
+        return $(this).text().toLowerCase().indexOf(value) !== -1 || value === '';
+    }).show();
+}
