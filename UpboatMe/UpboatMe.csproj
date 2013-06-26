@@ -247,7 +247,6 @@
     </Content>
     <None Include="Properties\PublishProfiles\upboatme.pubxml" />
     <Content Include="Views\Home\Terms.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Meme\Debug.cshtml" />
     <Content Include="Views\Home\Privacy.cshtml" />
     <Content Include="Views\Shared\_Foundation.cshtml" />
