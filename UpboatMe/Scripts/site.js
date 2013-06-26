@@ -42,6 +42,10 @@ $(function () {
 
         return false;
     });
+
+    $('#share-url').on('mouseup touchend', function (e) {
+        this.select();
+    });
 });
 
 function doListSearch(value) {
