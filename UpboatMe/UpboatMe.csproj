@@ -147,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App_Data\slogans.txt" />
+    <Content Include="Content\apple-touch-icon-precomposed.png" />
     <Content Include="Content\foundation\app.css" />
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />

@@ -12,7 +12,8 @@
 
     <title>@(ViewBag.Title != null ? ViewBag.Title + " - upboat.me" : "upboat.me")</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <meta name="apple-mobile-web-app-title" content="Upboat.me">
+    <link rel="apple-touch-icon" href="@Url.Content("~/Content/apple-touch-icon-precomposed.png")" />
     @Styles.Render("~/Content/foundation/css")
     @Styles.Render("~/Content/styles.css")
     @RenderSection("head", required: false)
