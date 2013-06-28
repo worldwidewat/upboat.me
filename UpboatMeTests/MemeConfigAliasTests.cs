@@ -7,7 +7,7 @@ using UpboatMe.Models;
 namespace UpboatMeTests
 {
     [TestClass]
-    public class MemeConfigTests
+    public class MemeConfigAliasTests
     {
         [TestMethod]
         public void InitialismMultipleWordsTest()
@@ -60,7 +60,25 @@ namespace UpboatMeTests
             Assert.AreEqual(1, memes.GetMemes().Count);
             var meme = memes.GetMemes()[0];
 
-            Assert.AreEqual(expectedAlias, meme.Aliases[0]);
+            Assert.IsTrue(meme.Aliases.Contains(expectedAlias));
+        }
+
+        [TestMethod]
+        public void InitialismWithApostropheTest()
+        {
+            // arrange
+            var filenames = new string[] { "I'll-have-you-know.png" };
+            const string expectedAlias = "ihyk";
+
+            // act
+            var memes = new MemeConfiguration();
+            MemeConfig.AutoRegisterMemesByFile(memes, filenames);
+
+            // assert
+            Assert.AreEqual(1, memes.GetMemes().Count);
+            var meme = memes.GetMemes()[0];
+
+            Assert.IsTrue(meme.Aliases.Contains(expectedAlias));
         }
     }
 }

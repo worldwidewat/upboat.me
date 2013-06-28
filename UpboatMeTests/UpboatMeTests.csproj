@@ -50,9 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MemeConfigTests.cs" />
+    <Compile Include="MemeConfigAliasTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemeUtilitiesTests.cs" />
+    <Compile Include="MemeConfigNameTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UpboatMe\UpboatMe.csproj">

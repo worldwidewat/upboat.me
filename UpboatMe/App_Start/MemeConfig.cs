@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,6 +10,7 @@ namespace UpboatMe.App_Start
 {
     public static class MemeConfig
     {
+        private static readonly Regex _StripCharactersToCollapseWords = new Regex(@"[']");
         private static readonly Regex _NonWordStripCharacters = new Regex(@"[_' -]", RegexOptions.Compiled);
         private static readonly Regex _ShouldBeDisplayedAsWhitespaceCharacters= new Regex(@"[_-]");
         
@@ -24,9 +26,8 @@ namespace UpboatMe.App_Start
                                       _NonWordStripCharacters.Replace(lowerFilename, "")
                                   };
 
-                // first drop names from something like "I'll-have-you-know" to "Ill-have-you-know"
-                // then fix the separators so it becomes "I'll have you know"
-                var memeName = _ShouldBeDisplayedAsWhitespaceCharacters.Replace(filename, " ");
+                var memeName = filename.ToTitleString();
+
                 var distinctAliases = aliases.Distinct().ToList();
                 var imageType = "image/" + lowerFilename.Substring(lowerFilename.Length - 3, 3);
 
@@ -36,8 +37,21 @@ namespace UpboatMe.App_Start
 
         public static string ToInitialism(this string input)
         {
-            var words = _NonWordStripCharacters.Split(input);
+            var collapsedWords = _StripCharactersToCollapseWords.Replace(input, "");
+            var words = _NonWordStripCharacters.Split(collapsedWords);
             return string.Join("", words.Select(w => w[0]));
+        }
+
+        public static string ToTitleString(this string filename)
+        {
+            // first drop names from something like "I'll-have-you-know" to "Ill-have-you-know"
+            // then fix the separators so it becomes "I'll have you know"
+            var memeName = _ShouldBeDisplayedAsWhitespaceCharacters.Replace(filename, " ");
+
+            // strip off file extension
+            memeName = memeName.Substring(0, memeName.LastIndexOf('.'));
+
+            return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(memeName);
         }
 
         public static void RegisterMemes(MemeConfiguration memes)
