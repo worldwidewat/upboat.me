@@ -16,7 +16,10 @@ namespace UpboatMe.Utilities
 
             var meme = memes[sanitizedName]
                        ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.StartsWith(sanitizedName)))
-                       ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.EndsWith(sanitizedName)));
+                       ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.EndsWith(sanitizedName)))
+                       ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => sanitizedName.StartsWith(a)))
+                       ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => sanitizedName.EndsWith(a)));
+
 
             return meme;
         }

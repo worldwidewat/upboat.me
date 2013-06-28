@@ -16,7 +16,8 @@ namespace UpboatMeTests
             _MemeConfig = new MemeConfiguration();
             _MemeConfig.Add(new Meme("Success Kid", "", new[] {"sk", "successkid"}));
             _MemeConfig.Add(new Meme("I'll Have You Know", "", new[] {"ihyk", "illhaveyouknow"}));
-            _MemeConfig.Add(new Meme("Foo", "", new[] {""}));
+            _MemeConfig.Add(new Meme("Foo", "", new[] { "f", "foo" }));
+            _MemeConfig.Add(new Meme("All The Things", "", new[] { "att", "allthethings" }));
         }
 
         [TestMethod]
@@ -53,7 +54,7 @@ namespace UpboatMeTests
         public void FindMemeNoMatchReturnsNull()
         {
             // arrange
-            const string searchName = "foobar";
+            const string searchName = "blah";
 
             // act
             var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
@@ -113,6 +114,36 @@ namespace UpboatMeTests
             // arrange
             const string searchName = "ill-have";
             const string expectedName = "I'll Have You Know";
+
+            // act
+            var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
+
+            // assert
+            Assert.IsNotNull(actualMeme);
+            Assert.AreEqual(expectedName, actualMeme.Description);
+        }
+
+        [TestMethod]
+        public void FindMemeSearchNameLeadsWithMemeName()
+        {
+            // arrange
+            const string searchName = "ill-have-you-know-i-watched-the-notebook-and-only-cried-four-times";
+            const string expectedName = "I'll Have You Know";
+
+            // act
+            var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
+
+            // assert
+            Assert.IsNotNull(actualMeme);
+            Assert.AreEqual(expectedName, actualMeme.Description);
+        }
+
+        [TestMethod]
+        public void FindMemeSearchNameTrailsWithMemeName()
+        {
+            // arrange
+            const string searchName = "search-for-all-the-things";
+            const string expectedName = "All The Things";
 
             // act
             var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
