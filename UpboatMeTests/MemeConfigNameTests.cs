@@ -61,5 +61,41 @@ namespace UpboatMeTests
 
             Assert.AreEqual(expectedDescription, meme.Description);
         }
+
+        [TestMethod]
+        public void NameWithJpgExtensionTest()
+        {
+            // arrange
+            var filenames = new string[] { "file.jpg" };
+            const string expectedDescription = "File";
+
+            // act
+            var memes = new MemeConfiguration();
+            MemeConfig.AutoRegisterMemesByFile(memes, filenames);
+
+            // assert
+            Assert.AreEqual(1, memes.GetMemes().Count);
+            var meme = memes.GetMemes()[0];
+
+            Assert.AreEqual(expectedDescription, meme.Description);
+        }
+
+        [TestMethod]
+        public void NameWithTwoCharacterExtensionTest()
+        {
+            // arrange
+            var filenames = new string[] { "file.jp" };
+            const string expectedDescription = "File";
+
+            // act
+            var memes = new MemeConfiguration();
+            MemeConfig.AutoRegisterMemesByFile(memes, filenames);
+
+            // assert
+            Assert.AreEqual(1, memes.GetMemes().Count);
+            var meme = memes.GetMemes()[0];
+
+            Assert.AreEqual(expectedDescription, meme.Description);
+        }
     }
 }
