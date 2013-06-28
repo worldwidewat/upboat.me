@@ -80,5 +80,23 @@ namespace UpboatMeTests
 
             Assert.IsTrue(meme.Aliases.Contains(expectedAlias));
         }
+
+        [TestMethod]
+        public void InitialismWithSingleCharacterWordsTest()
+        {
+            // arrange
+            var filenames = new string[] { "y-u-no.png" };
+            const string expectedAlias = "yun";
+
+            // act
+            var memes = new MemeConfiguration();
+            MemeConfig.AutoRegisterMemesByFile(memes, filenames);
+
+            // assert
+            Assert.AreEqual(1, memes.GetMemes().Count);
+            var meme = memes.GetMemes()[0];
+
+            Assert.IsTrue(meme.Aliases.Contains(expectedAlias));
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UpboatMe.Models;
 
 namespace UpboatMe.Utilities
@@ -13,7 +14,9 @@ namespace UpboatMe.Utilities
                 sanitizedName = memeName.Replace("-", "");
             }
 
-            var meme = memes[sanitizedName];
+            var meme = memes[sanitizedName]
+                       ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.StartsWith(sanitizedName)))
+                       ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.EndsWith(sanitizedName)));
 
             return meme;
         }
@@ -30,7 +33,7 @@ namespace UpboatMe.Utilities
             // urls look like this:  /meme-name/first-line/second-line
             // so we're basically delimiting on slashes
             // if there are surprise slashes, they'll end up in the second line
-            
+
             // strip off that first slash--it isn't helpful
             url = url.Substring(1);
 
