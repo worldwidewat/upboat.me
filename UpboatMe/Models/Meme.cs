@@ -5,7 +5,7 @@ namespace UpboatMe.Models
 {
     public class Meme
     {
-        private static string ImagePathFormat = "~/Images/{0}-template.png";
+        private static string ImagePathFormat = "~/Images/{0}";
 
         public string ImagePath { get; private set; }
         public string ImageType { get; private set; }
