@@ -14,7 +14,7 @@ namespace UpboatMeTests
         {
             // arrange
             var filenames = new string[]{"success-kid.png"};
-            var expectedAlias = "sk";
+            const string expectedAlias = "sk";
 
             // act
             var memes = new MemeConfiguration();
@@ -24,15 +24,33 @@ namespace UpboatMeTests
             Assert.AreEqual(1, memes.GetMemes().Count);
             var meme = memes.GetMemes()[0];
 
-            Assert.AreEqual(expectedAlias, meme.Aliases[0]);
+            Assert.IsTrue(meme.Aliases.Contains(expectedAlias));
         }
 
+        [TestMethod]
+        public void InitialismOneWordTest()
+        {
+            // arrange
+            var filenames = new string[] { "Fry.png" };
+            const string expectedAlias = "f";
+
+            // act
+            var memes = new MemeConfiguration();
+            MemeConfig.AutoRegisterMemesByFile(memes, filenames);
+
+            // assert
+            Assert.AreEqual(1, memes.GetMemes().Count);
+            var meme = memes.GetMemes()[0];
+
+            Assert.IsTrue(meme.Aliases.Contains(expectedAlias));
+        }
+        
         [TestMethod]
         public void InitialismMixedCaseTest()
         {
             // arrange
             var filenames = new string[] { "Success-Kid.png" };
-            var expectedAlias = "sk";
+            const string expectedAlias = "sk";
 
             // act
             var memes = new MemeConfiguration();
