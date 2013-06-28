@@ -1,10 +1,45 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
 using UpboatMe.Models;
 
 namespace UpboatMe.App_Start
 {
     public static class MemeConfig
     {
+        private static readonly Regex _NonWordStripCharacters = new Regex(@"[_' -]", RegexOptions.Compiled);
+        private static readonly Regex _ShouldBeDisplayedAsWhitespaceCharacters= new Regex(@"[_-]");
+        
+        public static void AutoRegisterMemesByFile(MemeConfiguration memes, string[] filenames)
+        {
+
+            foreach (var filename in filenames)
+            {
+                var lowerFilename = filename.ToLowerInvariant();
+                var aliases = new List<string>
+                                  {
+                                      lowerFilename.ToInitialism(),
+                                      _NonWordStripCharacters.Replace(lowerFilename, "")
+                                  };
+
+                // first drop names from something like "I'll-have-you-know" to "Ill-have-you-know"
+                // then fix the separators so it becomes "I'll have you know"
+                var memeName = _ShouldBeDisplayedAsWhitespaceCharacters.Replace(filename, " ");
+                var distinctAliases = aliases.Distinct().ToList();
+                var imageType = "image/" + lowerFilename.Substring(lowerFilename.Length - 3, 3);
+
+                memes.Add(new Meme(memeName, filename, distinctAliases, imageType));
+            }
+        }
+
+        public static string ToInitialism(this string input)
+        {
+            var words = _NonWordStripCharacters.Split(input);
+            return string.Join("", words.Select(w => w[0]));
+        }
+
         public static void RegisterMemes(MemeConfiguration memes)
         {
             memes.Add(new Meme("10 Guy", "10-guy", new List<string> { "10guy", "tenguy" }));
@@ -15,18 +50,18 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("Bad Joke Eel", "bad-joke-eel", new List<string> { "bje", "badjokeeel" }));
             memes.Add(new Meme("Bad Luck Brian", "bad-luck-brian", new List<string> { "blb", "badluckbrian" }));
             memes.Add(new Meme("Brace Yourselves", "brace-yourselves", new List<string> { "by", "braceyourselves", }));
-            memes.Add(new Meme("Business Cat", "business-cat", new List<string>{"bc", "business-cat", "suit-cat"}));
-            memes.Add(new Meme("College Liberal", "college-liberal", new List<string> {"collegeliberal", "scumbagcollegeliberal"}));
+            memes.Add(new Meme("Business Cat", "business-cat", new List<string> { "bc", "business-cat", "suit-cat" }));
+            memes.Add(new Meme("College Liberal", "college-liberal", new List<string> { "collegeliberal", "scumbagcollegeliberal" }));
             memes.Add(new Meme("Condescending Wonka", "condescending-wonka", new List<string> { "cw", "condescendingwonka", "wonka" }));
-            memes.Add(new Meme("Drunk Baby", "drunk-baby", new List<string> {"db", "drunk-baby"}));
-            memes.Add(new Meme("Ermahgerd", "ermahgerd", new List<string>{ "emg", "ermahgerd", "ermagerd", "ermagod", "ermahgod" }));
+            memes.Add(new Meme("Drunk Baby", "drunk-baby", new List<string> { "db", "drunk-baby" }));
+            memes.Add(new Meme("Ermahgerd", "ermahgerd", new List<string> { "emg", "ermahgerd", "ermagerd", "ermagod", "ermahgod" }));
             memes.Add(new Meme("Everyone Loses Their Minds", "everyone-loses-their-minds", new List<string> { "eltm", "everyonelosestheirminds" }));
             memes.Add(new Meme("First World Problems", "first-world-problems", new List<string> { "fwp", "firstworldproblems" }));
             memes.Add(new Meme("Futurama Fry", "futurama-fry", new List<string> { "ff", "fry", "futuramafry", "notsureiffry" }));
             memes.Add(new Meme("Good Guy Greg", "good-guy-greg", new List<string> { "ggg", "goodguygreg" }));
-            memes.Add(new Meme("Grumpy Cat", "grumpy-cat", new List<string>{"gc", "grumpycat", "sadcat"}));
+            memes.Add(new Meme("Grumpy Cat", "grumpy-cat", new List<string> { "gc", "grumpycat", "sadcat" }));
             memes.Add(new Meme("I don't want to live on this planet anymore", "i-don't-want-to-live-on-this-planet-anymore", new List<string> { "farnsworth", "idwtlotpa", "idontwanttoliveonthisplanetanymore", "idontwanttoliveonthisplanet" }));
-            memes.Add(new Meme("I Should Buy a Boat Cat", "i-should-buy-a-boat-cat", new List<string> {"isbabc", "babc", "boatcat", "ishouldbuyaboatcat", "buyaboatcat"}));
+            memes.Add(new Meme("I Should Buy a Boat Cat", "i-should-buy-a-boat-cat", new List<string> { "isbabc", "babc", "boatcat", "ishouldbuyaboatcat", "buyaboatcat" }));
             memes.Add(new Meme("I'll Have You Know", "ill-have-you-know", new List<string> { "ihyk", "illhaveyouknow" }));
             memes.Add(new Meme("Internet Grandma Surprise", "internet-grandma-surprise", new List<string> { "grandma", "igs", "internetgrandma", "internetgrandmasurprise", "grandmasurprise" }));
             memes.Add(new Meme("Irrationally Hostile Mark", "irrationally-hostile-mark", new List<string> { "irrationallyhostilemark", "hostilemark", "ihm" }));
@@ -48,9 +83,9 @@ namespace UpboatMe.App_Start
             memes.Add(new Meme("That Escalated Quickly (Ron Burgundy)", "boy-that-escalated-quickly", new List<string> { "teq", "bteq", "wteq", "thatescalatedquickly", "boythatescalatedquickly", "wellthatescalatedquickly", "ronburgundy" }));
             memes.Add(new Meme("The Most Interesting Man in the World", "the-most-interesting-man-in-the-world", new List<string> { "mim", "tmim", "tmimitw", "themostinterestingmanintheworld", "mostinterestingman" }));
             memes.Add(new Meme("Toy Story: Everywhere", "toy-story-everywhere", new List<string> { "toystory", "toystoryeverywhere", "buzzwoody" }));
-            memes.Add(new Meme("Unhelpful High School Teacher", "unhelpful-high-school-teacher", new List<string>{"uhst", "unhelpfulhighschoolteacher", "scumbagteacher", "st"}));
-            memes.Add(new Meme("Why Not Zoidberg?", "why-not-zoidberg", new List<string>{"wnz", "ynz", "whynotzoidberg", "zoidberg"}));
-            memes.Add(new Meme("Y U NO", "y-u-no", new List<string> { "yuno" } ));
+            memes.Add(new Meme("Unhelpful High School Teacher", "unhelpful-high-school-teacher", new List<string> { "uhst", "unhelpfulhighschoolteacher", "scumbagteacher", "st" }));
+            memes.Add(new Meme("Why Not Zoidberg?", "why-not-zoidberg", new List<string> { "wnz", "ynz", "whynotzoidberg", "zoidberg" }));
+            memes.Add(new Meme("Y U NO", "y-u-no", new List<string> { "yuno" }));
         }
     }
 }
