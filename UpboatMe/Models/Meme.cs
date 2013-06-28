@@ -9,6 +9,7 @@ namespace UpboatMe.Models
 
         public string ImagePath { get; private set; }
         public string ImageType { get; private set; }
+        public string ImageFileName { get; private set; }
         public Brush Stroke { get; private set; }
         public Brush Fill { get; private set; }
         public string Font { get; private set; }
@@ -21,7 +22,7 @@ namespace UpboatMe.Models
 
         public Meme(
             string description,
-            string imagePath,
+            string imageFileName,
             IList<string> aliases,
             string imageType = "image/png",
             string stroke = "black",
@@ -33,7 +34,8 @@ namespace UpboatMe.Models
             float bottomLineHeightPercent = 25)
         {
             Description = description;
-            ImagePath = string.Format(ImagePathFormat, imagePath);
+            ImagePath = string.Format(ImagePathFormat, imageFileName);
+            ImageFileName = imageFileName;
             Aliases = aliases;
             ImageType = imageType;
             Stroke = new SolidBrush(Color.FromName(stroke));

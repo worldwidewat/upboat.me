@@ -121,6 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\SpriteThumbsConfig.cs" />
+    <Compile Include="Handlers\ThumbsHttpHandler.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MemeRequest.cs" />
     <Compile Include="Models\RecentMeme.cs" />
@@ -152,6 +154,7 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
+    <Content Include="Content\sprite.css" />
     <Content Include="Content\step2.png" />
     <Content Include="Content\step3.png" />
     <Content Include="Content\step4.png" />
@@ -198,6 +201,7 @@
     <Content Include="Images\socially-awesome-awkward-penguin-template.png" />
     <Content Include="Images\socially-awkward-awesome-penguin-template.png" />
     <Content Include="Images\socially-awkward-penguin-template.png" />
+    <Content Include="Images\sprite.jpg" />
     <Content Include="Images\success-kid-template.png" />
     <Content Include="Images\sudden-clarity-clarence-template.png" />
     <Content Include="Images\technologically-impaired-duck-template.png" />
@@ -263,9 +267,16 @@
     <Content Include="Views\Home\HowTo.cshtml" />
     <Content Include="Views\Meme\List.cshtml" />
     <Content Include="Views\Meme\Builder.cshtml" />
+    <Content Include="Views\Meme\ListItemPartial.cshtml" />
     <None Include="Web.ProdDeploy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UpboatMe.SpriteThumbs\UpboatMe.SpriteThumbs.csproj">
+      <Project>{0580babb-78d7-435b-972b-d80a761b9549}</Project>
+      <Name>UpboatMe.SpriteThumbs</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
