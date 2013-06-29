@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 namespace UpboatMe.Models
 {
@@ -20,11 +21,16 @@ namespace UpboatMe.Models
         public string Description { get; private set; }
         public IList<string> Aliases { get; set; }
 
+        public string ImageFileNameWithoutExtension
+        {
+            get { return Path.GetFileNameWithoutExtension(ImageFileName); }
+        }
+
         public Meme(
             string description,
             string imageFileName,
             IList<string> aliases,
-            string imageType = "image/png",
+            string imageType = "image/jpg",
             string stroke = "black",
             string fill = "white",
             string font = "Impact",

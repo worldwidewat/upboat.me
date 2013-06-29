@@ -34,5 +34,15 @@ namespace UpboatMe.Utilities
 
             return helper.ActionLink(text, action, controller, routeValuesDictionary, attributesDictionary);
         }
+
+        public static MvcHtmlString ThumbImage(this HtmlHelper helper, string imageNameWithoutExtension)
+        {
+            var builder = new TagBuilder("div");
+
+            builder.AddCssClass("thumb");
+            builder.AddCssClass(string.Format("bg-{0}", imageNameWithoutExtension));
+
+            return new MvcHtmlString(builder.ToString());
+        }
     }
 }

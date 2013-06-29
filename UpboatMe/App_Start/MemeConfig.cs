@@ -72,10 +72,10 @@ namespace UpboatMe.App_Start
             memes["officespacelumbergh"].Aliases.Add("yeah");
             memes["onedoesnotsimply"].Aliases.Add("boromir");
             memes["onedoesnotsimply"].Aliases.Add("mordor");
-            memes["shrutefacts"].Aliases.Add("schrute");
-            memes["shrutefacts"].Aliases.Add("dwight");
-            memes["shrutefacts"].Aliases.Add("correction");
-            memes["shrutefacts"].Aliases.Add("false");
+            memes["schrutefacts"].Aliases.Add("schrute");
+            memes["schrutefacts"].Aliases.Add("dwight");
+            memes["schrutefacts"].Aliases.Add("correction");
+            memes["schrutefacts"].Aliases.Add("false");
             memes["technologicallyimpairedduck"].Aliases.Add("technologyduck");
             memes["boythatescalatedquickly"].Aliases.Add("wteq");
             memes["boythatescalatedquickly"].Aliases.Add("ronburgundy");

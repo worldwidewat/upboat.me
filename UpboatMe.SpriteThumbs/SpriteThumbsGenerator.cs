@@ -44,6 +44,7 @@ namespace UpboatMe.SpriteThumbs
                 using (var stream = File.Open(_configuration.StylesheetFilePath, FileMode.Create, FileAccess.Write))
                 using (var writer = new StreamWriter(stream))
                 {
+                    writer.WriteLine(".thumb {{ width: {0}px; height: {1}px; background-image: url({2}); background-position: {0}px {1}px; }}", _configuration.Width, _configuration.Height, SpriteThumbsConfiguration.SpriteResource);
 
                     for (int x = 0; x < files.Length; x++)
                     {
@@ -82,8 +83,7 @@ namespace UpboatMe.SpriteThumbs
 
         private void WriteFileCssInfo(string fileNameWithoutExtension, StreamWriter writer, int left, int top)
         {
-            var entry = string.Format(".{0} {{ background-position: -{1}px -{2}px; width: {3}px; height: {4}px; background-image: url({5})}}",
-                fileNameWithoutExtension, left, top, _configuration.Width, _configuration.Height, SpriteThumbsConfiguration.SpriteResource);
+            var entry = string.Format(".bg-{0} {{ background-position: -{1}px -{2}px; }}", fileNameWithoutExtension, left, top);
 
             writer.WriteLine(entry);
         }

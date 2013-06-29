@@ -2,7 +2,7 @@
 
 <div class="meme panel">
     <h5>@Html.ActionLink(Model.Description, "Make", "Meme", new { name = Model.Aliases[0], top = "top-line", bottom = "bottom-line" }, null)
-        <div class="@Path.GetFileNameWithoutExtension(Model.ImageFileName)"></div>
+        @Html.ThumbImage(Model.ImageFileNameWithoutExtension)
         <small>aka 
             @for (var i = 0; i < Model.Aliases.Count; ++i)
             {
