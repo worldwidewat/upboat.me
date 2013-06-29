@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
 namespace UpboatMe.SpriteThumbs
 {
-    public class SpriteGenerator :GeneratorBase
+    public class SpriteGenerator : GeneratorBase
     {
         public SpriteGenerator(SpriteThumbsConfiguration configuration)
             : base(configuration)
@@ -15,6 +14,21 @@ namespace UpboatMe.SpriteThumbs
 
         public void Generate()
         {
+            var resourceHash = Configuration.GetResourceHash();
+
+            if (File.Exists(Configuration.FullHashFileName))
+            {
+                var hash = File.ReadAllText(Configuration.FullHashFileName);
+
+                // If the previous hash is the same as the current, and we already have sprite and css files, don't regenerate
+                if (string.Equals(hash, resourceHash, StringComparison.Ordinal) &&
+                    File.Exists(Configuration.SpriteFullFileName) &&
+                    File.Exists(Configuration.StylesheetFullFileName))
+                {
+                    return;
+                }
+            }
+
             var files = Directory.GetFiles(Configuration.RawImagesPath, "*.jpg");
 
             if (!files.Any())
@@ -30,17 +44,17 @@ namespace UpboatMe.SpriteThumbs
                 File.Delete(Configuration.SpriteFullFileName);
             }
 
-            if (File.Exists(Configuration.StylesheetFilePath))
+            if (File.Exists(Configuration.StylesheetFullFileName))
             {
-                File.Delete(Configuration.StylesheetFilePath);
+                File.Delete(Configuration.StylesheetFullFileName);
             }
 
             using (var sprite = new Bitmap(width * Configuration.ThumbWidth, height * Configuration.ThumbHeight))
             using (var graphics = Graphics.FromImage(sprite))
-            using (var stream = File.Open(Configuration.StylesheetFilePath, FileMode.Create, FileAccess.Write))
+            using (var stream = File.Open(Configuration.StylesheetFullFileName, FileMode.Create, FileAccess.Write))
             using (var writer = new StreamWriter(stream))
             {
-                writer.WriteLine(".thumb {{ width: {0}px; height: {1}px; background-image: url({2}); background-position: {0}px {1}px; }}", Configuration.ThumbWidth, Configuration.ThumbHeight, SpriteThumbsConfiguration.SpriteResource);
+                writer.WriteLine(".thumb {{ width: {0}px; height: {1}px; background-image: url({2}); background-position: {0}px {1}px; }}", Configuration.ThumbWidth, Configuration.ThumbHeight, SpriteThumbsConfiguration.SpriteResource + "&hash=" + resourceHash);
 
                 for (int x = 0; x < files.Length; x++)
                 {
@@ -56,6 +70,9 @@ namespace UpboatMe.SpriteThumbs
 
                 SaveImage(sprite, Configuration.SpriteFullFileName);
             }
+
+            // Store an updated hash so we don't re-generate resources unnecessarily the next time the app starts up
+            File.WriteAllText(Configuration.FullHashFileName, resourceHash);
         }
 
         private void WriteFileToSprite(string file, Graphics spriteGraphics, int left, int top)

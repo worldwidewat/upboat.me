@@ -20,15 +20,15 @@ namespace UpboatMe.SpriteThumbs
             if (string.Equals(type, "sprite", StringComparison.OrdinalIgnoreCase))
             {
                 var bytes = File.ReadAllBytes(SpriteThumbsGlobalConfiguration.Configuration.SpriteFullFileName);
-
+                
                 context.Response.ContentType = "image/jpeg";
                 context.Response.BinaryWrite(bytes);
                 context.Response.Flush();
             }
             else if (string.Equals(type, "stylesheet", StringComparison.OrdinalIgnoreCase))
             {
-                var bytes = File.ReadAllBytes(SpriteThumbsGlobalConfiguration.Configuration.StylesheetFilePath);
-
+                var bytes = File.ReadAllBytes(SpriteThumbsGlobalConfiguration.Configuration.StylesheetFullFileName);
+                
                 context.Response.ContentType = "text/css";
                 context.Response.BinaryWrite(bytes);
                 context.Response.Flush();

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace UpboatMe.SpriteThumbs
 {
@@ -8,6 +11,7 @@ namespace UpboatMe.SpriteThumbs
     {
         public const string SpriteResource = "/thumbs.axd?type=sprite";
         public const string StylesheetResource = "/thumbs.axd?type=stylesheet";
+        public const string HashFileName = "SpriteThumbsResourceHash.txt";
 
         public SpriteThumbsConfiguration()
         {
@@ -32,6 +36,43 @@ namespace UpboatMe.SpriteThumbs
         public string StylesheetFileName { get; private set; }
         public string RawImagesPath { get; private set; }
 
+        public string FullHashFileName
+        {
+            get
+            {
+                return Path.Combine(SpriteOutputPath, HashFileName);
+            }
+        }
+
+        public string SpriteResourceUrl
+        {
+            get
+            {
+                return string.Format("{0}&hash={1}", SpriteResource, GetResourceHash());
+            }
+        }
+
+        public string StylesheetResourceUrl
+        {
+            get
+            {
+                return string.Format("{0}&hash={1}", StylesheetResource, GetResourceHash());
+            }
+        }
+
+        public string GetResourceHash()
+        {
+
+            var files = new DirectoryInfo(RawImagesPath).GetFiles("*.jpg");
+            var count = files.Length;
+            var lastModified = files.Max(f => f.LastWriteTime);
+            var input = string.Format("{0}-{1}", count, lastModified);
+            var algorithm = MD5.Create();
+            var hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            return string.Join("", hash.Select(h => h.ToString("X2")));
+        }
+
         public void SetThumbImagesPath(string thumbImagesPath)
         {
             ThumbImagesPath = thumbImagesPath;
@@ -45,7 +86,7 @@ namespace UpboatMe.SpriteThumbs
             }
         }
 
-        public string StylesheetFilePath
+        public string StylesheetFullFileName
         {
             get
             {
