@@ -7,16 +7,29 @@ namespace UpboatMe.SpriteThumbs.Tests
     public class GeneratorTests
     {
         [TestMethod]
-        public void TempGeneratorTest()
+        public void TempSpriteGeneratorTest()
         {
             var configuration = new SpriteThumbsConfiguration();
-            configuration.ImagePaths.Add(@"..\..\thumbs");
-            configuration.SetOutputPath(@".\");
+            configuration.SetThumbImagesPath(@"..\..\thumbs");
+            configuration.SetSpriteOutputPath(@".\");
             configuration.SetImageQualityPercent(50);
 
-            SpriteThumbsGenerator g = new SpriteThumbsGenerator(configuration);
+            SpriteGenerator g = new SpriteGenerator(configuration);
 
             g.Generate();
+        }
+
+        [TestMethod]
+        public void TempThumbsGeneratorTest()
+        {
+            var configuration = new SpriteThumbsConfiguration();
+
+            configuration.SetRawImagesPath(@".\");
+            configuration.SetThumbImagesPath(@".\thumbs");
+
+            var generator = new ThumbsGenerator(configuration);
+
+            generator.Generate();
         }
     }
 }

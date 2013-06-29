@@ -19,7 +19,7 @@ namespace UpboatMe.SpriteThumbs
 
             if (string.Equals(type, "sprite", StringComparison.OrdinalIgnoreCase))
             {
-                var bytes = File.ReadAllBytes(SpriteThumbsGlobalConfiguration.Configuration.SpriteFilePath);
+                var bytes = File.ReadAllBytes(SpriteThumbsGlobalConfiguration.Configuration.SpriteFullFileName);
 
                 context.Response.ContentType = "image/jpeg";
                 context.Response.BinaryWrite(bytes);

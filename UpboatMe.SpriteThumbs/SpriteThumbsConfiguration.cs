@@ -11,30 +11,37 @@ namespace UpboatMe.SpriteThumbs
 
         public SpriteThumbsConfiguration()
         {
-            ImagePaths = new List<string>();
-            Width = 100;
-            Height = 100;
+            ThumbImagesPath = @".\thumbs";
+            ThumbWidth = 100;
+            ThumbHeight = 100;
             ThumbsPerRow = 10;
             ImageQualityPercent = 50;
-            OutputPath = "App_Data";
+            SpriteOutputPath = @".\sprites";
             SpriteFileName = "sprite.jpg";
             StylesheetFileName = "sprite.css";
+            RawImagesPath = @".\images";
         }
 
-        public List<string> ImagePaths { get; private set; }
-        public string OutputPath { get; private set; }
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public string ThumbImagesPath { get; private set; }
+        public string SpriteOutputPath { get; private set; }
+        public int ThumbWidth { get; private set; }
+        public int ThumbHeight { get; private set; }
         public int ThumbsPerRow { get; private set; }
         public int ImageQualityPercent { get; private set; }
         public string SpriteFileName { get; private set; }
         public string StylesheetFileName { get; private set; }
+        public string RawImagesPath { get; private set; }
 
-        public string SpriteFilePath
+        public void SetThumbImagesPath(string thumbImagesPath)
+        {
+            ThumbImagesPath = thumbImagesPath;
+        }
+
+        public string SpriteFullFileName
         {
             get
             {
-                return Path.Combine(OutputPath, SpriteFileName);
+                return Path.Combine(SpriteOutputPath, SpriteFileName);
             }
         }
 
@@ -42,14 +49,14 @@ namespace UpboatMe.SpriteThumbs
         {
             get
             {
-                return Path.Combine(OutputPath, StylesheetFileName);
+                return Path.Combine(SpriteOutputPath, StylesheetFileName);
             }
         }
 
-        public void SetThumbSize(int width, int height)
+        public void SetThumbSize(int thumbWidth, int thumbHeight)
         {
-            Width = width;
-            Height = height;
+            ThumbWidth = thumbWidth;
+            ThumbHeight = thumbHeight;
         }
 
         public void SetThumbsPerRow(int thumbsPerRow)
@@ -67,20 +74,25 @@ namespace UpboatMe.SpriteThumbs
             ImageQualityPercent = imageQualityPercent;
         }
 
-        public void SetOutputPath(string path)
+        public void SetSpriteOutputPath(string spriteOutputPath)
         {
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(spriteOutputPath))
             {
-                throw new ArgumentOutOfRangeException("path", "Directory does not exist!");
+                throw new ArgumentOutOfRangeException("spriteOutputPath", "Directory does not exist!");
             }
 
-            OutputPath = path;
+            SpriteOutputPath = spriteOutputPath;
         }
 
-        public void SetOutputFileNames(string spriteFileName, string stylesheetFileName)
+        public void SetSpriteOutputFileNames(string spriteFileName, string stylesheetFileName)
         {
             SpriteFileName = spriteFileName;
             StylesheetFileName = stylesheetFileName;
+        }
+
+        public void SetRawImagesPath(string rawImagesPath)
+        {
+            RawImagesPath = rawImagesPath;
         }
     }
 }

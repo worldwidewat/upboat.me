@@ -15,9 +15,11 @@ namespace UpboatMe.App_Start
                 Directory.CreateDirectory(outputFolder);
             }
 
-            configuration.SetOutputPath(outputFolder);
+            configuration.SetSpriteOutputPath(outputFolder);
 
-            configuration.ImagePaths.Add(HostingEnvironment.MapPath("/images/thumbs"));
+            configuration.SetThumbImagesPath(HostingEnvironment.MapPath("/App_Data/GeneratedThumbs"));
+
+            configuration.SetRawImagesPath(HostingEnvironment.MapPath("/images"));
         }
     }
 }
