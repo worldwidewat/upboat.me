@@ -1,0 +1,5 @@
+# For landscape images
+mogrify -path ../thumbs -define jpeg:size=200x200 -thumbnail x100^ -gravity center -extent 100x100 *.jpg
+
+# For portrait images
+mogrify -path ../thumbs -define jpeg:size=200x200 -thumbnail 100^x -gravity center -extent 100x100 *.jpg
