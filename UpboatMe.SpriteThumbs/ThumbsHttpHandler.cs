@@ -4,7 +4,7 @@ using System.Net;
 using System.Web;
 using UpboatMe.SpriteThumbs;
 
-namespace UpboatMe.Handlers
+namespace UpboatMe.SpriteThumbs
 {
     public class ThumbsHttpHandler : IHttpHandler
     {

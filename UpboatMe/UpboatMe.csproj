@@ -122,7 +122,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\SpriteThumbsConfig.cs" />
-    <Compile Include="Handlers\ThumbsHttpHandler.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MemeRequest.cs" />
     <Compile Include="Models\RecentMeme.cs" />
