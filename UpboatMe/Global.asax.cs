@@ -32,10 +32,8 @@ namespace UpboatMe
 
             SpriteThumbsConfig.Initialize(SpriteThumbsGlobalConfiguration.Configuration);
 
-            var thumbsGenerator = new ThumbsGenerator(SpriteThumbsGlobalConfiguration.Configuration);
             var spriteGenerator = new SpriteGenerator(SpriteThumbsGlobalConfiguration.Configuration);
 
-            thumbsGenerator.Generate();
             spriteGenerator.Generate();
         }
     }

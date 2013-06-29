@@ -18,18 +18,5 @@ namespace UpboatMe.SpriteThumbs.Tests
 
             g.Generate();
         }
-
-        [TestMethod]
-        public void TempThumbsGeneratorTest()
-        {
-            var configuration = new SpriteThumbsConfiguration();
-
-            configuration.SetRawImagesPath(@".\");
-            configuration.SetThumbImagesPath(@".\thumbs");
-
-            var generator = new ThumbsGenerator(configuration);
-
-            generator.Generate();
-        }
     }
 }

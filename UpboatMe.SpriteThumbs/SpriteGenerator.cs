@@ -15,7 +15,7 @@ namespace UpboatMe.SpriteThumbs
 
         public void Generate()
         {
-            var files = Directory.GetFiles(Configuration.ThumbImagesPath, "*.jpg");
+            var files = Directory.GetFiles(Configuration.RawImagesPath, "*.jpg");
 
             if (!files.Any())
             {
@@ -62,9 +62,24 @@ namespace UpboatMe.SpriteThumbs
         {
             using (var image = new Bitmap(file))
             {
-                var bounds = new Rectangle(left, top, Configuration.ThumbWidth, Configuration.ThumbHeight);
+                var isPortrait = image.Width < image.Height;
 
-                spriteGraphics.DrawImage(image, bounds);
+                Rectangle crop;
+
+                if (isPortrait)
+                {
+                    var y = (int)((image.Height / 2d) - (image.Width / 2d));
+
+                    crop = new Rectangle(0, y, image.Width, image.Width);
+                }
+                else
+                {
+                    var x = (int)((image.Width / 2d) - (image.Height / 2d));
+
+                    crop = new Rectangle(x, 0, image.Height, image.Height);
+                }
+
+                spriteGraphics.DrawImage(image, new Rectangle(left, top, Configuration.ThumbWidth, Configuration.ThumbHeight), crop, GraphicsUnit.Pixel);
             }
         }
 
