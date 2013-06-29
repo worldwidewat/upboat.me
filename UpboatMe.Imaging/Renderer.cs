@@ -2,21 +2,19 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Web;
-using UpboatMe.Models;
 
-namespace UpboatMe.Utilities
+namespace UpboatMe.Imaging
 {
     public class Renderer
     {
-        public byte[] Render(Meme _meme, string top, string bottom, bool drawBoxes)
+        public byte[] Render(RenderParameters parameters, string top, string bottom)
         {
-            using (var image = Image.FromFile(HttpContext.Current.Server.MapPath(_meme.ImagePath)))
+            using (var image = Image.FromFile(parameters.FullImagePath))
             using (var graphics = Graphics.FromImage(image))
             {
-                DrawText(graphics, image, _meme, top, true, drawBoxes);
+                DrawText(parameters, graphics, image, top, true);
 
-                DrawText(graphics, image, _meme, bottom, false, drawBoxes);
+                DrawText(parameters, graphics, image, bottom, false);
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -27,11 +25,11 @@ namespace UpboatMe.Utilities
             }
         }
 
-        private void DrawText(Graphics graphics, Image image, Meme meme, string text, bool isTop, bool drawBoxes)
+        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, string text, bool isTop)
         {
             var done = false;
-            var fontSize = meme.FontSize;
-            var maxHeightPercent = isTop ? meme.TopLineHeightPercent : meme.BottomLineHeightPercent;
+            var fontSize = parameters.FontSize;
+            var maxHeightPercent = isTop ? parameters.TopLineHeightPercent : parameters.BottomLineHeightPercent;
             var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100 ));
             var stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
@@ -39,7 +37,7 @@ namespace UpboatMe.Utilities
 
             while (!done)
             {
-                var font = new Font(new FontFamily(meme.Font), fontSize, FontStyle.Regular);
+                var font = new Font(new FontFamily(parameters.Font), fontSize, FontStyle.Regular);
 
                 var size = graphics.MeasureString(text, font, image.Width);
 
@@ -66,13 +64,13 @@ namespace UpboatMe.Utilities
 
                     graphicsPath.AddString(text, font.FontFamily, (int)FontStyle.Regular, emSize, bounds, stringFormat);
 
-                    graphics.DrawPath(new Pen(meme.Stroke, meme.StrokeWidth) { LineJoin = LineJoin.Round }, graphicsPath);
-                    graphics.FillPath(meme.Fill, graphicsPath);
+                    graphics.DrawPath(new Pen(parameters.Stroke, parameters.StrokeWidth) { LineJoin = LineJoin.Round }, graphicsPath);
+                    graphics.FillPath(parameters.Fill, graphicsPath);
 
                     graphics.SmoothingMode = SmoothingMode.Default;
                 }
 
-                if (drawBoxes)
+                if (parameters.DrawBoxes)
                 {
                     DrawBoxes(graphics, image.Width, image.Height, maxHeight, isTop);
                 }

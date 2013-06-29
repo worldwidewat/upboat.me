@@ -1,10 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using UpboatMe.App_Start;
+using UpboatMe.Imaging;
 using UpboatMe.Models;
 using UpboatMe.Utilities;
-using System.Linq;
-using GoogleAnalyticsTracker;
 
 namespace UpboatMe.Controllers
 {
@@ -35,9 +34,22 @@ namespace UpboatMe.Controllers
                 memeRequest.Bottom = "Y U NO USE VALID MEME NAME?";
             }
 
+            var renderParameters = new RenderParameters
+            {
+                FullImagePath = HttpContext.Server.MapPath(meme.ImagePath),
+                TopLineHeightPercent = meme.TopLineHeightPercent,
+                BottomLineHeightPercent = meme.BottomLineHeightPercent,
+                Fill = meme.Fill,
+                Stroke = meme.Stroke,
+                Font = meme.Font,
+                FontSize = meme.FontSize,
+                StrokeWidth = meme.StrokeWidth,
+                DrawBoxes = drawBoxes
+            };
+
             var renderer = new Renderer();
 
-            var bytes = renderer.Render(meme, memeRequest.Top.SanitizeMemeText(), memeRequest.Bottom.SanitizeMemeText(), drawBoxes);
+            var bytes = renderer.Render(renderParameters, memeRequest.Top.SanitizeMemeText(), memeRequest.Bottom.SanitizeMemeText());
 
             Analytics.TrackMeme(HttpContext, memeRequest.Name);
 
