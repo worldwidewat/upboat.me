@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeneratorBase.cs" />
+    <Compile Include="RawImage.cs" />
     <Compile Include="SpriteGenerator.cs" />
     <Compile Include="SpriteThumbsConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

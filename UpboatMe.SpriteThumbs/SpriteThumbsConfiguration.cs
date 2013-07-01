@@ -15,7 +15,6 @@ namespace UpboatMe.SpriteThumbs
 
         public SpriteThumbsConfiguration()
         {
-            ThumbImagesPath = @".\thumbs";
             ThumbWidth = 100;
             ThumbHeight = 100;
             ThumbsPerRow = 10;
@@ -23,10 +22,9 @@ namespace UpboatMe.SpriteThumbs
             SpriteOutputPath = @".\sprites";
             SpriteFileName = "sprite.jpg";
             StylesheetFileName = "sprite.css";
-            RawImagesPath = @".\images";
+            RawImages = new List<RawImage>();
         }
 
-        public string ThumbImagesPath { get; private set; }
         public string SpriteOutputPath { get; private set; }
         public int ThumbWidth { get; private set; }
         public int ThumbHeight { get; private set; }
@@ -34,7 +32,7 @@ namespace UpboatMe.SpriteThumbs
         public int ImageQualityPercent { get; private set; }
         public string SpriteFileName { get; private set; }
         public string StylesheetFileName { get; private set; }
-        public string RawImagesPath { get; private set; }
+        public IList<RawImage> RawImages { get; private set; }
 
         public string FullHashFileName
         {
@@ -63,19 +61,13 @@ namespace UpboatMe.SpriteThumbs
         public string GetResourceHash()
         {
 
-            var files = new DirectoryInfo(RawImagesPath).GetFiles("*.jpg");
-            var count = files.Length;
-            var lastModified = files.Max(f => f.LastWriteTime);
+            var count = RawImages.Count;
+            var lastModified = RawImages.Max(i => i.LastWriteTime);
             var input = string.Format("{0}-{1}", count, lastModified);
             var algorithm = MD5.Create();
             var hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
 
             return string.Join("", hash.Select(h => h.ToString("X2")));
-        }
-
-        public void SetThumbImagesPath(string thumbImagesPath)
-        {
-            ThumbImagesPath = thumbImagesPath;
         }
 
         public string SpriteFullFileName
@@ -131,9 +123,26 @@ namespace UpboatMe.SpriteThumbs
             StylesheetFileName = stylesheetFileName;
         }
 
-        public void SetRawImagesPath(string rawImagesPath)
+        public void AddRawImages<T>(IEnumerable<T> collection, Func<T, string> idSelector, Func<T, string> fullFilePathSelector)
         {
-            RawImagesPath = rawImagesPath;
+            foreach (var item in collection)
+            {
+                RawImages.Add(new RawImage
+                {
+                    Id = idSelector(item),
+                    FullFilePath = fullFilePathSelector(item)
+                });
+            }
+        }
+
+        public static string GetThumbClassName()
+        {
+            return "thumb";
+        }
+
+        public static string GetImageClassName(string imageIdentifier)
+        {
+            return string.Format("bg-{0}", imageIdentifier);
         }
     }
 }

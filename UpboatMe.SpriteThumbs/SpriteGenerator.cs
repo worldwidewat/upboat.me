@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -29,15 +30,13 @@ namespace UpboatMe.SpriteThumbs
                 }
             }
 
-            var files = Directory.GetFiles(Configuration.RawImagesPath, "*.jpg");
-
-            if (!files.Any())
+            if (!Configuration.RawImages.Any())
             {
                 return;
             }
 
-            var width = files.Length < Configuration.ThumbsPerRow ? files.Length : Configuration.ThumbsPerRow;
-            var height = (int)Math.Ceiling(files.Length / (double)Configuration.ThumbsPerRow);
+            var width = Configuration.RawImages.Count < Configuration.ThumbsPerRow ? Configuration.RawImages.Count : Configuration.ThumbsPerRow;
+            var height = (int)Math.Ceiling(Configuration.RawImages.Count / (double)Configuration.ThumbsPerRow);
 
             if (File.Exists(Configuration.SpriteFullFileName))
             {
@@ -54,9 +53,10 @@ namespace UpboatMe.SpriteThumbs
             using (var stream = File.Open(Configuration.StylesheetFullFileName, FileMode.Create, FileAccess.Write))
             using (var writer = new StreamWriter(stream))
             {
-                writer.WriteLine(".thumb {{ width: {0}px; height: {1}px; background-image: url({2}); background-position: {0}px {1}px; }}", Configuration.ThumbWidth, Configuration.ThumbHeight, SpriteThumbsConfiguration.SpriteResource + "&hash=" + resourceHash);
+                writer.WriteLine(".{0} {{ width: {1}px; height: {2}px; background-image: url({3}); background-position: {1}px {2}px; }}",
+                    SpriteThumbsConfiguration.GetThumbClassName(), Configuration.ThumbWidth, Configuration.ThumbHeight, SpriteThumbsConfiguration.SpriteResource + "&hash=" + resourceHash);
 
-                for (int x = 0; x < files.Length; x++)
+                for (int x = 0; x < Configuration.RawImages.Count; x++)
                 {
                     var columnIndex = x % Configuration.ThumbsPerRow;
                     var rowIndex = (int)Math.Floor(x / (double)Configuration.ThumbsPerRow);
@@ -64,8 +64,8 @@ namespace UpboatMe.SpriteThumbs
                     var left = columnIndex * Configuration.ThumbWidth;
                     var top = rowIndex * Configuration.ThumbHeight;
 
-                    WriteFileToSprite(files[x], graphics, left, top);
-                    WriteFileCssInfo(Path.GetFileNameWithoutExtension(files[x]), writer, left, top);
+                    WriteFileToSprite(Configuration.RawImages[x], graphics, left, top);
+                    WriteFileCssInfo(Configuration.RawImages[x], writer, left, top);
                 }
 
                 SaveImage(sprite, Configuration.SpriteFullFileName);
@@ -75,9 +75,9 @@ namespace UpboatMe.SpriteThumbs
             File.WriteAllText(Configuration.FullHashFileName, resourceHash);
         }
 
-        private void WriteFileToSprite(string file, Graphics spriteGraphics, int left, int top)
+        private void WriteFileToSprite(RawImage rawImage, Graphics spriteGraphics, int left, int top)
         {
-            using (var image = new Bitmap(file))
+            using (var image = new Bitmap(rawImage.FullFilePath))
             {
                 var isPortrait = image.Width < image.Height;
 
@@ -100,9 +100,10 @@ namespace UpboatMe.SpriteThumbs
             }
         }
 
-        private void WriteFileCssInfo(string fileNameWithoutExtension, StreamWriter writer, int left, int top)
+        private void WriteFileCssInfo(RawImage rawImage, StreamWriter writer, int left, int top)
         {
-            var entry = string.Format(".bg-{0} {{ background-position: -{1}px -{2}px; }}", fileNameWithoutExtension, left, top);
+            var className = SpriteThumbsConfiguration.GetImageClassName(rawImage.Id);
+            var entry = string.Format(".{0} {{ background-position: -{1}px -{2}px; }}", className, left, top);
 
             writer.WriteLine(entry);
         }
