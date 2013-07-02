@@ -18,10 +18,10 @@ namespace UpboatMe.App_Start
         {
             var usedAliases = new HashSet<string>();
 
-            foreach (var filename in filenames)
+            foreach (var filename in filenames.OrderBy(f => f))
             {
                 var lowerFilename = filename.ToLowerInvariant();
-                var name = Path.GetFileNameWithoutExtension(lowerFilename);
+                var name = Path.GetFileNameWithoutExtension(lowerFilename).Substring(lowerFilename.IndexOf("-") + 1);
                 var extension = Path.GetExtension(lowerFilename).Substring(1); // strip off the dot
 
                 var aliases = new List<string>
@@ -49,7 +49,7 @@ namespace UpboatMe.App_Start
 
                 // TODO: image/jpg isn't acutally valid. Fix this or get rid of it
                 var imageType = "image/" + extension;
-                 
+
                 memes.Add(new Meme(memeName, filename, survivingAliases, imageType));
             }
         }
