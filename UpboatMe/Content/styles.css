@@ -39,60 +39,18 @@ hr {
     background-color: #fff;
 }
 
-.newspaper {
-    column-count: 1;
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
-    -ms-column-count: 1;
-    -o-column-count: 1;
+
+a.meme-thumb{
+    float: left;
+    padding: 2px;
 }
 
-    .newspaper div {
-        break-inside: avoid; /* W3C */
-        -webkit-column-break-inside: avoid; /* Safari & Chrome */
-        -moz-column-break-inside: avoid; /* Firefox */
-        -ms-column-break-inside: avoid; /* Internet Explorer */
-        -o-column-break-inside: avoid; /* Opera */
-    }
+a.meme-thumb div {
+    border-radius: 10%;
 
-/* Medium screens */
-@media only screen and (min-width: 768px) {
-    .newspaper {
-        column-count: 4;
-        -webkit-column-count: 4;
-        -moz-column-count: 4;
-        -ms-column-count: 4;
-        -o-column-count: 4;
-    }
 }
 
-/* Small screens */
-@media only screen and (max-width: 767px) and (min-width: 640px) {
-    .newspaper {
-        column-count: 3;
-        -webkit-column-count: 3;
-        -moz-column-count: 3;
-        -ms-column-count: 3;
-        -o-column-count: 3;
+    a.meme-thumb:hover div {
+        box-shadow: 0 0 5px #2284a1;
+        transition: all ease-in-out 100ms;
     }
-}
-
-@media only screen and (max-width: 639px) and (min-width: 480px) {
-    .newspaper {
-        column-count: 2;
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
-        -ms-column-count: 2;
-        -o-column-count: 2;
-    }
-}
-
-@media only screen and (max-width: 479px) {
-    .newspaper {
-        column-count: 1;
-        -webkit-column-count: 1;
-        -moz-column-count: 1;
-        -ms-column-count: 1;
-        -o-column-count: 1;
-    }
-}

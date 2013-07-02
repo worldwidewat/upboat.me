@@ -19,12 +19,9 @@
 }
 
 <div class="row">
-    <div class="large-12 columns newspaper">
+    <div class="large-12 columns">
 
-        @foreach (var meme in Model)
-        {
-            @Html.Partial("ListItemPartial", meme)
-        }
+        @foreach (var meme in Model){@Html.Partial("ListItemPartial", meme)}
 
         @if (!Model.Any())
         {

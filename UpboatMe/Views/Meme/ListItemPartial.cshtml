@@ -1,27 +1,2 @@
 ﻿@model UpboatMe.Models.Meme
-
-<div class="meme panel">
-    <div class="row center">
-        <div class="large-12" style="text-align:center">
-            <h6>@Html.ActionLink(Model.Description, "Make", "Meme", new { name = Model.Aliases[0], top = "top-line", bottom = "bottom-line" }, null)</h6>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-12">
-            <a href="@Url.Action("Make", "Meme", new { name = Model.Aliases[0], top = "top-line", bottom = "bottom-line" }, null)">
-                @Html.ThumbImage(Model.ImageFileNameWithoutExtension)
-            </a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-12" style="text-align:center">
-            <small>aka 
-                @for (var i = 0; i < Model.Aliases.Count; ++i)
-                {
-                    var alias = Model.Aliases[i];
-                    @(i == 0 ? "" : ", ")@Html.ActionLink(alias, "Make", "Meme", new { name = alias, top = "top-line", bottom = "bottom-line" }, null);
-                }
-            </small>
-        </div>
-    </div>
-</div>
+<a href="@Url.Action("Make", "Meme", new { name = Model.Aliases[0], top = "top-line", bottom = "bottom-line" }, null)" class="meme-thumb">@Html.ThumbImage(Model.ImageFileNameWithoutExtension)</a>
