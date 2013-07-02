@@ -10,7 +10,7 @@
             first = "-";
         }
         var second = $('#second-line').val().replace(sanitizeRegex, "-");
-        var url = '/' + name + '/' + encodeURIComponent(first) + '/' + encodeURIComponent(second);
+        var url = '/' + name + '/' + encodeURIComponent(first) + '/' + encodeURIComponent(second) + ".jpg";
         
         $('#share-url').val(rootUrl + url);
         $('#meme-preview').attr('src', url);

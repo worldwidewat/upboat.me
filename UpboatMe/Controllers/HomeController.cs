@@ -19,25 +19,25 @@ namespace UpboatMe.Controllers
                 {
                     new RecentMeme
                     {
-                        Url = "/sap/wears-suit-and-tie-to-interview/phone-interview.jpg",
+                        Url = Url.Action("Make", "Meme", new { name = "sap", top= "wears-suit-and-tie-to-interview", bottom = "phone-interview"}),
                         Alt = "socially awkward penguin: wears suit and tie to interview" + Environment.NewLine + "phone interview",
                         Title = "socially awkward penguin"
                     },
                     new RecentMeme
                     {
-                        Url = "/fry/not-sure-if-sunny-outside/or-hungover.jpg",
+                        Url = Url.Action("Make", "Meme", new { name = "fry", top= "not-sure-if-sunny-outside", bottom = "or-hungover"}),
                         Alt = "futurama fry: not sure if sunny outside" + Environment.NewLine + "or hungover",
                         Title = "futurama fry"
                     },
                     new RecentMeme
                     {
-                        Url = "/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life.jpg",
+                        Url = Url.Action("Make", "Meme", new { name = "scc", top= "i-don't-buy-things-with-money", bottom = "i-buy-them-with-hours-of-my-life"}),
                         Alt = "sudden clarity clarence: i don't buy things with money" + Environment.NewLine + "i buy them with hours of my life",
                         Title = "sudden clarity clarence"
                     },
                     new RecentMeme
                     {
-                        Url = "/blb/has-pet-rock/it-runs-away.jpg",
+                        Url = Url.Action("Make", "Meme", new { name = "blb", top= "wears-suit-and-tie-to-interview", bottom = "phone-interview"}),
                         Alt = "bad luck brian: has pet rock" + Environment.NewLine + "it runs away",
                         Title = "bad luck brian"
                     }
