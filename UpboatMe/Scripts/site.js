@@ -1,6 +1,4 @@
-﻿var rootUrl = 'http://upboat.me';
-
-$(function () {
+﻿$(function () {
 
     $(document).foundation();
 

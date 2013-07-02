@@ -97,9 +97,17 @@ namespace UpboatMe.Controllers
             return View(list);
         }
 
-        public ActionResult Builder()
+        public ActionResult Builder(string name, string top, string bottom)
         {
-            var viewModel = GlobalMemeConfiguration.Memes.GetMemes();
+            var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, name);
+
+            var viewModel = new BuilderViewModel
+            {
+                Memes = GlobalMemeConfiguration.Memes.GetMemes(),
+                SelectedMeme = meme != null ? meme.Aliases.First() : string.Empty,
+                Top = top,
+                Bottom = bottom
+            };
 
             return View(viewModel);
         }

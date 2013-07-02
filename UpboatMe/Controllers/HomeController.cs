@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using UpboatMe.Models;
+using System.Linq;
 
 namespace UpboatMe.Controllers
 {
@@ -10,9 +11,10 @@ namespace UpboatMe.Controllers
         // Note: don't forget to explicitly enable new actions in the route config
         public ActionResult Index()
         {
+            var memes = GlobalMemeConfiguration.Memes.GetMemes();
+
             var viewModel = new IndexViewModel()
             {
-                Memes = GlobalMemeConfiguration.Memes.GetMemes(),
                 RecentMemes = new List<RecentMeme>
                 {
                     new RecentMeme
@@ -39,6 +41,13 @@ namespace UpboatMe.Controllers
                         Alt = "bad luck brian: has pet rock" + Environment.NewLine + "it runs away",
                         Title = "bad luck brian"
                     }
+                },
+                BuilderViewModel = new BuilderViewModel 
+                {
+                    Memes = memes,
+                    Top = "top-line",
+                    Bottom = "bottom-line",
+                    SelectedMeme = memes.First().Aliases.First()
                 }
             };
 

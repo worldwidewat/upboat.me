@@ -1,11 +1,11 @@
-﻿@model IList<UpboatMe.Models.Meme>
+﻿@model BuilderViewModel
 
 <div class="row">
     <div class="large-6 columns">
         <form>
-            @Html.DropDownList("meme-name", new SelectList(Model.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text"))
-            <input type="text" id="first-line" placeholder="Top Line" />
-            <input type="text" id="second-line" placeholder="Bottom Line" />
+            @Html.DropDownList("meme-name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text", Model.SelectedMeme))
+            <input type="text" id="first-line" placeholder="Top Line" value="@Model.Top" />
+            <input type="text" id="second-line" placeholder="Bottom Line" value="@Model.Bottom" />
             <div style="text-align: center">
                 <input class="small button" type="button" value="Create!" id="create-meme" />
             </div>
@@ -14,14 +14,14 @@
         <h3>Share it!</h3>
         <div class="row">
             <div class="large-10 columns">
-                <input id="share-url" type="text" readonly="readonly" placeholder="Create a meme to share it!">
+                <input id="share-url" type="text" readonly="readonly" placeholder="Create a meme to share it!" value="@Model.GetPreviewUrl(Url)">
             </div>
             <div class="small-2 columns hide-for-small">
                 <input id="copy-button" type="button" data-clipboard-target="share-url" class="right inline small button" value="Copy" />
             </div>
         </div>
     </div>
-    <div class="large-6 columns">
-        <img id="meme-preview" src="/ihyk/I'll-have-you-know-I-tried-other-meme-generators/and-only-wasted-hours-and-hours-of-my-life"/>
+    <div class="large-6 columns"> 
+        <img id="meme-preview" src="@Model.GetPreviewUrl(Url)"/>
     </div>
 </div>

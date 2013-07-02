@@ -18,6 +18,9 @@
     @Styles.Render("~/Content/styles.css")
     <link type="text/css" href="@SpriteThumbsGlobalConfiguration.Configuration.StylesheetResourceUrl" rel="stylesheet"/>
     @RenderSection("head", required: false)
+    <script type="text/javascript">
+        var rootUrl = '@Url.AbsoluteAction("")';
+    </script>
 </head>
 <body>
     <div id="header" class="row">
