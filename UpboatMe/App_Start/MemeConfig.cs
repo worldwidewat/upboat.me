@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace UpboatMe.App_Start
 {
     public static class MemeConfig
     {
-        private static readonly Regex _StripCharactersToCollapseWords = new Regex(@"[']");
-        private static readonly Regex _NonWordStripCharacters = new Regex(@"[_' -]", RegexOptions.Compiled);
-        private static readonly Regex _ShouldBeDisplayedAsWhitespaceCharacters = new Regex(@"[_-]");
+        private static readonly Regex StripCharactersToCollapseWords = new Regex(@"[']");
+        private static readonly Regex NonWordStripCharacters = new Regex(@"[_' -]", RegexOptions.Compiled);
+        private static readonly Regex ShouldBeDisplayedAsWhitespaceCharacters = new Regex(@"[_-]");
 
         public static void AutoRegisterMemesByFile(MemeConfiguration memes, string[] filenames)
         {
@@ -21,13 +22,28 @@ namespace UpboatMe.App_Start
             foreach (var filename in filenames.OrderBy(f => f))
             {
                 var lowerFilename = filename.ToLowerInvariant();
-                var name = Path.GetFileNameWithoutExtension(lowerFilename).Substring(lowerFilename.IndexOf("-") + 1);
-                var extension = Path.GetExtension(lowerFilename).Substring(1); // strip off the dot
+
+                var name = Path.GetFileNameWithoutExtension(lowerFilename);
+
+                if (name == null)
+                {
+                    throw new NullReferenceException("name cannot be null");
+                }
+                // strip off number prefix (used for ordering)
+                name = name.Substring(lowerFilename.IndexOf("-", System.StringComparison.Ordinal) + 1);
+
+                var extension = Path.GetExtension(lowerFilename);
+                
+                if (extension == null)
+                {
+                    throw new NullReferenceException("extension cannot be null");
+                }
+                extension = extension.Substring(1); // strip off the dot
 
                 var aliases = new List<string>
                                   {
                                       name.ToInitialism(),
-                                      _NonWordStripCharacters.Replace(name, ""),
+                                      NonWordStripCharacters.Replace(name, ""),
                                   };
 
                 var memeName = name.ToTitleString();
@@ -54,18 +70,31 @@ namespace UpboatMe.App_Start
             }
         }
 
+        private static readonly Regex DigitPrefixRegex = new Regex(@"^(\d+)", RegexOptions.Compiled);
         public static string ToInitialism(this string input)
         {
-            var collapsedWords = _StripCharactersToCollapseWords.Replace(input, "");
-            var words = _NonWordStripCharacters.Split(collapsedWords);
-            return string.Join("", words.Select(w => w[0]));
+            var collapsedWords = StripCharactersToCollapseWords.Replace(input, "");
+            var words = NonWordStripCharacters.Split(collapsedWords);
+            var wordParts = words.Select(w =>
+                                             {
+                                                 // if the prefix is a number, take the whole number
+                                                 var possibleNumberPrefix = DigitPrefixRegex.Match(w);
+                                                 if (possibleNumberPrefix.Captures.Count > 0)
+                                                 {
+                                                     return possibleNumberPrefix.Captures[0].Value;
+                                                 }
+                                                 // otherwise just take the first character
+                                                 return w.Substring(0, 1);
+                                             });
+
+            return string.Join("", wordParts);
         }
 
         public static string ToTitleString(this string name)
         {
             // first drop names from something like "I'll-have-you-know" to "Ill-have-you-know"
             // then fix the separators so it becomes "I'll have you know"
-            var memeName = _ShouldBeDisplayedAsWhitespaceCharacters.Replace(name, " ");
+            var memeName = ShouldBeDisplayedAsWhitespaceCharacters.Replace(name, " ");
 
             return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(memeName);
         }
