@@ -6,11 +6,22 @@
         var name = $('#meme-name').val();
         var sanitizeRegex = / +/g;
         var first = $('#first-line').val().replace(sanitizeRegex, "-");
-        if (first==="") {
-            first = "-";
-        }
         var second = $('#second-line').val().replace(sanitizeRegex, "-");
-        var url = '/' + name + '/' + encodeURIComponent(first) + '/' + encodeURIComponent(second) + ".jpg";
+
+        var url = '/' + name;
+        first = encodeURIComponent(first);
+        second = encodeURIComponent(second);
+        
+        // if the second part is there, then we have to add the first
+        if (second) {
+            url += '/' + (first ? first : "-")
+                + '/' + second;
+        }
+        else if (first) {
+            url += '/' + first;
+        }
+
+        url += ".jpg";
         
         $('#share-url').val(rootUrl + url);
         $('#meme-preview').attr('src', url);
