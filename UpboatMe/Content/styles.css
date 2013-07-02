@@ -41,13 +41,12 @@ hr {
 
 
 a.meme-thumb{
-    float: left;
+    display: inline-block;
     padding: 2px;
 }
 
 a.meme-thumb div {
     border-radius: 10%;
-
 }
 
     a.meme-thumb:hover div {
