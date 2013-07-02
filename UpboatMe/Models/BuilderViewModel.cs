@@ -13,7 +13,13 @@ namespace UpboatMe.Models
 
         public string GetPreviewUrl(UrlHelper helper)
         {
-            return helper.AbsoluteAction(helper.RouteUrl("Meme", new { name = SelectedMeme, Top, Bottom }));
+            var path = helper.Action("Make", "Meme", new
+                                                         {
+                                                             name = SelectedMeme,
+                                                             top = Top ?? "", // passing null breaks the route
+                                                             bottom = Bottom ?? "" // passing null breaks the route
+                                                         });
+            return helper.AbsoluteAction(path);
         }
 
         public BuilderViewModel()

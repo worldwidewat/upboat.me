@@ -15,7 +15,7 @@ namespace UpboatMe.Controllers
 
         // ignore the parameters and figure it out manually from Request.RawUrl
         // this allows us to keep using routes to generate our own links, which is handy
-        public ActionResult Make(string name, string top, string bottom)
+        public ActionResult Make(string name)
         {
             var url = Request.RawUrl;
             var hasExtension = _UrlExtension.IsMatch(url);
@@ -97,7 +97,7 @@ namespace UpboatMe.Controllers
             return View(list);
         }
 
-        public ActionResult Builder(string name, string top, string bottom)
+        public ActionResult Builder(string name, string top = "", string bottom = "")
         {
             var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, name);
 

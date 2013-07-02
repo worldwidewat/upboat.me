@@ -21,16 +21,11 @@ namespace UpboatMe
             );
 
             routes.MapRoute(
-                name: "List",
-                url: "List",
-                defaults: new { controller = "Meme", action = "List" }
-            );
-
-            routes.MapRoute(
-                name: "Builder",
-                url: "Builder",
-                defaults: new { controller = "Meme", action = "Builder" }
-            );
+                name: "MemePages",
+                url: "{action}/{name}/{top}/{bottom}",
+                defaults: new { controller = "Meme", name = UrlParameter.Optional, top = UrlParameter.Optional, bottom = UrlParameter.Optional },
+                constraints: new { action = "Builder|Debug|List" }
+                );
 
             routes.MapRoute(
                 name: "Debug",
@@ -38,22 +33,32 @@ namespace UpboatMe
                 defaults: new { controller = "Meme", action = "Debug", top = UrlParameter.Optional, bottom = UrlParameter.Optional }
             );
 
+            // http://stackoverflow.com/questions/6830796/regex-to-match-anything-but-two-words
+            const string excludedMemeNames = "^(?!bundles|content|scripts).*";
+
+            routes.MapRoute(
+                name: "MemeNameOnly",
+                url: "{name}.jpg",
+                defaults: new { controller = "Meme", action = "Make", top = "", bottom = "" }
+            );
+
+            routes.MapRoute(
+                name: "MemeNameTopLineOnly",
+                url: "{name}/{top}.jpg",
+                defaults: new { controller = "Meme", action = "Make", bottom = "" }
+            );
+
             routes.MapRoute(
                 name: "Meme",
                 url: "{name}/{top}/{bottom}.jpg",
-                defaults: new { controller = "Meme", action = "Make", top = UrlParameter.Optional, bottom = UrlParameter.Optional },
-                // match anything except these specific things:
-                // http://stackoverflow.com/questions/6830796/regex-to-match-anything-but-two-words
-                constraints: new { url = "^(?!bundles|content|scripts).*" }
+                defaults: new { controller = "Meme", action = "Make" }
             );
 
             routes.MapRoute(
                 name: "Meme Catch All",
                 url: "{*url}",
                 defaults: new { controller = "Meme", action = "Make" },
-                // match anything except these specific things:
-                // http://stackoverflow.com/questions/6830796/regex-to-match-anything-but-two-words
-                constraints: new { url = "^(?!bundles|content|scripts).*" }
+                constraints: new { url = excludedMemeNames }
             );
         }
     }
