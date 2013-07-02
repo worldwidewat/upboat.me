@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace UpboatMe.SpriteThumbs
 {
@@ -8,10 +11,10 @@ namespace UpboatMe.SpriteThumbs
     {
         public const string SpriteResource = "/thumbs.axd?type=sprite";
         public const string StylesheetResource = "/thumbs.axd?type=stylesheet";
+        public const string HashFileName = "SpriteThumbsResourceHash.txt";
 
         public SpriteThumbsConfiguration()
         {
-            ThumbImagesPath = @".\thumbs";
             ThumbWidth = 100;
             ThumbHeight = 100;
             ThumbsPerRow = 10;
@@ -19,10 +22,9 @@ namespace UpboatMe.SpriteThumbs
             SpriteOutputPath = @".\sprites";
             SpriteFileName = "sprite.jpg";
             StylesheetFileName = "sprite.css";
-            RawImagesPath = @".\images";
+            RawImages = new List<RawImage>();
         }
 
-        public string ThumbImagesPath { get; private set; }
         public string SpriteOutputPath { get; private set; }
         public int ThumbWidth { get; private set; }
         public int ThumbHeight { get; private set; }
@@ -30,11 +32,42 @@ namespace UpboatMe.SpriteThumbs
         public int ImageQualityPercent { get; private set; }
         public string SpriteFileName { get; private set; }
         public string StylesheetFileName { get; private set; }
-        public string RawImagesPath { get; private set; }
+        public IList<RawImage> RawImages { get; private set; }
 
-        public void SetThumbImagesPath(string thumbImagesPath)
+        public string FullHashFileName
         {
-            ThumbImagesPath = thumbImagesPath;
+            get
+            {
+                return Path.Combine(SpriteOutputPath, HashFileName);
+            }
+        }
+
+        public string SpriteResourceUrl
+        {
+            get
+            {
+                return string.Format("{0}&hash={1}", SpriteResource, GetResourceHash());
+            }
+        }
+
+        public string StylesheetResourceUrl
+        {
+            get
+            {
+                return string.Format("{0}&hash={1}", StylesheetResource, GetResourceHash());
+            }
+        }
+
+        public string GetResourceHash()
+        {
+
+            var count = RawImages.Count;
+            var lastModified = RawImages.Max(i => i.LastWriteTime);
+            var input = string.Format("{0}-{1}", count, lastModified);
+            var algorithm = MD5.Create();
+            var hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            return string.Join("", hash.Select(h => h.ToString("X2")));
         }
 
         public string SpriteFullFileName
@@ -45,7 +78,7 @@ namespace UpboatMe.SpriteThumbs
             }
         }
 
-        public string StylesheetFilePath
+        public string StylesheetFullFileName
         {
             get
             {
@@ -90,9 +123,26 @@ namespace UpboatMe.SpriteThumbs
             StylesheetFileName = stylesheetFileName;
         }
 
-        public void SetRawImagesPath(string rawImagesPath)
+        public void AddRawImages<T>(IEnumerable<T> collection, Func<T, string> idSelector, Func<T, string> fullFilePathSelector)
         {
-            RawImagesPath = rawImagesPath;
+            foreach (var item in collection)
+            {
+                RawImages.Add(new RawImage
+                {
+                    Id = idSelector(item),
+                    FullFilePath = fullFilePathSelector(item)
+                });
+            }
+        }
+
+        public static string GetThumbClassName()
+        {
+            return "thumb";
+        }
+
+        public static string GetImageClassName(string imageIdentifier)
+        {
+            return string.Format("bg-{0}", imageIdentifier);
         }
     }
 }

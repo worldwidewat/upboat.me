@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Web.Hosting;
+using UpboatMe.Models;
 using UpboatMe.SpriteThumbs;
 
 namespace UpboatMe.App_Start
@@ -16,10 +17,8 @@ namespace UpboatMe.App_Start
             }
 
             configuration.SetSpriteOutputPath(outputFolder);
-
-            configuration.SetThumbImagesPath(HostingEnvironment.MapPath("/App_Data/GeneratedThumbs"));
-
-            configuration.SetRawImagesPath(HostingEnvironment.MapPath("/images"));
+                        
+            configuration.AddRawImages(GlobalMemeConfiguration.Memes.GetMemes(), m => m.ImageFileNameWithoutExtension, m => HostingEnvironment.MapPath(m.ImagePath));
         }
     }
 }

@@ -10,7 +10,6 @@ namespace UpboatMe.SpriteThumbs.Tests
         public void TempSpriteGeneratorTest()
         {
             var configuration = new SpriteThumbsConfiguration();
-            configuration.SetThumbImagesPath(@"..\..\thumbs");
             configuration.SetSpriteOutputPath(@".\");
             configuration.SetImageQualityPercent(50);
 

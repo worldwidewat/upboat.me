@@ -3,6 +3,7 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using System.Linq;
 using System.Collections.Generic;
+using UpboatMe.SpriteThumbs;
 
 namespace UpboatMe.Utilities
 {
@@ -39,8 +40,8 @@ namespace UpboatMe.Utilities
         {
             var builder = new TagBuilder("div");
 
-            builder.AddCssClass("thumb");
-            builder.AddCssClass(string.Format("bg-{0}", imageNameWithoutExtension));
+            builder.AddCssClass(SpriteThumbsConfiguration.GetThumbClassName());
+            builder.AddCssClass(SpriteThumbsConfiguration.GetImageClassName(imageNameWithoutExtension));
 
             return new MvcHtmlString(builder.ToString());
         }

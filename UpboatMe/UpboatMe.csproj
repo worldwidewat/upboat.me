@@ -152,7 +152,6 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
-    <Content Include="Content\sprite.css" />
     <Content Include="Content\step2.png" />
     <Content Include="Content\step3.png" />
     <Content Include="Content\step4.png" />
