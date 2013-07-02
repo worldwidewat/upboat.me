@@ -16,6 +16,8 @@ namespace UpboatMe.App_Start
 
         public static void AutoRegisterMemesByFile(MemeConfiguration memes, string[] filenames)
         {
+            var usedAliases = new HashSet<string>();
+
             foreach (var filename in filenames)
             {
                 var lowerFilename = filename.ToLowerInvariant();
@@ -25,19 +27,30 @@ namespace UpboatMe.App_Start
                 var aliases = new List<string>
                                   {
                                       name.ToInitialism(),
-                                      _NonWordStripCharacters.Replace(name, "")
+                                      _NonWordStripCharacters.Replace(name, ""),
                                   };
 
                 var memeName = name.ToTitleString();
 
-                var distinctAliases =
+                var filteredAliases =
                     aliases.Where(a => a.Length > 1) // don't use single character aliases
                            .Distinct()
                            .ToList();
 
+                var survivingAliases = new List<string>();
+                // Note: don't follow resharper's advice on this loop. It be cray cray
+                foreach (var alias in filteredAliases)
+                {
+                    if (usedAliases.Add(alias))
+                    {
+                        survivingAliases.Add(alias);
+                    }
+                }
+
+                // TODO: image/jpg isn't acutally valid. Fix this or get rid of it
                 var imageType = "image/" + extension;
                  
-                memes.Add(new Meme(memeName, filename, distinctAliases, imageType));
+                memes.Add(new Meme(memeName, filename, survivingAliases, imageType));
             }
         }
 
