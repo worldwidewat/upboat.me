@@ -17,25 +17,25 @@ namespace UpboatMe.Controllers
                 {
                     new RecentMeme
                     {
-                        Url = "/sap/wears-suit-and-tie-to-interview/phone-interview",
+                        Url = "/sap/wears-suit-and-tie-to-interview/phone-interview.jpg",
                         Alt = "socially awkward penguin: wears suit and tie to interview" + Environment.NewLine + "phone interview",
                         Title = "socially awkward penguin"
                     },
                     new RecentMeme
                     {
-                        Url = "/fry/not-sure-if-sunny-outside/or-hungover",
+                        Url = "/fry/not-sure-if-sunny-outside/or-hungover.jpg",
                         Alt = "futurama fry: not sure if sunny outside" + Environment.NewLine + "or hungover",
                         Title = "futurama fry"
                     },
                     new RecentMeme
                     {
-                        Url = "/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life",
+                        Url = "/scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life.jpg",
                         Alt = "sudden clarity clarence: i don't buy things with money" + Environment.NewLine + "i buy them with hours of my life",
                         Title = "sudden clarity clarence"
                     },
                     new RecentMeme
                     {
-                        Url = "/blb/has-pet-rock/it-runs-away",
+                        Url = "/blb/has-pet-rock/it-runs-away.jpg",
                         Alt = "bad luck brian: has pet rock" + Environment.NewLine + "it runs away",
                         Title = "bad luck brian"
                     }
