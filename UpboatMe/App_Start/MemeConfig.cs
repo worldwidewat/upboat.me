@@ -30,7 +30,11 @@ namespace UpboatMe.App_Start
 
                 var memeName = name.ToTitleString();
 
-                var distinctAliases = aliases.Distinct().ToList();
+                var distinctAliases =
+                    aliases.Where(a => a.Length > 1) // don't use single character aliases
+                           .Distinct()
+                           .ToList();
+
                 var imageType = "image/" + extension;
                  
                 memes.Add(new Meme(memeName, filename, distinctAliases, imageType));
