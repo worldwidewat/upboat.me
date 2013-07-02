@@ -15,7 +15,7 @@ namespace UpboatMe.Utilities
 
                 using (var tracker = new Tracker("UA-41725429-1", "upboat.me"))
                 {
-                    tracker.TrackPageView(context, "Generate Meme", string.Format("meme/make/{0}", meme));
+                    tracker.TrackPageView(context, "Generate Meme", context.Request.RawUrl);
                 }
             }
         }
