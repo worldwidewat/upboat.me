@@ -30,20 +30,6 @@ $(function () {
         setTimeout(function () { button.removeClass('success'); }, 1000);
     });
 
-    $('#list-search-form #query').on('keyup', function (e) {
-        var value = $(this).val().toLowerCase();
-
-        doListSearch(value);
-    });
-
-    $('#list-search-form').on('submit', function (e) {
-        var value = $(this).find('#query').val().toLowerCase();
-
-        doListSearch(value);
-
-        return false;
-    });
-
     $('#share-url').on('mouseup touchend', function (e) {
         this.select();
     });
