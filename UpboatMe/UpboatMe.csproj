@@ -151,7 +151,6 @@
     <Content Include="App_Data\slogans.txt" />
     <Content Include="Content\apple-touch-icon-precomposed.png" />
     <Content Include="Content\banana-example-320.jpg" />
-    <Content Include="Content\foundation\app.css" />
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Content\styles.css" />
@@ -335,8 +334,6 @@
     <Content Include="Images\0168-whisper-sloth.jpg" />
     <Content Include="Images\0169-why-cant-i.jpg" />
     <Content Include="Images\0170-why-not-zoidberg.jpg" />
-    <Content Include="Images\0171-x-all-the-y.jpg" />
-    <Content Include="Images\0172-x-x-everywhere.jpg" />
     <Content Include="Images\0173-y-u-no.jpg" />
     <Content Include="Images\0174-yao-ming.jpg" />
     <Content Include="Images\0175-yo-dawg-heard-you.jpg" />

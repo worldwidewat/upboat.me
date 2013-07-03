@@ -103,6 +103,7 @@ namespace UpboatMe.App_Start
         {
             // overrides
             memes["10guy"].Aliases.Add("tenguy");
+            memes["allthethings"].Aliases.Add("xallthey");
             memes["angrywalter"].Aliases.Add("amitheonlyone");
             memes["angrywalter"].Aliases.Add("aitoo");
             memes["annoyedpicard"].Aliases.Add("whythefuck");
@@ -127,6 +128,7 @@ namespace UpboatMe.App_Start
             memes["boythatescalatedquickly"].Aliases.Add("ronburgundy");
             memes["themostinterestingmanintheworld"].Aliases.Add("idontalways");
             memes["toystoryeverywhere"].Aliases.Add("buzzwoody");
+            memes["toystoryeverywhere"].Aliases.Add("xxeverywhere");
             memes["unhelpfulhighschoolteacher"].Aliases.Add("scumbagteacher");
         }
     }
