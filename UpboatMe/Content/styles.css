@@ -1,13 +1,4 @@
-﻿body {
-}
-
-/*
-.row + .row {
-    margin-top: 40px;
-}
-*/
-
-li > em {
+﻿li > em {
     color: #777;
 }
 
@@ -40,16 +31,21 @@ hr {
 }
 
 
-a.meme-thumb{
+a.meme-thumb {
     display: inline-block;
     padding: 2px;
 }
 
-a.meme-thumb div {
-    border-radius: 10%;
-}
+    a.meme-thumb div {
+        border-radius: 10%;
+    }
 
     a.meme-thumb:hover div {
         box-shadow: 0 0 5px #2284a1;
         transition: all ease-in-out 100ms;
     }
+
+.framed {
+    border-radius: 3px;
+    border: 1px solid #b1b1b1;
+}

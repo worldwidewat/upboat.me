@@ -150,12 +150,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App_Data\slogans.txt" />
     <Content Include="Content\apple-touch-icon-precomposed.png" />
+    <Content Include="Content\banana-example-320.jpg" />
     <Content Include="Content\foundation\app.css" />
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\normalize.css" />
-    <Content Include="Content\step2.png" />
-    <Content Include="Content\step3.png" />
-    <Content Include="Content\step4.png" />
+    <Content Include="Content\step2-400.png" />
+    <Content Include="Content\step3-400.png" />
+    <Content Include="Content\step4-400.png" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\url-example.png" />
     <Content Include="Content\vote-right.png" />
