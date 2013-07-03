@@ -14,8 +14,9 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="apple-mobile-web-app-title" content="Upboat.me">
     <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/apple-touch-icon-precomposed.png")" />
+    @Styles.Render("~/Content/foundation/normalize")
     @Styles.Render("~/Content/foundation/css")
-    @Styles.Render("~/Content/styles.css")
+    @Styles.Render("~/Content/css")
     <link type="text/css" href="@SpriteThumbsGlobalConfiguration.Configuration.StylesheetResourceUrl" rel="stylesheet"/>
     @RenderSection("head", required: false)
     <script type="text/javascript">
@@ -66,13 +67,7 @@
         </div>
     </div>
 
-    @* Zepto polyfill: If you need to support Internet Explorer, you can fall back on jQuery. http://zeptojs.com/ *@
-    <script>
-        document.write('<script src=' +
-            ('__proto__' in {} ? '@Url.Content("~/scripts/zepto.js")' : '@Url.Content("~/scripts/jquery.js")') +
-      '><\/script>')
-    </script>
-
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/foundation")
     @Scripts.Render("~/bundles/site")
     @*Use the Scripts section to define page specific scripts*@
