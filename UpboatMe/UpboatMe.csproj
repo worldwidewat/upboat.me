@@ -155,6 +155,9 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Content\styles.css" />
+    <Content Include="Content\UpBoat128.png" />
+    <Content Include="Content\UpBoat32.png" />
+    <Content Include="Content\UpBoatWatermark.png" />
     <Content Include="Content\url-example.png" />
     <Content Include="Content\vote-right.png" />
     <Content Include="Content\vote-up.png" />

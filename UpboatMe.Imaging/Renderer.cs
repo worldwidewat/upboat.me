@@ -12,6 +12,8 @@ namespace UpboatMe.Imaging
             using (var image = Image.FromFile(parameters.FullImagePath))
             using (var graphics = Graphics.FromImage(image))
             {
+                DrawWatermark(parameters, graphics, image);
+
                 DrawText(parameters, graphics, image, top, true);
 
                 DrawText(parameters, graphics, image, bottom, false);
@@ -22,6 +24,37 @@ namespace UpboatMe.Imaging
 
                     return memoryStream.ToArray();
                 }
+            }
+        }
+
+        private void DrawWatermark(RenderParameters parameters, Graphics graphics, Image image)
+        {
+            using (var watermark = Image.FromFile(parameters.FullWatermarkImageFilePath))
+            {
+                var padding = 2;
+                var width = parameters.WatermarkImageWidth;
+                var height = parameters.WatermarkImageHeight;
+                var sourceRectangle = new Rectangle(0, 0, watermark.Width, watermark.Height);
+                var destinationRectangle = new Rectangle(image.Width - width - padding, image.Height - height - padding, width, height);
+
+                graphics.DrawImage(watermark, destinationRectangle, sourceRectangle, GraphicsUnit.Pixel);
+
+                var font = new Font(parameters.WatermarkFont, parameters.WatermarkFontSize);
+
+                var textSize = graphics.MeasureString(parameters.WatermarkText, font);
+
+                var textX = watermark.Width - width - (int)Math.Ceiling(textSize.Width);
+
+                var bounds = new Rectangle(image.Width - width - (int)Math.Ceiling(textSize.Width), image.Height - (int)Math.Ceiling(textSize.Height), image.Width, (int)Math.Ceiling(textSize.Height));
+
+                graphics.CompositingMode = CompositingMode.SourceOver;
+
+                var stroke = new SolidBrush(Color.FromArgb(150, parameters.WatermarkStroke));
+                var fill = new SolidBrush(Color.FromArgb(150, parameters.WatermarkFill));
+
+                DrawText(graphics, parameters.WatermarkText, font, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
+
+                graphics.CompositingMode = CompositingMode.SourceCopy;
             }
         }
 
@@ -56,19 +89,10 @@ namespace UpboatMe.Imaging
                     stringFormat.LineAlignment = StringAlignment.Far;
                 }
 
-                using (var graphicsPath = new GraphicsPath())
-                {
-                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+                var stroke = new SolidBrush(parameters.Stroke);
+                var fill = new SolidBrush(parameters.Fill);
 
-                    float emSize = graphics.DpiY * fontSize / 72;
-
-                    graphicsPath.AddString(text, font.FontFamily, (int)FontStyle.Regular, emSize, bounds, stringFormat);
-
-                    graphics.DrawPath(new Pen(parameters.Stroke, parameters.StrokeWidth) { LineJoin = LineJoin.Round }, graphicsPath);
-                    graphics.FillPath(parameters.Fill, graphicsPath);
-
-                    graphics.SmoothingMode = SmoothingMode.Default;
-                }
+                DrawText(graphics, text, font, fontSize, stroke, parameters.StrokeWidth, fill, stringFormat, bounds);
 
                 if (parameters.DrawBoxes)
                 {
@@ -79,7 +103,24 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private void DrawBoxes(Graphics graphics, int width, int height, int maxHeight, bool isTop)
+        private static void DrawText(Graphics graphics, string text, Font font, int fontSize, Brush stroke, int strokeWidth, Brush fill, StringFormat stringFormat, Rectangle bounds)
+        {
+            using (var graphicsPath = new GraphicsPath())
+            {
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                float emSize = graphics.DpiY * fontSize / 72;
+
+                graphicsPath.AddString(text, font.FontFamily, (int)FontStyle.Regular, emSize, bounds, stringFormat);
+
+                graphics.DrawPath(new Pen(stroke, strokeWidth) { LineJoin = LineJoin.Round }, graphicsPath);
+                graphics.FillPath(fill, graphicsPath);
+
+                graphics.SmoothingMode = SmoothingMode.Default;
+            }
+        }
+
+        private static void DrawBoxes(Graphics graphics, int width, int height, int maxHeight, bool isTop)
         {
             graphics.CompositingMode = CompositingMode.SourceOver;
 

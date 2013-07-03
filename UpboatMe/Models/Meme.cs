@@ -11,8 +11,8 @@ namespace UpboatMe.Models
         public string ImagePath { get; private set; }
         public string ImageType { get; private set; }
         public string ImageFileName { get; private set; }
-        public Brush Stroke { get; private set; }
-        public Brush Fill { get; private set; }
+        public Color Stroke { get; private set; }
+        public Color Fill { get; private set; }
         public string Font { get; private set; }
         public int FontSize { get; private set; }
         public int StrokeWidth { get; private set; }
@@ -44,8 +44,8 @@ namespace UpboatMe.Models
             ImageFileName = imageFileName;
             Aliases = aliases;
             ImageType = imageType;
-            Stroke = new SolidBrush(Color.FromName(stroke));
-            Fill = new SolidBrush(Color.FromName(fill));
+            Stroke = Color.FromName(stroke);
+            Fill = Color.FromName(fill);
             Font = font;
             FontSize = fontSize;
             StrokeWidth = strokeWidth;

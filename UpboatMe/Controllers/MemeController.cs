@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
@@ -56,7 +57,16 @@ namespace UpboatMe.Controllers
                 Font = meme.Font,
                 FontSize = meme.FontSize,
                 StrokeWidth = meme.StrokeWidth,
-                DrawBoxes = drawBoxes
+                DrawBoxes = drawBoxes,
+                FullWatermarkImageFilePath = HttpContext.Server.MapPath("~/Content/UpBoatWatermark.png"),
+                WatermarkImageHeight = 25,
+                WatermarkImageWidth = 25,
+                WatermarkText = "upboat.me",
+                WatermarkFont = "Arial",
+                WatermarkFontSize = 9,
+                WatermarkStroke = Color.Black,
+                WatermarkFill = Color.White,
+                WatermarkStrokeWidth = 1
             };
 
             var renderer = new Renderer();
@@ -72,15 +82,7 @@ namespace UpboatMe.Controllers
         {
             var viewModel = new MemeDebugViewModel();
 
-            viewModel.DebugImages = GlobalMemeConfiguration.Memes.GetMemeNames().Select(m => Url.Action("Make",
-                new
-                {
-                    name = m,
-                    top = top,
-                    bottom = bottom,
-                    drawBoxes = Request.QueryString["drawBoxes"]
-                }))
-                .ToList();
+            viewModel.DebugImages = GlobalMemeConfiguration.Memes.GetMemeNames().Select(m => string.Format("/{0}/{1}/{2}", m, top, bottom)).ToList();
 
             return View(viewModel);
         }

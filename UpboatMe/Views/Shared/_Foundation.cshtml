@@ -26,7 +26,13 @@
 <body>
     <div id="header" class="row">
         <div class="large-12 columns">
-            <h1>@Html.ActionLink("UPBOAT.ME", "Index", "Home") <div style="float:right"><small>&#8220;<small>@UpboatMe.Utilities.SloganUtilities.GetRandomSlogan()</small>&#8221;</small></div></h1>
+            <h1>
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Content/UpBoat128.png")" />
+                    <span>UPBOAT.ME</span>
+                </a>
+                <div style="float:right"><small>&#8220;<small>@UpboatMe.Utilities.SloganUtilities.GetRandomSlogan()</small>&#8221;</small></div>
+            </h1>
         </div>
     </div>
     <div class="row">
