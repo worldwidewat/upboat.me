@@ -28,7 +28,7 @@
     });
 
     var clip = new ZeroClipboard(document.getElementById("copy-button"), {
-        moviePath: "Scripts/ZeroClipboard.swf"
+        moviePath: rootUrl + "/Scripts/ZeroClipboard.swf"
     });
 
     clip.on('complete', function (client, args) {
