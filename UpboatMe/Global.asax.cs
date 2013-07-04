@@ -7,13 +7,10 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using UpboatMe.App_Start;
 using UpboatMe.Models;
-using WorldWideWat.SpriteThumbs;
 
 namespace UpboatMe
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -29,12 +26,6 @@ namespace UpboatMe
             
             MemeConfig.AutoRegisterMemesByFile(GlobalMemeConfiguration.Memes, filenames.ToArray());
             MemeConfig.RegisterManualMemes(GlobalMemeConfiguration.Memes);
-
-            SpriteThumbsConfig.Initialize(SpriteThumbsGlobalConfiguration.Configuration);
-
-            var spriteGenerator = new SpriteGenerator(SpriteThumbsGlobalConfiguration.Configuration);
-
-            spriteGenerator.Generate();
         }
     }
 }

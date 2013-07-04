@@ -13,5 +13,5 @@ newrelic.config
 *.PublishSettings
 local-docs/
 newrelic.prod.config
-GeneratedThumbs/
+SpriteThumbsOutput/
 TestResults/

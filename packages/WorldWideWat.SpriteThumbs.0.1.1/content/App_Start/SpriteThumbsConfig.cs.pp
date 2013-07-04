@@ -1,11 +1,10 @@
 using System.IO;
 using System.Web.Hosting;
-using UpboatMe.Models;
 using WorldWideWat.SpriteThumbs;
 
-[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(UpboatMe.App_Start.SpriteThumbsConfig), "PostStart")]
+[assembly: WebActivatorEx.PostApplicationStartMethod(typeof($rootnamespace$.App_Start.SpriteThumbsConfig), "PostStart")]
 
-namespace UpboatMe.App_Start 
+namespace $rootnamespace$.App_Start 
 {
     public static class SpriteThumbsConfig 
 	{
@@ -21,16 +20,11 @@ namespace UpboatMe.App_Start
             }
 
             configuration.SetSpriteOutputPath(outputFolder);
+            
+			// Add your images here
+            // configuration.RawImages.Add(...);
 
-            foreach (var meme in GlobalMemeConfiguration.Memes.GetMemes())
-            {
-                configuration.RawImages.Add(new RawImage
-                {
-                    Id = meme.ImageFileNameWithoutExtension,
-                    FullFilePath = HostingEnvironment.MapPath(meme.ImagePath)
-
-                });
-            }
+			// Tweak other sprite generation parameters here (like thumb size and image quality)
 			
             var spriteGenerator = new SpriteGenerator(SpriteThumbsGlobalConfiguration.Configuration);
 
