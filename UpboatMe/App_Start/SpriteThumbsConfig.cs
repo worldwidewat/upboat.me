@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Web.Hosting;
 using UpboatMe.Models;
-using UpboatMe.SpriteThumbs;
+using WorldWideWat.SpriteThumbs;
 
 namespace UpboatMe.App_Start
 {

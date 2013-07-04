@@ -118,6 +118,9 @@
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="WorldWideWat.SpriteThumbs">
+      <HintPath>..\packages\WorldWideWat.SpriteThumbs.0.1.0\lib\WorldWideWat.SpriteThumbs.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -390,10 +393,6 @@
     <ProjectReference Include="..\UpboatMe.Imaging\UpboatMe.Imaging.csproj">
       <Project>{b5c8dbd8-2f64-4a79-a408-d03ce3871884}</Project>
       <Name>UpboatMe.Imaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UpboatMe.SpriteThumbs\UpboatMe.SpriteThumbs.csproj">
-      <Project>{0580babb-78d7-435b-972b-d80a761b9549}</Project>
-      <Name>UpboatMe.SpriteThumbs</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

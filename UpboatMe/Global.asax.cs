@@ -7,7 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using UpboatMe.App_Start;
 using UpboatMe.Models;
-using UpboatMe.SpriteThumbs;
+using WorldWideWat.SpriteThumbs;
 
 namespace UpboatMe
 {

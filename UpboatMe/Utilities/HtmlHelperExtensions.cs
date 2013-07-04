@@ -3,7 +3,7 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using System.Linq;
 using System.Collections.Generic;
-using UpboatMe.SpriteThumbs;
+using WorldWideWat.SpriteThumbs;
 
 namespace UpboatMe.Utilities
 {
