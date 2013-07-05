@@ -29,8 +29,7 @@ namespace UpboatMe
                             .Include("~/Scripts/foundation/foundation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site")
-                            .Include("~/Scripts/ZeroClipboard.js",
-                                     "~/Scripts/site.js"));
+                            .Include("~/Scripts/site.js"));
         }
     }
 }
