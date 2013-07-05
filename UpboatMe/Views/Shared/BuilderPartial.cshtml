@@ -18,7 +18,7 @@
                 <h3 id="share">Share it!</h3>
                 <div class="row">
                     <div class="large-12 columns text-right">
-                        <input id="share-url" type="text" readonly="readonly" placeholder="Create a meme to share it!" value="@Html.AttributeEncode(previewUrl)">
+                        <input id="share-url" autofocus="autofocus" type="text" readonly="readonly" placeholder="Create a meme to share it!" value="@Html.AttributeEncode(previewUrl)">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=@Html.AttributeEncode(previewUrl)" target="_blank">
                             <img src="@Url.Content("~/Content/social/24px/facebook.png")" alt="Share to Facebook" title="Share to Facebook" />
                         </a>
