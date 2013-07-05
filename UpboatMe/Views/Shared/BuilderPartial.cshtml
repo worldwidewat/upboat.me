@@ -1,27 +1,43 @@
 ﻿@model BuilderViewModel
-
+@{
+    var previewUrl = Model.GetPreviewUrl(Url);
+}
 <div class="row">
     <div class="large-6 columns">
-        <form>
-            @Html.DropDownList("meme-name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text", Model.SelectedMeme))
-            <input type="text" id="first-line" placeholder="Top Line" value="@Model.Top" />
-            <input type="text" id="second-line" placeholder="Bottom Line" value="@Model.Bottom" />
-            <div style="text-align: center">
-                <input class="small button" type="button" value="Create!" id="create-meme" />
+        @using(Html.BeginForm(null, null, FormMethod.Get)){
+            @Html.DropDownList("name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text", Model.SelectedMeme))
+            <input name="top" type="text" id="first-line" placeholder="Top Line" value="@Model.Top" />
+            <input name="bottom" type="text" id="second-line" placeholder="Bottom Line" value="@Model.Bottom" />
+            <div class="text-right">
+                <input class="small button" type="submit" value="Create!" id="create-meme" />
             </div>
-        </form>
+        }
+        @if (!string.IsNullOrEmpty(Model.Top) || !string.IsNullOrEmpty(Model.Bottom))
+        {
+            <div class="flash-on-load">
+                <h3>Share it!</h3>
+                <div class="row">
+                    <div class="large-12 columns text-right">
+                        <input id="share-url" type="text" readonly="readonly" placeholder="Create a meme to share it!" value="@Html.AttributeEncode(previewUrl)">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=@Html.AttributeEncode(previewUrl)" target="_blank">
+                            <img src="@Url.Content("~/Content/social/24px/facebook.png")" alt="Share to Facebook" title="Share to Facebook" />
+                        </a>
+                        <a href="https://twitter.com/share?url=@Html.AttributeEncode(previewUrl)&via=upboatme&text=@Html.AttributeEncode(Model.GetShareText())" target="_blank">
+                            <img src="@Url.Content("~/Content/social/24px/twitter.png")" alt="Share to Twitter" title="Share to Twitter" />
+                        </a>
+                        <a href="http://www.reddit.com/r/AdviceAnimals/submit?title=@Html.AttributeEncode(Model.GetShareText())&url=@Html.AttributeEncode(previewUrl)" target="_blank">
+                            <img src="@Url.Content("~/Content/social/24px/reddit.png")" alt="Share to Reddit" title="Share to Reddit" />
+                        </a>
 
-        <h3>Share it!</h3>
-        <div class="row">
-            <div class="large-10 columns">
-                <input id="share-url" type="text" readonly="readonly" placeholder="Create a meme to share it!" value="@Model.GetPreviewUrl(Url)">
+                        <a href="http://pinterest.com/pin/create/button/?url=@Html.AttributeEncode(previewUrl)&media=@Html.AttributeEncode(previewUrl)&description=@Html.AttributeEncode(Model.GetShareText())" target="_blank">
+                            <img src="@Url.Content("~/Content/social/24px/pinterest.png")" alt="Pin it" title="Pin it" />
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="small-2 columns hide-for-small">
-                <input id="copy-button" type="button" data-clipboard-target="share-url" class="right inline small button" value="Copy" />
-            </div>
-        </div>
+        }
     </div>
     <div class="large-6 columns"> 
-        <img id="meme-preview" src="@Model.GetPreviewUrl(Url)"/>
+        <img id="meme-preview" src="@Html.AttributeEncode(previewUrl)" alt="@Html.AttributeEncode(@Model.GetAltText())" title="@Html.AttributeEncode(@Model.GetAltText())"/>
     </div>
 </div>

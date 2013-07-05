@@ -49,3 +49,14 @@ a.meme-thumb {
     border-radius: 3px;
     border: 1px solid #b1b1b1;
 }
+
+.flash-on-load{
+    -webkit-animation:flash 1s;
+       -moz-animation:flash 1s;
+         -o-animation:flash 1s;
+            animation:flash 1s;
+}
+@-webkit-keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
+   @-moz-keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
+     @-o-keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
+        @keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }

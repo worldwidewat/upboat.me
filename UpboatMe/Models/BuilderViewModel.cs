@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using UpboatMe.Utilities;
 
@@ -20,6 +21,17 @@ namespace UpboatMe.Models
                                                              bottom = Bottom ?? "" // passing null breaks the route
                                                          });
             return helper.AbsoluteAction(path);
+        }
+
+        public string GetAltText()
+        {
+            return string.Format("{0}:{1}{2}{1}{3}",
+                                 SelectedMeme, Environment.NewLine, Top, Bottom);
+        }
+
+        public string GetShareText()
+        {
+            return string.Format("{0}", SelectedMeme);
         }
 
         public BuilderViewModel()

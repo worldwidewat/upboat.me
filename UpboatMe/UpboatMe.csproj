@@ -162,6 +162,11 @@
     <Content Include="Content\banana-example-320.jpg" />
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\normalize.css" />
+    <Content Include="Content\social\24px\facebook.png" />
+    <Content Include="Content\social\24px\google-plus.png" />
+    <Content Include="Content\social\24px\pinterest.png" />
+    <Content Include="Content\social\24px\reddit.png" />
+    <Content Include="Content\social\24px\twitter.png" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\UpBoat128.png" />
     <Content Include="Content\UpBoat32.png" />
