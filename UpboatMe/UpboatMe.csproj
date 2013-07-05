@@ -135,6 +135,7 @@
     <Compile Include="Models\MemeRequest.cs" />
     <Compile Include="Models\RecentMeme.cs" />
     <Compile Include="Utilities\Analytics.cs" />
+    <Compile Include="Utilities\CollectionExtensions.cs" />
     <Compile Include="Utilities\HtmlHelperExtensions.cs" />
     <Compile Include="Utilities\MemeUtilities.cs" />
     <Compile Include="Utilities\SloganUtilities.cs" />

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using UpboatMe.Models;
+using UpboatMe.Utilities;
 
 namespace UpboatMe.App_Start
 {
@@ -104,32 +105,24 @@ namespace UpboatMe.App_Start
             // overrides
             memes["10guy"].Aliases.Add("tenguy");
             memes["allthethings"].Aliases.Add("xallthey");
-            memes["angrywalter"].Aliases.Add("amitheonlyone");
-            memes["angrywalter"].Aliases.Add("aitoo");
+            memes["angrywalter"].Aliases.Add("amitheonlyone", "aitoo");
             memes["annoyedpicard"].Aliases.Add("whythefuck");
-            memes["braceyourselves"].Aliases.Add("imminentned");
-            memes["braceyourselves"].Aliases.Add("iscoming");
+            memes["braceyourselves"].Aliases.Add("imminentned", "iscoming");
             memes["ermahgerd"].Aliases.Add("emg");
             memes["everyonelosestheirminds"].Aliases.Add("joker");
             memes["futuramafry"].Aliases.Add("notsureif");
             memes["grumpycat"].Aliases.Add("sadcat");
             memes["idontwanttoliveonthisplanetanymore"].Aliases.Add("farnsworth");
             memes["illhaveyouknow"].Aliases.Add("spongebob");
-            memes["officespacelumbergh"].Aliases.Add("thatdbegreat");
-            memes["officespacelumbergh"].Aliases.Add("yeah");
-            memes["onedoesnotsimply"].Aliases.Add("boromir");
-            memes["onedoesnotsimply"].Aliases.Add("mordor");
-            memes["schrutefacts"].Aliases.Add("schrute");
-            memes["schrutefacts"].Aliases.Add("dwight");
-            memes["schrutefacts"].Aliases.Add("correction");
-            memes["schrutefacts"].Aliases.Add("false");
+            memes["officespacelumbergh"].Aliases.Add("thatdbegreat", "yeah");
+            memes["onedoesnotsimply"].Aliases.Add("boromir", "mordor");
+            memes["schrutefacts"].Aliases.Add("schrute", "dwight", "correction", "false");
             memes["technologicallyimpairedduck"].Aliases.Add("technologyduck");
-            memes["boythatescalatedquickly"].Aliases.Add("wteq");
-            memes["boythatescalatedquickly"].Aliases.Add("ronburgundy");
+            memes["boythatescalatedquickly"].Aliases.Add("wteq", "ronburgundy");
             memes["themostinterestingmanintheworld"].Aliases.Add("idontalways");
-            memes["toystoryeverywhere"].Aliases.Add("buzzwoody");
-            memes["toystoryeverywhere"].Aliases.Add("xxeverywhere");
+            memes["toystoryeverywhere"].Aliases.Add("buzzwoody", "xxeverywhere");
             memes["unhelpfulhighschoolteacher"].Aliases.Add("scumbagteacher");
+            memes["mckaylamaroneynotimpressed"].Aliases.Add("nim", "um", "unimpressedmckayla");
         }
     }
 }
