@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Web;
 using UpboatMe.Models;
 
 namespace UpboatMe.Utilities
@@ -31,6 +32,13 @@ namespace UpboatMe.Utilities
             if (String.IsNullOrEmpty(url))
             {
                 return result;
+            }
+
+            // strip off any application path prefix
+            var applicationPath = HttpContext.Current.Request.ApplicationPath;
+            if (!string.IsNullOrEmpty(applicationPath))
+            {
+                url = url.Substring(applicationPath.Length);
             }
 
             // urls look like this:  /meme-name/first-line/second-line
