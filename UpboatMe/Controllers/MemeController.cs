@@ -18,7 +18,7 @@ namespace UpboatMe.Controllers
         // this allows us to keep using routes to generate our own links, which is handy
         public ActionResult Make(string name)
         {
-            var url = Request.ServerVariables["UNENCODED_URL"];
+            var url = Request.ServerVariables["HTTP_URL"];
             
             // decode any %-encodings
             url = Server.UrlDecode(url);
