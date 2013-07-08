@@ -13,7 +13,7 @@ namespace UpboatMe.App_Start
 		{
             var configuration = SpriteThumbsGlobalConfiguration.Configuration;
 
-            var outputFolder = HostingEnvironment.MapPath("/App_Data/SpriteThumbsOutput");
+            var outputFolder = HostingEnvironment.MapPath("~/App_Data/SpriteThumbsOutput");
 
             if (outputFolder != null && !Directory.Exists(outputFolder))
             {
