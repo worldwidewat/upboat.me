@@ -90,27 +90,5 @@
         ga('send', 'pageview');
     </script>
     }
-    <!--
-        server variables:
-        @for (int i = 0; i < Request.ServerVariables.Count; ++i)
-        {
-            @Request.ServerVariables.GetKey(i)<text>:</text> @(string.Join(", ", Request.ServerVariables.GetValues(i))) @Environment.NewLine
-            
-        }
-
-        UNENCODED_URL: @Request.ServerVariables["UNENCODED_URL"]
-        HTTP_URL: @Request.ServerVariables["HTTP_URL"]
-        REQUEST_URI: @Request.ServerVariables["REQUEST_URI"]
-        X-FORWARDED-FOR: @Request.ServerVariables["X-FORWARDED-FOR"]
-        X-FOO: @Request.ServerVariables["X-FOO"]
-        HTTP_X_REWRITE_URL: @Request.ServerVariables["HTTP_X_REWRITE_URL"]
-        
-        headers:
-        @for(int i = 0; i < Request.Headers.Count; ++i)
-        {
-            @Request.Headers.GetKey(i)<text>:</text> @(string.Join(", ", Request.Headers.GetValues(i))) @Environment.NewLine
-            
-        }
-        -->
 </body>
 </html>
