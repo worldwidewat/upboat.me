@@ -1,4 +1,13 @@
-﻿li > em {
+﻿h1, h2, h3 {
+    
+    /* via http://rachaelmoore.name/posts/design/css/web-safe-helvetica-font-stack/#sthash.tT7aN9ah.dpuf
+       and http://www.google.com/fonts/#QuickUsePlace:quickUse/Family:Roboto */
+    font-family: "Roboto", "HelveticaNeueUltraLight", "HelveticaNeue-Ultra-Light", "Helvetica Neue Ultra Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Arial", sans-serif;
+    font-weight: 100;
+    font-stretch: normal;
+}
+
+li > em {
     color: #777;
 }
 
