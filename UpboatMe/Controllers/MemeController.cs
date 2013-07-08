@@ -19,6 +19,9 @@ namespace UpboatMe.Controllers
         public ActionResult Make(string name)
         {
             var url = Request.RawUrl;
+            
+            // decode any %-encodings
+            url = Server.UrlDecode(url);
             var hasExtension = _UrlExtension.IsMatch(url);
 
             // todo - handle this more elegantly, or don't do such things via this action
