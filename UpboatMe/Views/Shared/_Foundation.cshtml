@@ -103,6 +103,7 @@
         REQUEST_URI: @Request.ServerVariables["REQUEST_URI"]
         X-FORWARDED-FOR: @Request.ServerVariables["X-FORWARDED-FOR"]
         X-FOO: @Request.ServerVariables["X-FOO"]
+        HTTP_X_REWRITE_URL: @Request.ServerVariables["HTTP_X_REWRITE_URL"]
         
         headers:
         @for(int i = 0; i < Request.Headers.Count; ++i)
