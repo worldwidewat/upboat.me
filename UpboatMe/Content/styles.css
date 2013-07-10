@@ -1,25 +1,53 @@
 ﻿h1, h2, h3 {
-    
     /* via http://rachaelmoore.name/posts/design/css/web-safe-helvetica-font-stack/#sthash.tT7aN9ah.dpuf
        and http://www.google.com/fonts/#QuickUsePlace:quickUse/Family:Roboto */
     font-family: "Roboto", "HelveticaNeueUltraLight", "HelveticaNeue-Ultra-Light", "Helvetica Neue Ultra Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Arial", sans-serif;
     font-weight: 100;
     font-stretch: normal;
-    
     /* simulate better antialiasing http://stackoverflow.com/a/4012154/29 */
     text-shadow: 0 0 1px rgba(0,0,0,0.3);
+}
+
+#header .button {
+    margin-bottom: 0;
+}
+
+#header ul {
+    margin-top: 1em;
+    white-space: nowrap;
+}
+#header ul li {
+    margin-left: .625em;
+}
+
+#slogan {
+    text-align: right;
 }
 
 li > em {
     color: #777;
 }
 
-#header a:link, #header a:visited {
-    color: #000;
+#header h1 {
+    margin-bottom: .25em;
 }
 
-#header a:hover, #header a:active {
-    color: #2ba6cb;
+    #header h1 a:link, #header h1 a:visited {
+        color: #000;
+        transition: color 300ms ease-out;
+    }
+
+    #header h1 a:hover, #header h1 a:active {
+        color: #2284a1;
+        transition: color 300ms ease-out;
+    }
+
+#header ul a:link, #header a:visited {
+    color: #fff;
+}
+
+#header ul a:hover, #header a:active {
+    color: #fff;
 }
 
 #footer div {
