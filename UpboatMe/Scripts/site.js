@@ -2,11 +2,14 @@
     $(document).foundation();
     
     $("#builder-form").on("submit", function(e) {
-        var url = $(this).attr('action');
-        url = url
-            + "/" + $(this).find('[name=name]').val()
-            + "/" + encodeURIComponent($(this).find('[name=top]').val())
-            + "/" + encodeURIComponent($(this).find('[name=bottom]').val());
+        var name = $(this).find('[name=name]').val();
+        var top = encodeURIComponent($(this).find('[name=top]').val()) || "-";
+        var bottom = encodeURIComponent($(this).find('[name=bottom]').val());
+
+        var url = $(this).attr('action')
+            + "/" + name
+            + "/" + top
+            + "/" + bottom;
 
         e.preventDefault();
         window.location.href = url;
