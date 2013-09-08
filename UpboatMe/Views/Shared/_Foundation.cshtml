@@ -36,7 +36,7 @@
             <div class="right">
                 <ul class="inline-list">
                     <li>@Html.TopNavLink("Home", "Index", "Home", null, new { @class = "small button round hide-for-small" })</li>
-                    <li>@Html.TopNavLink("Builder", "Builder", "Meme", null, new { @class = "small button round" })</li>
+                    <li>@Html.TopNavLink("Builder", "Builder", "Meme", new { url = "" }, new { @class = "small button round" })</li>
                     <li>@Html.TopNavLink("Meme Index", "List", "Meme", null, new { @class = "small button round" })</li>
                 </ul>
                 <div id="slogan" class="hide-for-small">&#8220;<small>@UpboatMe.Utilities.SloganUtilities.GetRandomSlogan()</small>&#8221;</div>

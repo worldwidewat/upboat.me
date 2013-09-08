@@ -11,28 +11,15 @@ namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
-        private static Regex _StripRegex = new Regex(@"&?drawboxes=true|\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex _UrlExtension = new Regex(@"\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
 
         // ignore the parameters and figure it out manually from Request.RawUrl
         // this allows us to keep using routes to generate our own links, which is handy
-        public ActionResult Make(string name)
+        public ActionResult Make()
         {
             var url = Request.ServerVariables["HTTP_URL"];
-            
-            // decode any %-encodings
-            url = Server.UrlDecode(url);
-
-            var hasExtension = _UrlExtension.IsMatch(url);
-
-            // todo - handle this more elegantly, or don't do such things via this action
-            var drawBoxes = url.Contains("drawBoxes=true");
-
-            // strip off any file extensions
-            url = _StripRegex.Replace(url, "");
-
-            var memeRequest = MemeUtilities.GetMemeRequest(url);
-
+            var memeRequest = MemeRequest.FromUrl(url, Server);
             var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, memeRequest.Name);
             if (meme == null)
             {
@@ -46,6 +33,7 @@ namespace UpboatMe.Controllers
             // if we still need to worry about png vs. jpg. The browser
             // probably doesn't care, but it might be weird if the extension
             // doesn't match the mimetype
+            var hasExtension = _UrlExtension.IsMatch(url);
             if (!hasExtension)
             {
                 return Redirect(url + Path.GetExtension(meme.ImageFileName));
@@ -61,7 +49,7 @@ namespace UpboatMe.Controllers
                 Font = meme.Font,
                 FontSize = meme.FontSize,
                 StrokeWidth = meme.StrokeWidth,
-                DrawBoxes = drawBoxes,
+                DebugMode = memeRequest.IsDebugMode,
                 FullWatermarkImageFilePath = HttpContext.Server.MapPath("~/Content/UpBoatWatermark.png"),
                 WatermarkImageHeight = 25,
                 WatermarkImageWidth = 25,
@@ -102,17 +90,27 @@ namespace UpboatMe.Controllers
 
             return View(list);
         }
-
-        public ActionResult Builder(string name, string top = "", string bottom = "")
+        
+        public ActionResult Builder()
         {
-            var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, name);
+            var url = Request.ServerVariables["HTTP_URL"];
+            var memeRequest = MemeRequest.FromUrl(url, Server);
+
+            var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, memeRequest.Name);
+            if (meme == null)
+            {
+                // TODO: update this flow to return a proper HTTP 404 code, too
+                memeRequest.Name = "ihyk";
+                memeRequest.Top = "I'll-have-you-know-I-tried-other-meme-generators";
+                memeRequest.Bottom = "and-only-wasted-hours-and-hours-of-my-life";
+            }
 
             var viewModel = new BuilderViewModel
             {
                 Memes = GlobalMemeConfiguration.Memes.GetMemes(),
-                SelectedMeme = meme != null ? meme.Aliases.First() : string.Empty,
-                Top = top,
-                Bottom = bottom
+                SelectedMeme = meme != null ? meme.Aliases.First() : memeRequest.Name,
+                Top = memeRequest.Top,
+                Bottom = memeRequest.Bottom
             };
 
             return View(viewModel);

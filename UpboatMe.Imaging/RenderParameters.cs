@@ -12,7 +12,7 @@ namespace UpboatMe.Imaging
         public Color Fill { get; set; }
         public Color Stroke { get; set; }
         public int StrokeWidth { get; set; }
-        public bool DrawBoxes { get; set; }
+        public bool DebugMode { get; set; }
         public string FullWatermarkImageFilePath { get; set; }
         public int WatermarkImageWidth { get; set; }
         public int WatermarkImageHeight { get; set; }

@@ -19,25 +19,25 @@ namespace UpboatMe.Controllers
                 {
                     new RecentMeme
                     {
-                        Url = Url.Action("Make", "Meme", new { name = "sap", top= "wears-suit-and-tie-to-interview", bottom = "phone-interview"}),
+                        Url = Request.ApplicationPath + "sap/wears-suit-and-tie-to-interview/phone-interview.jpg",
                         Alt = "socially awkward penguin: wears suit and tie to interview" + Environment.NewLine + "phone interview",
                         Title = "socially awkward penguin"
                     },
                     new RecentMeme
                     {
-                        Url = Url.Action("Make", "Meme", new { name = "fry", top= "not-sure-if-sunny-outside", bottom = "or-hungover"}),
+                        Url = Request.ApplicationPath + "fry/not-sure-if-sunny-outside/or-hungover.jpg",
                         Alt = "futurama fry: not sure if sunny outside" + Environment.NewLine + "or hungover",
                         Title = "futurama fry"
                     },
                     new RecentMeme
                     {
-                        Url = Url.Action("Make", "Meme", new { name = "scc", top= "i-don't-buy-things-with-money", bottom = "i-buy-them-with-hours-of-my-life"}),
+                        Url = Request.ApplicationPath + "scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life.jpg",
                         Alt = "sudden clarity clarence: i don't buy things with money" + Environment.NewLine + "i buy them with hours of my life",
                         Title = "sudden clarity clarence"
                     },
                     new RecentMeme
                     {
-                        Url = Url.Action("Make", "Meme", new { name = "blb", top= "wears-suit-and-tie-to-interview", bottom = "phone-interview"}),
+                        Url = Request.ApplicationPath + "blb/wears-suit-and-tie-to-interview/phone-interview",
                         Alt = "bad luck brian: has pet rock" + Environment.NewLine + "it runs away",
                         Title = "bad luck brian"
                     }

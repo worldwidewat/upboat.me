@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using UpboatMe.Models;
 
@@ -15,6 +16,11 @@ namespace UpboatMe.Utilities
                 sanitizedName = memeName.Replace("-", "");
             }
 
+            if (string.IsNullOrEmpty(sanitizedName))
+            {
+                return null;
+            }
+
             var meme = memes[sanitizedName]
                        ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.StartsWith(sanitizedName)))
                        ?? memes.GetMemes().FirstOrDefault(m => m.Aliases.Any(a => a.EndsWith(sanitizedName)))
@@ -25,6 +31,9 @@ namespace UpboatMe.Utilities
             return meme;
         }
 
+        private static readonly Regex _ActionNames =
+            new Regex("^(builder|debug)/", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        
         public static MemeRequest GetMemeRequest(string url)
         {
             var result = new MemeRequest();
@@ -41,13 +50,13 @@ namespace UpboatMe.Utilities
                 url = url.Substring(applicationPath.Length);
             }
 
+            // strip off any action names
+            url = _ActionNames.Replace(url, "");
+
             // urls look like this:  /meme-name/first-line/second-line
             // so we're basically delimiting on slashes
             // if there are surprise slashes, they'll end up in the second line
-
-            // strip off that first slash--it isn't helpful
-            url = url.Substring(1);
-
+            
             var firstSlash = url.IndexOf('/');
             var secondSlash = url.IndexOf('/', firstSlash + 1);
 

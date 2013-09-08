@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using UpboatMe.Utilities;
 
@@ -12,15 +13,12 @@ namespace UpboatMe.Models
         public string Bottom { get; set; }
         public IList<Meme> Memes { get; set; }
 
-        public string GetPreviewUrl(UrlHelper helper)
+        public MvcHtmlString GetPreviewUrl(UrlHelper helper)
         {
-            var path = helper.Action("Make", "Meme", new
-                                                         {
-                                                             name = SelectedMeme,
-                                                             top = Top ?? "", // passing null breaks the route
-                                                             bottom = Bottom ?? "" // passing null breaks the route
-                                                         });
-            return helper.AbsoluteAction(path);
+            var path = string.Format("{0}{1}/{2}/{3}", 
+                HttpContext.Current.Request.ApplicationPath, SelectedMeme, Top, Bottom);
+
+            return MvcHtmlString.Create(helper.AbsoluteAction(path));
         }
 
         public string GetAltText()
@@ -32,13 +30,6 @@ namespace UpboatMe.Models
         public string GetShareText()
         {
             return string.Format("{0}", SelectedMeme);
-        }
-
-        public BuilderViewModel()
-        {
-            SelectedMeme = "ihyk";
-            Top = "I'll-have-you-know-I-tried-other-meme-generators";
-            Bottom = "and-only-wasted-hours-and-hours-of-my-life";
         }
     }
 }

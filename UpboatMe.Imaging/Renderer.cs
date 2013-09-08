@@ -94,7 +94,7 @@ namespace UpboatMe.Imaging
 
                 DrawText(graphics, text, font, fontSize, stroke, parameters.StrokeWidth, fill, stringFormat, bounds);
 
-                if (parameters.DrawBoxes)
+                if (parameters.DebugMode)
                 {
                     DrawBoxes(graphics, image.Width, image.Height, maxHeight, isTop);
                 }

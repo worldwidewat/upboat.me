@@ -28,8 +28,8 @@ namespace UpboatMe
 
             routes.MapRoute(
                 name: "MemePages",
-                url: "{action}/{name}/{top}/{bottom}",
-                defaults: new { controller = "Meme", name = UrlParameter.Optional, top = UrlParameter.Optional, bottom = UrlParameter.Optional },
+                url: "{action}/{*url}",
+                defaults: new { controller = "Meme" },
                 constraints: new { action = "Builder|Debug|List" }
                 );
 
@@ -41,24 +41,6 @@ namespace UpboatMe
 
             // http://stackoverflow.com/questions/6830796/regex-to-match-anything-but-two-words
             const string excludedMemeNames = "^(?!bundles|content|scripts).*";
-
-            routes.MapRoute(
-                name: "MemeNameOnly",
-                url: "{name}.jpg",
-                defaults: new { controller = "Meme", action = "Make", top = "", bottom = "" }
-            );
-
-            routes.MapRoute(
-                name: "MemeNameTopLineOnly",
-                url: "{name}/{top}.jpg",
-                defaults: new { controller = "Meme", action = "Make", bottom = "" }
-            );
-
-            routes.MapRoute(
-                name: "Meme",
-                url: "{name}/{top}/{bottom}.jpg",
-                defaults: new { controller = "Meme", action = "Make" }
-            );
 
             routes.MapRoute(
                 name: "Meme Catch All",
