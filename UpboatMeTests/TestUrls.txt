@@ -14,3 +14,21 @@ http://localhost/upboatme/lmis/%D7%95%D7%90%D7%96-%D7%90%D7%9E%D7%A8%D7%A0%D7%95
 
 double slash
 http://localhost/upboatme/ggg//bottom-line
+
+http://upboatme-dev.azurewebsites.net/sk/bikes-to-work-from-Raleigh-To-Apex/not-injured,-dead,-or-late.jpg
+http://upboatme-dev.azurewebsites.net/iw/riding-bike-14-miles-to-work/no-test-ride-of-the-route.jpg
+http://upboatme-dev.azurewebsites.net/att/Who-Broke/All-the-things%3F.jpg
+http://upboatme-dev.azurewebsites.net/fwp/i-want-to-reply-to-the-meeting-request/but-it's-just-an-ordinary-email.jpg
+http://upboatme-dev.azurewebsites.net/bje/get-it/raisin-Hate/.jpg
+http://upboatme-dev.azurewebsites.net/iw/convinces-everyone-to-use-two-factor-auth/throws-away-the-second-factor.jpg
+http://upboatme-dev.azurewebsites.net/bje/get-it/raisin-Hate/.jpg
+http://upboatme-dev.azurewebsites.net/iw/convinces-everyone-to-use-two-factor-auth/throws-away-the-second-factor.jpg
+http://upboatme-dev.azurewebsites.net/hb/audi-doesn't-have-fully-electric-cars/and-they-still-sell-through-dealers.jpg
+http://upboatme-dev.azurewebsites.net/tdh/The-quality-of-the-wellness-memes/are-too-damn-high!.jpg
+http://upboatme-dev.azurewebsites.net/sko/'Can-you-add-feature-x'/it's-already-done-and-going-live-tomorrow.jpg
+http://upboatme-dev.azurewebsites.net/ggg/already-wrote-a-wiki-page-detailing-how-to-solve-your-problem/explains-it-again-in-an-email-anyway.jpg
+http://upboatme-dev.azurewebsites.net/ihyk/I'll-have-you-know/I-explained-exactly-how-to-do-that-in-an-email-and-wiki-page.jpg
+http://upboatme-dev.azurewebsites.net/ch/if-you-wanted-to-know-how-to-find-or-use-the-site/you-should-have-read-the-email-about-how-to-find-and-use-the-new-site.jpg
+http://upboatme-dev.azurewebsites.net/sap/needs-size-10.5-shoe/asks-clerk-for-a-1030.jpg
+http://upboatme-dev.azurewebsites.net/sap/needs-size-10.5-shoe/asks-clerk-for-a-10%3A30.jpg
+http://upboatme-dev.azurewebsites.net/sap/needs-size-10.5-shoe/asks-clerk-for-a-1030.jpg
