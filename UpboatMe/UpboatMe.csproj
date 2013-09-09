@@ -364,6 +364,7 @@
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\NewRelic.Agent.Core.dll" />
     <Content Include="newrelic\NewRelic.Profiler.dll" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\foundation\foundation.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\site.js" />

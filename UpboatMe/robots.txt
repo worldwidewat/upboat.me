@@ -1,0 +1,23 @@
+﻿# via http://www.chris.com/ascii/?art=television/futurama
+# Silver Saks
+#         _
+#        ( )
+#         H
+#         H
+#        _H_ 
+#     .-'-.-'-.
+#    /         \
+#   |           |
+#   |   .-------'._
+#   |  / /  '.' '. \
+#   |  \ \ @   @ / / 
+#   |   '---------'        
+#   |    _______|  
+#   |  .'-+-+-+|  
+#   |  '.-+-+-+|  KILL ALL HUMANS 
+#   |    """""" |
+#   '-.__   __.-'
+#        """ 
+
+User-Agent: *
+Allow: /
