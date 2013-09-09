@@ -94,9 +94,25 @@ namespace UpboatMe.Controllers
             foreach (var keyword in keywords)
             {
                 var k = keyword.Trim();
-                filteredList = filteredList
-                    .Where(l => l.Description.IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1
-                                || l.Aliases.Any(a => a.IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1));
+
+                if (k.StartsWith("-"))
+                {
+                    k = k.TrimStart('-');
+                    if (k == "")
+                    {
+                        continue;
+                    }
+
+                    filteredList = filteredList
+                        .Where(m => m.Description.IndexOf(k, StringComparison.OrdinalIgnoreCase) == -1
+                                    && m.Aliases.All(a => a.IndexOf(k, StringComparison.OrdinalIgnoreCase) == -1));
+                }
+                else
+                {
+                    filteredList = filteredList
+                        .Where(m => m.Description.IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1
+                                    || m.Aliases.Any(a => a.IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1));
+                }
             }
 
             return View(filteredList.ToList());
