@@ -4,7 +4,7 @@
 }
 <div class="row">
     <div class="large-6 columns">
-        <form id="builder-form" action="@Url.Action("Builder", "Meme", new { url = ""})">
+        <form id="builder-form" action="@Url.Action("Builder", "Meme", new { url = "" })">
             @Html.DropDownList("name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text", Model.SelectedMeme))
             <input name="top" type="text" id="first-line" placeholder="Top Line" value="@Model.Top" />
             <input name="bottom" type="text" id="second-line" placeholder="Bottom Line" value="@Model.Bottom" />
@@ -17,8 +17,12 @@
             <div class="flash-on-load">
                 <h3 id="share">Share it!</h3>
                 <div class="row">
+                    <div class="large-12 columns" style="">
+                        <div id="share-url">@previewUrl</div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 1em; margin-bottom: 1em;">
                     <div class="large-12 columns text-right">
-                        <input id="share-url" type="text" readonly="readonly" placeholder="Create a meme to share it!" value="@(previewUrl)">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=@(previewUrl)" target="_blank">
                             <img src="@Url.Content("~/Content/social/24px/facebook.png")" alt="Share to Facebook" title="Share to Facebook" />
                         </a>
@@ -37,7 +41,7 @@
             </div>
         }
     </div>
-    <div class="large-6 columns"> 
+    <div class="large-6 columns">
         <img id="meme-preview" src="@(previewUrl)" alt="@(@Model.GetAltText())" title="@(@Model.GetAltText())"/>
     </div>
 </div>

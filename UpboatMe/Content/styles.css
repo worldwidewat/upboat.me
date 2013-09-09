@@ -67,7 +67,9 @@ hr {
 }
 
 #share-url {
-    background-color: #fff;
+    padding: 5px;
+    background-color: #eee;
+    border: 1px dashed #2284a1;
 }
 
 

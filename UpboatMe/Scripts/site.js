@@ -14,6 +14,18 @@
         e.preventDefault();
         window.location.href = url;
     });
+
+    $("#share-url").on("click", function (e) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(this);
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(this);
+            window.getSelection().addRange(range);
+        }
+    });
 });
 
 function doListSearch(value) {
