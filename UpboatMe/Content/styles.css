@@ -92,13 +92,23 @@ a.meme-thumb {
     border: 1px solid #b1b1b1;
 }
 
-.flash-on-load{
-    -webkit-animation:flash 1s;
-       -moz-animation:flash 1s;
-         -o-animation:flash 1s;
-            animation:flash 1s;
+.throb{
+    -webkit-animation:throb 2s;
+       -moz-animation:throb 2s;
+        -ms-animation:throb 2s;
+         -o-animation:throb 2s;
+            animation:throb 2s;
+
+    -webkit-animation-iteration-count: infinite;
+       -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+         -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+
+
 }
-@-webkit-keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
-   @-moz-keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
-     @-o-keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
-        @keyframes flash { 0% {background-color: #fff;} 10% {background-color: #ffb093;} 20% {background-color: #fff;} 30% {background-color: #ffb093;} 100% {background-color: #fff; } }
+@-webkit-keyframes throb { 0% {box-shadow: none;} 20% {box-shadow: 0 0 .5em #2284a1;} 40% {box-shadow: none;}}
+   @-moz-keyframes throb { 0% {box-shadow: none;} 20% {box-shadow: 0 0 .5em #2284a1;} 40% {box-shadow: none;}}
+    @-ms-keyframes throb { 0% {box-shadow: none;} 20% {box-shadow: 0 0 .5em #2284a1;} 40% {box-shadow: none;}}
+     @-o-keyframes throb { 0% {box-shadow: none;} 20% {box-shadow: 0 0 .5em #2284a1;} 40% {box-shadow: none;}}
+        @keyframes throb { 0% {box-shadow: none;} 20% {box-shadow: 0 0 .5em #2284a1;} 40% {box-shadow: none;}}
