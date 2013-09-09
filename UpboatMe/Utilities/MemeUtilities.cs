@@ -44,10 +44,15 @@ namespace UpboatMe.Utilities
             }
 
             // strip off any application path prefix
-            var applicationPath = HttpContext.Current.Request.ApplicationPath;
-            if (!string.IsNullOrEmpty(applicationPath))
+            var applicationPath = HttpContext.Current.Request.ApplicationPath ?? "/";
+            if (applicationPath == "/")
             {
                 url = url.Substring(applicationPath.Length);
+            }
+            else
+            {
+                // trim the path, and the slash after it, e.g. /builder/
+                url = url.Substring(1 + applicationPath.Length);
             }
 
             // strip off any action names

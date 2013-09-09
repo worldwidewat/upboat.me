@@ -15,8 +15,13 @@ namespace UpboatMe.Models
 
         public MvcHtmlString GetPreviewUrl(UrlHelper helper)
         {
-            var path = string.Format("{0}{1}/{2}/{3}", 
-                HttpContext.Current.Request.ApplicationPath, SelectedMeme, Top, Bottom);
+            var root = HttpContext.Current.Request.ApplicationPath ?? "/";
+            if (!root.EndsWith("/"))
+            {
+                root += "/";
+            }
+
+            var path = string.Format("{0}{1}/{2}/{3}.jpg", root, SelectedMeme, Top, Bottom);
 
             return MvcHtmlString.Create(helper.AbsoluteAction(path));
         }

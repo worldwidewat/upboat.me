@@ -9,7 +9,8 @@
         var url = $(this).attr('action')
             + "/" + name
             + "/" + top
-            + "/" + bottom;
+            + "/" + bottom
+            + ".jpg";
 
         e.preventDefault();
         window.location.href = url;
