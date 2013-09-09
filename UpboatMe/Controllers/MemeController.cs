@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -82,15 +83,25 @@ namespace UpboatMe.Controllers
         public ActionResult List(string query)
         {
             var list = GlobalMemeConfiguration.Memes.GetMemes();
-
-            if (!string.IsNullOrEmpty(query))
+            if (string.IsNullOrEmpty(query))
             {
-                list = list.Where(m => m.Description.IndexOf(query) != -1 || m.Aliases.Any(a => a.IndexOf(query) != -1)).ToList();
+                return View(list);
             }
 
-            return View(list);
+            var filteredList = list.AsQueryable();
+            var keywords = query.Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var keyword in keywords)
+            {
+                var k = keyword.Trim();
+                filteredList = filteredList
+                    .Where(l => l.Description.IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1
+                                || l.Aliases.Any(a => a.IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1));
+            }
+
+            return View(filteredList.ToList());
         }
-        
+
         public ActionResult Builder()
         {
             var url = Request.ServerVariables["HTTP_URL"];
