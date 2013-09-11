@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using UpboatMe.Utilities;
@@ -13,6 +14,7 @@ namespace UpboatMe.Models
         public string Bottom { get; set; }
         public IList<Meme> Memes { get; set; }
 
+        private readonly Regex _previewUrlStripper = new Regex(@"\s+", RegexOptions.Compiled);
         public MvcHtmlString GetPreviewUrl(UrlHelper helper)
         {
             var root = HttpContext.Current.Request.ApplicationPath ?? "/";
@@ -22,8 +24,9 @@ namespace UpboatMe.Models
             }
 
             var path = string.Format("{0}{1}/{2}/{3}.jpg", root, SelectedMeme, Top, Bottom);
-
-            return MvcHtmlString.Create(helper.AbsoluteAction(path));
+            var strippedPath = _previewUrlStripper.Replace(path, "-");
+            
+            return MvcHtmlString.Create(helper.AbsoluteAction(strippedPath));
         }
 
         public string GetAltText()
