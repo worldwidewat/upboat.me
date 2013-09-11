@@ -23,10 +23,12 @@ namespace UpboatMe.Models
                 root += "/";
             }
 
-            var path = string.Format("{0}{1}/{2}/{3}.jpg", root, SelectedMeme, Top, Bottom);
+            var path = string.Format("{0}{1}/{2}/{3}", root, SelectedMeme, Top, Bottom);
             var strippedPath = _previewUrlStripper.Replace(path, "-");
-            
-            return MvcHtmlString.Create(helper.AbsoluteAction(strippedPath));
+            var trimmedPath = strippedPath.TrimEnd('/');
+            var pathWithExtension = trimmedPath += ".jpg";
+
+            return MvcHtmlString.Create(helper.AbsoluteAction(pathWithExtension));
         }
 
         public string GetAltText()
