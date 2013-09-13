@@ -17,7 +17,9 @@ namespace UpboatMe.Models
         public int FontSize { get; private set; }
         public int StrokeWidth { get; private set; }
         public float TopLineHeightPercent { get; private set; }
+        public Rectangle? TopLineBounds { get; set; }
         public float BottomLineHeightPercent { get; private set; }
+        public Rectangle? BottomLineBounds { get; set; }
         public string Description { get; private set; }
         public IList<string> Aliases { get; set; }
 

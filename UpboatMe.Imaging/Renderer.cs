@@ -63,27 +63,29 @@ namespace UpboatMe.Imaging
             var done = false;
             var fontSize = parameters.FontSize;
             var maxHeightPercent = isTop ? parameters.TopLineHeightPercent : parameters.BottomLineHeightPercent;
-            var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100 ));
+            var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100));
             var stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
+            var bounds = (isTop ? parameters.TopLineBounds : parameters.BottomLineBounds)
+                                    ?? new Rectangle(0, 0, image.Width, maxHeight);
+
+            
             stringFormat.Alignment = StringAlignment.Center;
 
             while (!done)
             {
                 var font = new Font(new FontFamily(parameters.Font), fontSize, FontStyle.Regular);
 
-                var size = graphics.MeasureString(text, font, image.Width);
-
-                if (size.Height > maxHeight && fontSize > 10)
+                var size = graphics.MeasureString(text, font, bounds.Width);
+                
+                if (size.Height > bounds.Size.Height && fontSize > 10)
                 {
                     fontSize -= 2;
-
                     continue;
                 }
 
-                var bounds = new Rectangle(0, 0, image.Width, (int)size.Height);
 
-                if (!isTop)
+                if (!isTop && parameters.BottomLineBounds == null)
                 {
                     bounds.Y = image.Height - bounds.Height - 1;
                     stringFormat.LineAlignment = StringAlignment.Far;
@@ -96,7 +98,7 @@ namespace UpboatMe.Imaging
 
                 if (parameters.DebugMode)
                 {
-                    DrawBoxes(graphics, image.Width, image.Height, maxHeight, isTop);
+                    DrawBoxes(graphics, image.Width, image.Height, bounds);
                 }
 
                 done = true;
@@ -120,13 +122,13 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private static void DrawBoxes(Graphics graphics, int width, int height, int maxHeight, bool isTop)
+        private static void DrawBoxes(Graphics graphics, int width, int height, Rectangle bounds)
         {
             graphics.CompositingMode = CompositingMode.SourceOver;
 
             var brush = new SolidBrush(Color.FromArgb(150, Color.Red));
 
-            graphics.FillRectangle(brush, 0, isTop ? 0 : height - maxHeight, width, maxHeight);
+            graphics.FillRectangle(brush, bounds);
 
             for (int x = 0; x < height; x += 20)
             {

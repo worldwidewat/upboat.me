@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -123,6 +124,10 @@ namespace UpboatMe.App_Start
             memes["toystoryeverywhere"].Aliases.Add("buzzwoody", "xxeverywhere");
             memes["unhelpfulhighschoolteacher"].Aliases.Add("scumbagteacher");
             memes["mckaylamaroneynotimpressed"].Aliases.Add("nim", "um", "unimpressedmckayla");
+
+            var batman = memes["batmanslappingrobin"];
+            batman.TopLineBounds = new Rectangle(10, 10, 180, 70);
+            batman.BottomLineBounds = new Rectangle(220, 10, 170, 60);
         }
     }
 }

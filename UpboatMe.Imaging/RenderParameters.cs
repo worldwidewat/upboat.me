@@ -7,7 +7,9 @@ namespace UpboatMe.Imaging
         public string FullImagePath { get; set; }
         public int FontSize { get; set; }
         public float TopLineHeightPercent { get; set; }
+        public Rectangle? TopLineBounds { get; set; }
         public float BottomLineHeightPercent { get; set; }
+        public Rectangle? BottomLineBounds { get; set; }
         public string Font { get; set; }
         public Color Fill { get; set; }
         public Color Stroke { get; set; }

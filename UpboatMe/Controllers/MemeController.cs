@@ -44,7 +44,9 @@ namespace UpboatMe.Controllers
             {
                 FullImagePath = HttpContext.Server.MapPath(meme.ImagePath),
                 TopLineHeightPercent = meme.TopLineHeightPercent,
+                TopLineBounds = meme.TopLineBounds,
                 BottomLineHeightPercent = meme.BottomLineHeightPercent,
+                BottomLineBounds = meme.BottomLineBounds,
                 Fill = meme.Fill,
                 Stroke = meme.Stroke,
                 Font = meme.Font,
