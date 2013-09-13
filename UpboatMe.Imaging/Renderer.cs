@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Linq;
 
 namespace UpboatMe.Imaging
 {
@@ -52,7 +53,7 @@ namespace UpboatMe.Imaging
                 var stroke = new SolidBrush(Color.FromArgb(150, parameters.WatermarkStroke));
                 var fill = new SolidBrush(Color.FromArgb(150, parameters.WatermarkFill));
 
-                DrawText(graphics, parameters.WatermarkText, font, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
+                DrawText(graphics, parameters.WatermarkText, font, parameters.FontStyle, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
 
                 graphics.CompositingMode = CompositingMode.SourceCopy;
             }
@@ -72,9 +73,11 @@ namespace UpboatMe.Imaging
             
             stringFormat.Alignment = StringAlignment.Center;
 
+            var fontFamily = FindFont(parameters);
+
             while (!done)
             {
-                var font = new Font(new FontFamily(parameters.Font), fontSize, FontStyle.Regular);
+                var font = new Font(fontFamily, fontSize, FontStyle.Regular);
 
                 var size = graphics.MeasureString(text, font, bounds.Width);
                 
@@ -94,7 +97,7 @@ namespace UpboatMe.Imaging
                 var stroke = new SolidBrush(parameters.Stroke);
                 var fill = new SolidBrush(parameters.Fill);
 
-                DrawText(graphics, text, font, fontSize, stroke, parameters.StrokeWidth, fill, stringFormat, bounds);
+                DrawText(graphics, text, font, parameters.FontStyle, fontSize, stroke, parameters.StrokeWidth, fill, stringFormat, bounds);
 
                 if (parameters.DebugMode)
                 {
@@ -105,7 +108,19 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private static void DrawText(Graphics graphics, string text, Font font, int fontSize, Brush stroke, int strokeWidth, Brush fill, StringFormat stringFormat, Rectangle bounds)
+        private static FontFamily FindFont(RenderParameters parameters)
+        {
+            var fontFamily = parameters.PrivateFonts.Families.FirstOrDefault(f => f.Name == parameters.Font)
+                             ?? FontFamily.Families.FirstOrDefault(f => f.Name == parameters.Font);
+
+            if (fontFamily == null)
+            {
+                throw new ArgumentException(string.Format("Font {0} could not be found", parameters.Font));
+            }
+            return fontFamily;
+        }
+
+        private static void DrawText(Graphics graphics, string text, Font font, FontStyle fontStyle, int fontSize, Brush stroke, int strokeWidth, Brush fill, StringFormat stringFormat, Rectangle bounds)
         {
             using (var graphicsPath = new GraphicsPath())
             {
@@ -113,11 +128,18 @@ namespace UpboatMe.Imaging
 
                 float emSize = graphics.DpiY * fontSize / 72;
 
-                graphicsPath.AddString(text, font.FontFamily, (int)FontStyle.Regular, emSize, bounds, stringFormat);
-
-                graphics.DrawPath(new Pen(stroke, strokeWidth) { LineJoin = LineJoin.Round }, graphicsPath);
-                graphics.FillPath(fill, graphicsPath);
-
+                if (strokeWidth >= 0)
+                {
+                    graphicsPath.AddString(text, font.FontFamily, (int) fontStyle, emSize, bounds, stringFormat);
+                    graphics.DrawPath(new Pen(stroke, strokeWidth) {LineJoin = LineJoin.Round}, graphicsPath);
+                    graphics.FillPath(fill, graphicsPath);
+                }
+                else
+                {
+                    font = new Font(font, fontStyle);
+                    graphics.CompositingMode = CompositingMode.SourceOver;
+                    graphics.DrawString(text, font, fill, bounds, stringFormat);
+                }
                 graphics.SmoothingMode = SmoothingMode.Default;
             }
         }

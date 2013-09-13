@@ -388,6 +388,9 @@
     <Content Include="newrelic\extensions\extension.xsd">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Fonts\SFActionManExtended.ttf" />
+    <Content Include="Fonts\ShyFoundry Freeware EULA.pdf" />
+    <Content Include="Fonts\SFActionManExtended-Italic.ttf" />
     <None Include="Properties\PublishProfiles\upboatme.pubxml" />
     <Content Include="Views\Home\Terms.cshtml" />
     <Content Include="Views\Meme\Debug.cshtml" />

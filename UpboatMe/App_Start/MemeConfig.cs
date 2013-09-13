@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace UpboatMe.App_Start
                 // TODO: image/jpg isn't acutally valid. Fix this or get rid of it
                 var imageType = "image/" + extension;
 
-                memes.Add(new Meme(memeName, filename, survivingAliases, imageType));
+                memes.Add(new Meme(memeName, filename, survivingAliases, imageType: imageType, fontStyle: FontStyle.Regular));
             }
         }
 
@@ -101,8 +102,13 @@ namespace UpboatMe.App_Start
             return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(memeName);
         }
 
+        public static readonly PrivateFontCollection PrivateFontCollection = new PrivateFontCollection();
+
         public static void RegisterManualMemes(MemeConfiguration memes)
         {
+            var batmanFontPath = HttpRuntime.AppDomainAppPath + @"Fonts\SFActionManExtended.ttf";
+            PrivateFontCollection.AddFontFile(batmanFontPath);
+
             // overrides
             memes["10guy"].Aliases.Add("tenguy");
             memes["allthethings"].Aliases.Add("xallthey");
@@ -126,8 +132,13 @@ namespace UpboatMe.App_Start
             memes["mckaylamaroneynotimpressed"].Aliases.Add("nim", "um", "unimpressedmckayla");
 
             var batman = memes["batmanslappingrobin"];
-            batman.TopLineBounds = new Rectangle(10, 10, 180, 70);
-            batman.BottomLineBounds = new Rectangle(220, 10, 170, 60);
+            batman.Font = "SF Action Man Extended";
+            batman.Fill = Color.FromArgb(255, 63, 63, 63);
+            batman.StrokeWidth = -1;
+            batman.FontStyle = FontStyle.Italic;
+            batman.TopLineBounds = new Rectangle(10, 5, 180, 75);
+            batman.BottomLineBounds = new Rectangle(220, 5, 170, 75);
         }
+
     }
 }

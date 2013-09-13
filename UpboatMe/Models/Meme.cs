@@ -11,11 +11,11 @@ namespace UpboatMe.Models
         public string ImagePath { get; private set; }
         public string ImageType { get; private set; }
         public string ImageFileName { get; private set; }
-        public Color Stroke { get; private set; }
-        public Color Fill { get; private set; }
-        public string Font { get; private set; }
+        public Color Stroke { get; set; }
+        public Color Fill { get; set; }
+        public string Font { get; set; }
         public int FontSize { get; private set; }
-        public int StrokeWidth { get; private set; }
+        public int StrokeWidth { get;  set; }
         public float TopLineHeightPercent { get; private set; }
         public Rectangle? TopLineBounds { get; set; }
         public float BottomLineHeightPercent { get; private set; }
@@ -28,6 +28,8 @@ namespace UpboatMe.Models
             get { return Path.GetFileNameWithoutExtension(ImageFileName); }
         }
 
+        public FontStyle FontStyle { get; set; }
+
         public Meme(
             string description,
             string imageFileName,
@@ -36,6 +38,7 @@ namespace UpboatMe.Models
             string stroke = "black",
             string fill = "white",
             string font = "Impact",
+            FontStyle fontStyle = FontStyle.Regular,
             int fontSize = 40,
             int strokeWidth = 5,
             float topLineHeightPercent = 25,
@@ -53,6 +56,7 @@ namespace UpboatMe.Models
             StrokeWidth = strokeWidth;
             TopLineHeightPercent = topLineHeightPercent;
             BottomLineHeightPercent = bottomLineHeightPercent;
+            FontStyle = fontStyle;
         }
     }
 }

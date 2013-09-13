@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Text;
 
 namespace UpboatMe.Imaging
 {
@@ -24,5 +25,7 @@ namespace UpboatMe.Imaging
         public int WatermarkStrokeWidth { get; set; }
         public string WatermarkFont { get; set; }
         public int WatermarkFontSize { get; set; }
+        public PrivateFontCollection PrivateFonts { get; set; }
+        public FontStyle FontStyle { get; set; }
     }
 }

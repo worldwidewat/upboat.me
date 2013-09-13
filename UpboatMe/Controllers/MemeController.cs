@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using UpboatMe.App_Start;
 using UpboatMe.Imaging;
 using UpboatMe.Models;
 using UpboatMe.Utilities;
@@ -61,7 +62,9 @@ namespace UpboatMe.Controllers
                 WatermarkFontSize = 9,
                 WatermarkStroke = Color.Black,
                 WatermarkFill = Color.White,
-                WatermarkStrokeWidth = 1
+                WatermarkStrokeWidth = 1,
+                PrivateFonts = MemeConfig.PrivateFontCollection,
+                FontStyle = meme.FontStyle
             };
 
             var renderer = new Renderer();
