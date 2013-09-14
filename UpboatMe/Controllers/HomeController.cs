@@ -37,7 +37,7 @@ namespace UpboatMe.Controllers
                     },
                     new RecentMeme
                     {
-                        Url = Request.ApplicationPath + "blb/wears-suit-and-tie-to-interview/phone-interview",
+                        Url = Request.ApplicationPath + "blb/has-pet-rock/it-runs-away.jpg",
                         Alt = "bad luck brian: has pet rock" + Environment.NewLine + "it runs away",
                         Title = "bad luck brian"
                     }
