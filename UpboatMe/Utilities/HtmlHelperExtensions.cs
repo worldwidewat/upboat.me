@@ -1,9 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using System.Linq;
 using System.Collections.Generic;
 using WorldWideWat.SpriteThumbs;
+using System.Web;
+using System.Web.Hosting;
 
 namespace UpboatMe.Utilities
 {
@@ -44,6 +47,14 @@ namespace UpboatMe.Utilities
             builder.AddCssClass(SpriteThumbsConfiguration.GetImageClassName(imageNameWithoutExtension));
 
             return new MvcHtmlString(builder.ToString());
+        }
+
+        public static string LastUpdated(this HtmlHelper helper)
+        {
+            var filePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "web.config");
+            var lastWriteTime = File.GetLastWriteTimeUtc(filePath);
+
+            return lastWriteTime.ToString("yyyy-MM-dd HH:mm Z");
         }
     }
 }

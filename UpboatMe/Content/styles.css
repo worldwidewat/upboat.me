@@ -50,6 +50,10 @@ li > em {
     color: #fff;
 }
 
+#footer {
+    color: #888;
+}
+
 #footer div {
     font-size: 75%;
 }

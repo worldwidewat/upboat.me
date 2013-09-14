@@ -46,26 +46,31 @@
     @RenderBody()
     <div id="footer" class="row">
         <hr/>
-        <div class="large-4 columns">
+        <div class="large-3 columns">
             <ul>
                 <li>@Html.ActionLink("Pricing", "Pricing", "Home")</li>
                 <li><a href="https://github.com/worldwidewat/upboat.me">Source</a></li>
                 <li><a href="https://github.com/worldwidewat/upboat.me/blob/master/CONTRIBUTING.md">Contributing</a></li>
-                <li><a href="http://www.microsoft.com/bizspark/">BizSpark</a></li>
             </ul>
         </div>
-        <div class="large-4 columns">
+        <div class="large-3 columns">
             <ul>
                 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a></li>
                 <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
                 <li>@Html.ActionLink("Privacy", "Privacy", "Home")</li>
             </ul>
         </div>
-        <div class="large-4 columns">
+        <div class="large-3 columns">
             <ul>
                 <li><a href="http://twitter.com/upboatme">@@upboatme</a></li>
                 <li><a href="http://twitter.com/mharen">@@mharen</a></li>
                 <li><a href="http://twitter.com/pwninstein">@@pwninstein</a></li>
+            </ul>
+        </div>
+        <div class="large-3 columns">
+            <ul>
+                <li>Built with <a href="http://www.microsoft.com/bizspark/">BizSpark</a></li>
+                <li title="Last updated">Updated @Html.LastUpdated()</li>
             </ul>
         </div>
     </div>
