@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
 using UpboatMe.App_Start;
 using UpboatMe.Imaging;
@@ -72,6 +73,10 @@ namespace UpboatMe.Controllers
             var bytes = renderer.Render(renderParameters, memeRequest.Top.SanitizeMemeText(), memeRequest.Bottom.SanitizeMemeText());
 
             Analytics.TrackMeme(HttpContext, memeRequest.Name);
+
+            Response.Cache.SetCacheability(HttpCacheability.Public);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddDays(1));
+            Response.Cache.SetValidUntilExpires(true);
 
             return new FileContentResult(bytes, meme.ImageType);
         }
