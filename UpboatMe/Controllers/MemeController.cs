@@ -15,7 +15,7 @@ namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
-        private static Regex _UrlExtension = new Regex(@"\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex _UrlExtension = new Regex(@"\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         [OutputCache(Location = OutputCacheLocation.Any, Duration = 60 * 60 /* 1 hour */)]
         public ActionResult Make()
