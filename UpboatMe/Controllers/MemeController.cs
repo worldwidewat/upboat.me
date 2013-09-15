@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using UpboatMe.App_Start;
 using UpboatMe.Imaging;
 using UpboatMe.Models;
@@ -16,9 +17,7 @@ namespace UpboatMe.Controllers
     {
         private static Regex _UrlExtension = new Regex(@"\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-
-        // ignore the parameters and figure it out manually from Request.RawUrl
-        // this allows us to keep using routes to generate our own links, which is handy
+        [OutputCache(Location = OutputCacheLocation.Any, Duration = 60 * 60 /* 1 hour */)]
         public ActionResult Make()
         {
             var url = Request.ServerVariables["HTTP_URL"];
@@ -73,10 +72,6 @@ namespace UpboatMe.Controllers
             var bytes = renderer.Render(renderParameters, memeRequest.Top.SanitizeMemeText(), memeRequest.Bottom.SanitizeMemeText());
 
             Analytics.TrackMeme(HttpContext, memeRequest.Name);
-
-            Response.Cache.SetCacheability(HttpCacheability.Public);
-            Response.Cache.SetMaxAge(TimeSpan.FromDays(365));
-            Response.Cache.SetValidUntilExpires(true);
 
             return new FileContentResult(bytes, meme.ImageType);
         }
