@@ -455,10 +455,12 @@
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName) == ProdDeploy (
   copy "$(SolutionDir)Deployment\newrelic.prod.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
-  git log -1 --format="%25%25ad %25%25h" --date=short &gt; "$(ProjectDir)App_Data\version.txt"
 ) ELSE (
   copy "$(SolutionDir)Deployment\newrelic.dev.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
-)</PreBuildEvent>
+)
+
+git log -1 --format="%25%25ad %25%25h" --date=short &gt; "$(ProjectDir)App_Data\version.txt"
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
