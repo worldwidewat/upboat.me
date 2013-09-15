@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Web.Mvc;
 
 namespace UpboatMe.Utilities
@@ -15,6 +16,15 @@ namespace UpboatMe.Utilities
                                                   path);
 
             return absoluteAction;
+        }
+
+        public static string VersionedContent(this UrlHelper url, string path)
+        {
+            var filepath = url.RequestContext.HttpContext.Server.MapPath(path);
+            var lastWriteTime = File.GetLastWriteTimeUtc(filepath);
+            var cacheBuster = lastWriteTime.Ticks;
+
+            return string.Format("{0}?v={1}", url.Content(path), cacheBuster);
         }
     }
 }
