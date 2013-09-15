@@ -51,10 +51,12 @@ namespace UpboatMe.Utilities
 
         public static string LastUpdated(this HtmlHelper helper)
         {
-            var filePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "web.config");
-            var lastWriteTime = File.GetLastWriteTimeUtc(filePath);
-
-            return lastWriteTime.ToString("yyyy-MM-dd HH:mm Z");
+            var filePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data", "version.txt");
+            if (File.Exists(filePath))
+            {
+                return File.ReadAllText(filePath);
+            }
+            return "";
         }
     }
 }
