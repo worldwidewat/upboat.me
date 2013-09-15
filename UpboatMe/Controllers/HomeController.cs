@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using UpboatMe.Models;
 using System.Linq;
+using System.Web.Hosting;
 
 namespace UpboatMe.Controllers
 {
@@ -12,6 +13,11 @@ namespace UpboatMe.Controllers
         public ActionResult Index()
         {
             var memes = GlobalMemeConfiguration.Memes.GetMemes();
+            var root = HostingEnvironment.ApplicationVirtualPath ?? "";
+            if (!root.EndsWith("/"))
+            {
+                root += "/";
+            }
 
             var viewModel = new IndexViewModel()
             {
@@ -19,30 +25,30 @@ namespace UpboatMe.Controllers
                 {
                     new RecentMeme
                     {
-                        Url = Request.ApplicationPath + "sap/wears-suit-and-tie-to-interview/phone-interview.jpg",
+                        Url = root + "sap/wears-suit-and-tie-to-interview/phone-interview.jpg",
                         Alt = "socially awkward penguin: wears suit and tie to interview" + Environment.NewLine + "phone interview",
                         Title = "socially awkward penguin"
                     },
                     new RecentMeme
                     {
-                        Url = Request.ApplicationPath + "fry/not-sure-if-sunny-outside/or-hungover.jpg",
+                        Url = root + "fry/not-sure-if-sunny-outside/or-hungover.jpg",
                         Alt = "futurama fry: not sure if sunny outside" + Environment.NewLine + "or hungover",
                         Title = "futurama fry"
                     },
                     new RecentMeme
                     {
-                        Url = Request.ApplicationPath + "scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life.jpg",
+                        Url = root + "scc/i-don't-buy-things-with-money/i-buy-them-with-hours-of-my-life.jpg",
                         Alt = "sudden clarity clarence: i don't buy things with money" + Environment.NewLine + "i buy them with hours of my life",
                         Title = "sudden clarity clarence"
                     },
                     new RecentMeme
                     {
-                        Url = Request.ApplicationPath + "blb/has-pet-rock/it-runs-away.jpg",
+                        Url = root + "blb/has-pet-rock/it-runs-away.jpg",
                         Alt = "bad luck brian: has pet rock" + Environment.NewLine + "it runs away",
                         Title = "bad luck brian"
                     }
                 },
-                BuilderViewModel = new BuilderViewModel 
+                BuilderViewModel = new BuilderViewModel
                 {
                     Memes = memes,
                     Top = "top-line",

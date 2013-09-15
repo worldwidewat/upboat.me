@@ -75,7 +75,7 @@ namespace UpboatMe.Controllers
             Analytics.TrackMeme(HttpContext, memeRequest.Name);
 
             Response.Cache.SetCacheability(HttpCacheability.Public);
-            Response.Cache.SetExpires(DateTime.UtcNow.AddDays(1));
+            Response.Cache.SetMaxAge(TimeSpan.FromDays(365));
             Response.Cache.SetValidUntilExpires(true);
 
             return new FileContentResult(bytes, meme.ImageType);
