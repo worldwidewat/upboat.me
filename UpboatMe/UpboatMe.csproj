@@ -158,6 +158,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App_Data\slogans.txt" />
+    <Content Include="App_Data\version.txt" />
     <Content Include="Content\apple-touch-icon-precomposed.png" />
     <Content Include="Content\banana-example-320.jpg" />
     <Content Include="Content\foundation\foundation.css" />
@@ -454,8 +455,9 @@
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName) == ProdDeploy (
   copy "$(SolutionDir)Deployment\newrelic.prod.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
+  git log -1 --format="%25%25ad %25%25h" --date=short &gt; "$(ProjectDir)App_Data\version.txt"
 ) ELSE (
-   copy "$(SolutionDir)Deployment\newrelic.dev.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
+  copy "$(SolutionDir)Deployment\newrelic.dev.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
 )</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

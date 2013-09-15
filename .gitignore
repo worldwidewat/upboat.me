@@ -15,3 +15,4 @@ local-docs/
 newrelic.prod.config
 SpriteThumbsOutput/
 TestResults/
+Upboatme/App_Data/version.txt
