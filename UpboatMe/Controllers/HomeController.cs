@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.UI;
 using UpboatMe.Models;
 using System.Linq;
 using System.Web.Hosting;
@@ -10,6 +11,7 @@ namespace UpboatMe.Controllers
     public class HomeController : Controller
     {
         // Note: don't forget to explicitly enable new actions in the route config
+        [OutputCache(Location = OutputCacheLocation.Any, Duration = 60)]
         public ActionResult Index()
         {
             var memes = GlobalMemeConfiguration.Memes.GetMemes();

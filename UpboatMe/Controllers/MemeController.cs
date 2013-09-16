@@ -85,6 +85,7 @@ namespace UpboatMe.Controllers
             return View(viewModel);
         }
 
+        [OutputCache(Location = OutputCacheLocation.Any, Duration = 60)]
         public ActionResult List(string query)
         {
             var list = GlobalMemeConfiguration.Memes.GetMemes();
@@ -123,6 +124,7 @@ namespace UpboatMe.Controllers
             return View(filteredList.ToList());
         }
 
+        [OutputCache(Location = OutputCacheLocation.Any, Duration = 60)]
         public ActionResult Builder()
         {
             var url = Request.ServerVariables["HTTP_URL"];
