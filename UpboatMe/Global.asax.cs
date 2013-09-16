@@ -26,6 +26,8 @@ namespace UpboatMe
             
             MemeConfig.AutoRegisterMemesByFile(GlobalMemeConfiguration.Memes, filenames.ToArray());
             MemeConfig.RegisterManualMemes(GlobalMemeConfiguration.Memes);
+
+            MvcHandler.DisableMvcResponseHeader = true;
         }
     }
 }
