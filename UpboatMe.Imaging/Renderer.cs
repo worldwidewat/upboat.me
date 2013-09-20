@@ -18,7 +18,7 @@ namespace UpboatMe.Imaging
                 DrawText(parameters, graphics, image, top, true);
 
                 DrawText(parameters, graphics, image, bottom, false);
-
+                  
                 using (var memoryStream = new MemoryStream())
                 {
                     image.Save(memoryStream, image.RawFormat);

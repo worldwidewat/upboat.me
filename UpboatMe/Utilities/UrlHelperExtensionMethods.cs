@@ -20,7 +20,7 @@ namespace UpboatMe.Utilities
             var absoluteAction = string.Format("{0}://{1}{2}",
                                                isSsl ? "https" : "http",
                                                requestUrl.Authority,
-                                               path);
+                                               path);  
 
             return absoluteAction;
         }
