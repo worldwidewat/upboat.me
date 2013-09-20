@@ -8,10 +8,14 @@ namespace UpboatMe.Utilities
     {
         public static string AbsoluteAction(this UrlHelper url, string path)
         {
-            Uri requestUrl = url.RequestContext.HttpContext.Request.Url;
+            var requestUrl = url.RequestContext.HttpContext.Request.Url;
+
+            var sslHeaderValue = url.RequestContext.HttpContext.Request.Headers["X-FORWARDED-PROTO"];
+            var isSsl = url.RequestContext.HttpContext.Request.IsSecureConnection ||
+                        string.Equals(sslHeaderValue, "https", StringComparison.OrdinalIgnoreCase);
 
             string absoluteAction = string.Format("{0}://{1}{2}",
-                                                  requestUrl.Scheme,
+                                                  isSsl ? "https" : "http",
                                                   requestUrl.Authority,
                                                   path);
 
