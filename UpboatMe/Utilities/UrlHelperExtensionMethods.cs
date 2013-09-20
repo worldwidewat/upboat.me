@@ -10,14 +10,17 @@ namespace UpboatMe.Utilities
         {
             var requestUrl = url.RequestContext.HttpContext.Request.Url;
 
-            var sslHeaderValue = url.RequestContext.HttpContext.Request.Headers["X-FORWARDED-PROTO"];
-            var isSsl = url.RequestContext.HttpContext.Request.IsSecureConnection ||
-                        string.Equals(sslHeaderValue, "https", StringComparison.OrdinalIgnoreCase);
+            var protoHeaderValue = url.RequestContext.HttpContext.Request.Headers["X-FORWARDED-PROTO"];
+            var visitorHeaderValue = url.RequestContext.HttpContext.Request.Headers["CF-Visitor"] ?? "";
 
-            string absoluteAction = string.Format("{0}://{1}{2}",
-                                                  isSsl ? "https" : "http",
-                                                  requestUrl.Authority,
-                                                  path);
+            var isSsl = url.RequestContext.HttpContext.Request.IsSecureConnection
+                        || string.Equals(protoHeaderValue, "https", StringComparison.OrdinalIgnoreCase)
+                        || visitorHeaderValue.IndexOf("\"scheme\":\"https\"", StringComparison.OrdinalIgnoreCase) >= 0;
+
+            var absoluteAction = string.Format("{0}://{1}{2}",
+                                               isSsl ? "https" : "http",
+                                               requestUrl.Authority,
+                                               path);
 
             return absoluteAction;
         }
