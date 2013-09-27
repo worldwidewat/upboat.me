@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\SpriteThumbsConfig.cs" />
+    <Compile Include="Models\ApiMemeResult.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Models\BuilderViewModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />

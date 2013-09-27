@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using UpboatMe.Models;
 
@@ -8,39 +10,43 @@ namespace UpboatMe.Controllers
 {
     public class ListController : ApiController
     {
-        public IEnumerable<ApiMemeResult> Get()
+        public HttpResponseMessage Get()
         {
-            return GlobalMemeConfiguration
+            var result = GlobalMemeConfiguration
                 .Memes
                 .GetMemes()
                 .Select(m => new ApiMemeResult
-                {
-                    Name = m.Aliases.Last(),
-                    Description = m.Description,
-                    Aliases = m.Aliases
-                });
+                                 {
+                                     Name = m.Aliases.Last(),
+                                     Description = m.Description,
+                                     Aliases = m.Aliases
+                                 });
+
+            return HttpCachedResponseMessage(result);
         }
 
-        public ApiMemeResult Get(string id)
+        public HttpResponseMessage Get(string id)
         {
             var meme = GlobalMemeConfiguration.Memes[id];
-            return new ApiMemeResult
-                       {
-                           Name = meme.Aliases.Last(),
-                           Description = meme.Description,
-                           Aliases = meme.Aliases
-                       };
-        }
-    }
+            var result = new ApiMemeResult
+                             {
+                                 Name = meme.Aliases.Last(),
+                                 Description = meme.Description,
+                                 Aliases = meme.Aliases
+                             };
 
-    [DataContract(Name = "Meme")]
-    public class ApiMemeResult
-    {
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public string Description { get; set; }
-        [DataMember]
-        public IEnumerable<string> Aliases { get; set; }
+            return HttpCachedResponseMessage(result);
+        }
+
+        private HttpResponseMessage HttpCachedResponseMessage<T>(T result)
+        {
+            var response = Request.CreateResponse(HttpStatusCode.OK, result);
+            response.Headers.CacheControl = new CacheControlHeaderValue
+            {
+                MaxAge = TimeSpan.FromHours(1),
+                Public = true
+            };
+            return response;
+        }
     }
 }
