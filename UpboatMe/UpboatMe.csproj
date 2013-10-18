@@ -366,6 +366,8 @@
     <Content Include="Images\0175-yo-dawg-heard-you.jpg" />
     <Content Include="Images\0176-you-dont-say.jpg" />
     <Content Include="Images\0177-you-should-feel-bad-zoidberg.jpg" />
+    <Content Include="Images\0178-sad-hamster.jpg" />
+    <Content Include="Images\0179-dr-evil-quotes.jpg" />
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\NewRelic.Agent.Core.dll" />
     <Content Include="newrelic\NewRelic.Profiler.dll" />
