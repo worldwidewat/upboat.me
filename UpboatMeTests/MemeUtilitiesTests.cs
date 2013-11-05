@@ -18,6 +18,8 @@ namespace UpboatMeTests
             _MemeConfig.Add(new Meme("I'll Have You Know", "", new[] {"ihyk", "illhaveyouknow"}));
             _MemeConfig.Add(new Meme("Foo", "", new[] { "f", "foo" }));
             _MemeConfig.Add(new Meme("All The Things", "", new[] { "att", "allthethings" }));
+            _MemeConfig.Add(new Meme("Chubby Bubbles Girl", "", new[] {"cbg", "chubbybubblesgirl"}));
+            _MemeConfig.Add(new Meme("Confession Bear", "", new[] {"cb", "confessionbear"}));
         }
 
         [TestMethod]
@@ -144,6 +146,36 @@ namespace UpboatMeTests
             // arrange
             const string searchName = "search-for-all-the-things";
             const string expectedName = "All The Things";
+
+            // act
+            var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
+
+            // assert
+            Assert.IsNotNull(actualMeme);
+            Assert.AreEqual(expectedName, actualMeme.Description);
+        }
+
+        [TestMethod]
+        public void FindConfessionBearByInitialism()
+        {
+            // arrange
+            const string searchName = "cb";
+            const string expectedName = "Confession Bear";
+
+            // act
+            var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
+
+            // assert
+            Assert.IsNotNull(actualMeme);
+            Assert.AreEqual(expectedName, actualMeme.Description);
+        }
+
+        [TestMethod]
+        public void FindConfessionBearByName()
+        {
+            // arrange
+            const string searchName = "confession-bear";
+            const string expectedName = "Confession Bear";
 
             // act
             var actualMeme = MemeUtilities.FindMeme(_MemeConfig, searchName);
