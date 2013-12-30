@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,8 +48,9 @@
       <HintPath>..\packages\GoogleAnalyticsTracker.1.5.000\lib\net40\GoogleAnalyticsTracker.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NewRelic.Api.Agent">
-      <HintPath>..\packages\NewRelic.Azure.WebSites.2.8.89.0\lib\NewRelic.Api.Agent.dll</HintPath>
+    <Reference Include="NewRelic.Api.Agent, Version=2.18.35.0, Culture=neutral, PublicKeyToken=06552fced0b33d87, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NewRelic.Azure.WebSites.2.18.35.0\lib\NewRelic.Api.Agent.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -259,6 +262,7 @@
     <Content Include="Images\0073-gasp-rage-face.jpg" />
     <Content Include="Images\0074-gollum.jpg" />
     <Content Include="Images\0075-good-guy-greg.jpg" />
+    <Content Include="Images\0075-great-guy-greg.jpg" />
     <Content Include="Images\0076-grumpy-cat.jpg" />
     <Content Include="Images\0077-happy-guy-rage-face.jpg" />
     <Content Include="Images\0078-heres-johnny.jpg" />
@@ -392,13 +396,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fonts\SFActionManExtended.ttf" />
+    <Content Include="Fonts\ShyFoundry Freeware EULA.pdf" />
+    <Content Include="Fonts\SFActionManExtended-Italic.ttf" />
     <Content Include="newrelic\newrelic.config" />
     <Content Include="newrelic\extensions\extension.xsd">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Fonts\SFActionManExtended.ttf" />
-    <Content Include="Fonts\ShyFoundry Freeware EULA.pdf" />
-    <Content Include="Fonts\SFActionManExtended-Italic.ttf" />
     <None Include="Properties\PublishProfiles\upboatme.pubxml" />
     <Content Include="Views\Home\Terms.cshtml" />
     <Content Include="Views\Meme\Debug.cshtml" />
@@ -460,15 +464,9 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>if $(ConfigurationName) == ProdDeploy (
-  copy "$(SolutionDir)Deployment\newrelic.prod.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
-) ELSE (
-  copy "$(SolutionDir)Deployment\newrelic.dev.config" "$(SolutionDir)UpboatMe\newrelic\newrelic.config" /y
-)
-
-git log -1 --format="%25%25ad %25%25h" --date=short &gt; "$(ProjectDir)App_Data\version.txt"
-</PreBuildEvent>
+    <PreBuildEvent>git log -1 --format="%2525%2525ad %2525%2525h" --date=short &amp;gt; "$(ProjectDir)App_Data\version.txt"</PreBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
