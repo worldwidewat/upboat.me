@@ -27,5 +27,8 @@ namespace UpboatMe.Imaging
         public int WatermarkFontSize { get; set; }
         public PrivateFontCollection PrivateFonts { get; set; }
         public FontStyle FontStyle { get; set; }
+        public StringAlignment TextAlignment { get; set; }
+
+        public bool DoForceTextToAllCaps { get; set; }
     }
 }

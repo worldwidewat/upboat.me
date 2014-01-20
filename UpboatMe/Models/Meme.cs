@@ -6,7 +6,7 @@ namespace UpboatMe.Models
 {
     public class Meme
     {
-        private static string ImagePathFormat = "~/Images/{0}";
+        private const string ImagePathFormat = "~/Images/{0}";
 
         public string ImagePath { get; private set; }
         public string ImageType { get; private set; }
@@ -22,6 +22,8 @@ namespace UpboatMe.Models
         public Rectangle? BottomLineBounds { get; set; }
         public string Description { get; private set; }
         public IList<string> Aliases { get; set; }
+        public StringAlignment TextAlignment { get; set; }
+        public bool DoForceTextToAllCaps { get; set; }
 
         public string ImageFileNameWithoutExtension
         {
@@ -42,7 +44,9 @@ namespace UpboatMe.Models
             int fontSize = 40,
             int strokeWidth = 5,
             float topLineHeightPercent = 25,
-            float bottomLineHeightPercent = 25)
+            float bottomLineHeightPercent = 25,
+            StringAlignment textAlignment = StringAlignment.Center,
+            bool doForceTextToAllCaps = true)
         {
             Description = description;
             ImagePath = string.Format(ImagePathFormat, imageFileName);
@@ -56,7 +60,10 @@ namespace UpboatMe.Models
             StrokeWidth = strokeWidth;
             TopLineHeightPercent = topLineHeightPercent;
             BottomLineHeightPercent = bottomLineHeightPercent;
+            TextAlignment = textAlignment;
+            DoForceTextToAllCaps = doForceTextToAllCaps;
             FontStyle = fontStyle;
         }
+
     }
 }

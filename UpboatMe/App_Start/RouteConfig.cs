@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using WorldWideWat.SpriteThumbs;
 
-namespace UpboatMe
+namespace UpboatMe.App_Start
 {
     public class RouteConfig
     {

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
 
 namespace UpboatMe.Utilities
 {
     public static class StringExtensionMethods
     {
-        public static string SanitizeMemeText(this string text)
+        public static string SanitizeMemeText(this string text, bool doForceTextToAllCaps)
         {
             if (text == null)
             {
                 return string.Empty;
             }
 
-            return text.Replace("--", "—").Replace('-', ' ').ToUpper();
+            var sanitized = text.Replace("--", "—").Replace('-', ' ');
+
+            return doForceTextToAllCaps ? sanitized.ToUpper() : sanitized;
         }
 
         //From some super-awesome Stack Overflow post that I can't seem to find anymore... sorry dude :(

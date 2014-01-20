@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -44,8 +45,6 @@ namespace UpboatMe.Imaging
 
                 var textSize = graphics.MeasureString(parameters.WatermarkText, font);
 
-                var textX = watermark.Width - width - (int)Math.Ceiling(textSize.Width);
-
                 var bounds = new Rectangle(image.Width - width - (int)Math.Ceiling(textSize.Width), image.Height - (int)Math.Ceiling(textSize.Height), image.Width, (int)Math.Ceiling(textSize.Height));
 
                 graphics.CompositingMode = CompositingMode.SourceOver;
@@ -71,7 +70,7 @@ namespace UpboatMe.Imaging
                                     ?? new Rectangle(0, 0, image.Width, maxHeight);
 
             
-            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.Alignment = parameters.TextAlignment;
 
             var fontFamily = FindFont(parameters);
 
@@ -154,10 +153,10 @@ namespace UpboatMe.Imaging
 
             for (int x = 0; x < height; x += 20)
             {
-                graphics.DrawString(x.ToString(), SystemFonts.DefaultFont, Brushes.Black, 0, x);
+                graphics.DrawString(x.ToString(CultureInfo.InvariantCulture), SystemFonts.DefaultFont, Brushes.Black, 0, x);
             }
 
-            graphics.DrawString(string.Format("H: {0}, W: {1}", height, width), SystemFonts.DefaultFont, Brushes.Black, width / 2, 20);
+            graphics.DrawString(string.Format("H: {0}, W: {1}", height, width), SystemFonts.DefaultFont, Brushes.Black, width / 2f, 20);
 
             graphics.CompositingMode = CompositingMode.SourceCopy;
         }

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using UpboatMe.App_Start;
@@ -15,7 +14,7 @@ namespace UpboatMe.Controllers
 {
     public class MemeController : Controller
     {
-        private static readonly Regex _UrlExtension = new Regex(@"\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex UrlExtension = new Regex(@"\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         [OutputCache(Location = OutputCacheLocation.Any, Duration = 60 * 60 /* 1 hour */)]
         public ActionResult Make()
@@ -35,7 +34,7 @@ namespace UpboatMe.Controllers
             // if we still need to worry about png vs. jpg. The browser
             // probably doesn't care, but it might be weird if the extension
             // doesn't match the mimetype
-            var hasExtension = _UrlExtension.IsMatch(url);
+            var hasExtension = UrlExtension.IsMatch(url);
             if (!hasExtension)
             {
                 return Redirect(url + Path.GetExtension(meme.ImageFileName));
@@ -46,6 +45,7 @@ namespace UpboatMe.Controllers
                 FullImagePath = HttpContext.Server.MapPath(meme.ImagePath),
                 TopLineHeightPercent = meme.TopLineHeightPercent,
                 TopLineBounds = meme.TopLineBounds,
+                TextAlignment = meme.TextAlignment,
                 BottomLineHeightPercent = meme.BottomLineHeightPercent,
                 BottomLineBounds = meme.BottomLineBounds,
                 Fill = meme.Fill,
@@ -64,12 +64,15 @@ namespace UpboatMe.Controllers
                 WatermarkFill = Color.White,
                 WatermarkStrokeWidth = 1,
                 PrivateFonts = MemeConfig.PrivateFontCollection,
-                FontStyle = meme.FontStyle
+                FontStyle = meme.FontStyle,
             };
 
             var renderer = new Renderer();
 
-            var bytes = renderer.Render(renderParameters, memeRequest.Top.SanitizeMemeText(), memeRequest.Bottom.SanitizeMemeText());
+            var bytes = renderer.Render(
+                renderParameters, 
+                memeRequest.Top.SanitizeMemeText(meme.DoForceTextToAllCaps), 
+                memeRequest.Bottom.SanitizeMemeText(meme.DoForceTextToAllCaps));
 
             Analytics.TrackMeme(HttpContext, memeRequest.Name);
 

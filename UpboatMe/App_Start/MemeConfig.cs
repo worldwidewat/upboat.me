@@ -33,7 +33,7 @@ namespace UpboatMe.App_Start
                     throw new NullReferenceException("name cannot be null");
                 }
                 // strip off number prefix (used for ordering)
-                name = name.Substring(lowerFilename.IndexOf("-", System.StringComparison.Ordinal) + 1);
+                name = name.Substring(lowerFilename.IndexOf("-", StringComparison.Ordinal) + 1);
 
                 var extension = Path.GetExtension(lowerFilename);
                 
@@ -69,7 +69,7 @@ namespace UpboatMe.App_Start
                 // TODO: image/jpg isn't acutally valid. Fix this or get rid of it
                 var imageType = "image/" + extension;
 
-                memes.Add(new Meme(memeName, filename, survivingAliases, imageType: imageType, fontStyle: FontStyle.Regular));
+                memes.Add(new Meme(memeName, filename, survivingAliases, imageType));
             }
         }
 
@@ -138,7 +138,15 @@ namespace UpboatMe.App_Start
             batman.FontStyle = FontStyle.Italic;
             batman.TopLineBounds = new Rectangle(10, 5, 180, 75);
             batman.BottomLineBounds = new Rectangle(220, 5, 170, 75);
-        }
 
+            var resharper = memes["resharpertip"];
+            resharper.Font = "Segoe UI";
+            resharper.TextAlignment = StringAlignment.Near;
+            resharper.Fill = Color.WhiteSmoke;
+            resharper.StrokeWidth = -1;
+            resharper.TopLineBounds = new Rectangle(78, 72, 481, 22);
+            resharper.BottomLineBounds = new Rectangle(78, 97, 462, 22);
+            resharper.DoForceTextToAllCaps = false;
+        }
     }
 }
