@@ -3,6 +3,7 @@
 *.pyc
 *.suo
 *.user
+*.ncrunch*
 bin/
 obj/
 local_settings.py
