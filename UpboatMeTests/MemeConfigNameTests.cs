@@ -12,7 +12,7 @@ namespace UpboatMeTests
         public void DashesReplacedWithSpacesTest()
         {
             // arrange
-            var filenames = new string[] { "Success-Kid.png" };
+            var filenames = new string[] { "100-Success-Kid.png" };
             const string expectedDescription = "Success Kid";
 
             // act
@@ -30,7 +30,7 @@ namespace UpboatMeTests
         public void TitleCaseTest()
         {
             // arrange
-            var filenames = new string[] { "success-kid.png" };
+            var filenames = new string[] { "100-success-kid.png" };
             const string expectedDescription = "Success Kid";
 
             // act
@@ -48,7 +48,7 @@ namespace UpboatMeTests
         public void NameWithApostropheTest()
         {
             // arrange
-            var filenames = new string[] { "I'll-have-you-know.png" };
+            var filenames = new string[] { "100-I'll-have-you-know.png" };
             const string expectedDescription = "I'll Have You Know";
 
             // act
@@ -66,7 +66,7 @@ namespace UpboatMeTests
         public void NameWithJpgExtensionTest()
         {
             // arrange
-            var filenames = new string[] { "file.jpg" };
+            var filenames = new string[] { "100-file.jpg" };
             const string expectedDescription = "File";
 
             // act
@@ -84,7 +84,7 @@ namespace UpboatMeTests
         public void NameWithTwoCharacterExtensionTest()
         {
             // arrange
-            var filenames = new string[] { "file.jp" };
+            var filenames = new string[] { "100-file.jp" };
             const string expectedDescription = "File";
 
             // act
