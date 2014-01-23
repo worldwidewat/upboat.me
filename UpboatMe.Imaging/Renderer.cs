@@ -16,9 +16,25 @@ namespace UpboatMe.Imaging
             {
                 DrawWatermark(parameters, graphics, image);
 
-                DrawText(parameters, graphics, image, top, true);
+                var topMaxHeightPercent = parameters.TopLineHeightPercent;
+                var bottomMaxHeightPercent = parameters.BottomLineHeightPercent;
+                var topMaxHeight = (int)Math.Ceiling(image.Height * (topMaxHeightPercent / 100));
+                var bottomMaxHeight = (int)Math.Ceiling(image.Height * (bottomMaxHeightPercent / 100));
+                var topBounds = parameters.TopLineBounds ?? new Rectangle(0, 0, image.Width, topMaxHeight);
+                var bottomBounds = parameters.BottomLineBounds ?? new Rectangle(0, 0, image.Width, bottomMaxHeight);
+                var topAlignment = parameters.TextAlignment;
 
-                DrawText(parameters, graphics, image, bottom, false);
+                StringAlignment? bottomAlignment = null;
+
+                if (parameters.BottomLineBounds == null)
+                {
+                    bottomBounds.Y = image.Height - bottomBounds.Height - 1;
+                    bottomAlignment = StringAlignment.Far;
+                }
+
+                DrawText(parameters, graphics, image, top, topBounds, null);
+
+                DrawText(parameters, graphics, image, bottom, bottomBounds, bottomAlignment);
                   
                 using (var memoryStream = new MemoryStream())
                 {
@@ -58,19 +74,19 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, string text, bool isTop)
+        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, string text, Rectangle bounds, StringAlignment? lineAlignment)
         {
             var done = false;
             var fontSize = parameters.FontSize;
-            var maxHeightPercent = isTop ? parameters.TopLineHeightPercent : parameters.BottomLineHeightPercent;
-            var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100));
+            
             var stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
-            var bounds = (isTop ? parameters.TopLineBounds : parameters.BottomLineBounds)
-                                    ?? new Rectangle(0, 0, image.Width, maxHeight);
-
-            
             stringFormat.Alignment = parameters.TextAlignment;
+
+            if (lineAlignment.HasValue)
+            {
+                stringFormat.LineAlignment = lineAlignment.Value;
+            }
 
             var fontFamily = FindFont(parameters);
 
@@ -84,13 +100,6 @@ namespace UpboatMe.Imaging
                 {
                     fontSize -= 2;
                     continue;
-                }
-
-
-                if (!isTop && parameters.BottomLineBounds == null)
-                {
-                    bounds.Y = image.Height - bounds.Height - 1;
-                    stringFormat.LineAlignment = StringAlignment.Far;
                 }
 
                 var stroke = new SolidBrush(parameters.Stroke);

@@ -147,6 +147,9 @@ namespace UpboatMe.App_Start
             resharper.TopLineBounds = new Rectangle(78, 72, 481, 22);
             resharper.BottomLineBounds = new Rectangle(78, 97, 462, 22);
             resharper.DoForceTextToAllCaps = false;
+
+            var doge = memes["doge"];
+            doge.Font = "Comic Sans MS";
         }
     }
 }
