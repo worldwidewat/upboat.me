@@ -132,24 +132,33 @@ namespace UpboatMe.App_Start
             memes["mckaylamaroneynotimpressed"].Aliases.Add("nim", "um", "unimpressedmckayla");
 
             var batman = memes["batmanslappingrobin"];
-            batman.Font = "SF Action Man Extended";
-            batman.Fill = Color.FromArgb(255, 63, 63, 63);
-            batman.StrokeWidth = -1;
-            batman.FontStyle = FontStyle.Italic;
-            batman.TopLineBounds = new Rectangle(10, 5, 180, 75);
-            batman.BottomLineBounds = new Rectangle(220, 5, 170, 75);
+            foreach (var line in batman.Lines)
+            {
+                line.Font = "SF Action Man Extended";
+                line.Fill = Color.FromArgb(255, 63, 63, 63);
+                line.StrokeWidth = -1;
+                line.FontStyle = FontStyle.Italic;
+            }
+            batman.Lines[0].Bounds = new Rectangle(10, 5, 180, 75);
+            batman.Lines[1].Bounds = new Rectangle(220, 5, 170, 75);
 
             var resharper = memes["resharpertip"];
-            resharper.Font = "Segoe UI";
-            resharper.TextAlignment = StringAlignment.Near;
-            resharper.Fill = Color.WhiteSmoke;
-            resharper.StrokeWidth = -1;
-            resharper.TopLineBounds = new Rectangle(78, 72, 481, 22);
-            resharper.BottomLineBounds = new Rectangle(78, 97, 462, 22);
-            resharper.DoForceTextToAllCaps = false;
+            foreach (var line in resharper.Lines)
+            {
+                line.Font = "Segoe UI";
+                line.TextAlignment = StringAlignment.Near;
+                line.Fill = Color.WhiteSmoke;
+                line.StrokeWidth = -1;
+                line.DoForceTextToAllCaps = false;
+            }
+            resharper.Lines[0].Bounds = new Rectangle(78, 72, 481, 22);
+            resharper.Lines[1].Bounds = new Rectangle(78, 97, 462, 22);
 
             var doge = memes["doge"];
-            doge.Font = "Comic Sans MS";
+            foreach (var line in doge.Lines)
+            {
+                line.Font = "Comic Sans MS";
+            }
         }
     }
 }

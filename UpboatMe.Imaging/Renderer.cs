@@ -9,32 +9,25 @@ namespace UpboatMe.Imaging
 {
     public class Renderer
     {
-        public byte[] Render(RenderParameters parameters, string top, string bottom)
+        public byte[] Render(RenderParameters parameters)
         {
             using (var image = Image.FromFile(parameters.FullImagePath))
             using (var graphics = Graphics.FromImage(image))
             {
                 DrawWatermark(parameters, graphics, image);
 
-                var topMaxHeightPercent = parameters.TopLineHeightPercent;
-                var bottomMaxHeightPercent = parameters.BottomLineHeightPercent;
-                var topMaxHeight = (int)Math.Ceiling(image.Height * (topMaxHeightPercent / 100));
-                var bottomMaxHeight = (int)Math.Ceiling(image.Height * (bottomMaxHeightPercent / 100));
-                var topBounds = parameters.TopLineBounds ?? new Rectangle(0, 0, image.Width, topMaxHeight);
-                var bottomBounds = parameters.BottomLineBounds ?? new Rectangle(0, 0, image.Width, bottomMaxHeight);
-                var topAlignment = parameters.TextAlignment;
-
-                StringAlignment? bottomAlignment = null;
-
-                if (parameters.BottomLineBounds == null)
+                foreach (var line in parameters.Lines)
                 {
-                    bottomBounds.Y = image.Height - bottomBounds.Height - 1;
-                    bottomAlignment = StringAlignment.Far;
+                    var maxHeightPercent = line.HeightPercent;
+                    var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100));
+                    var bounds = line.Bounds ?? new Rectangle(0, 0, image.Width, maxHeight);
+                    var topAlignment = line.TextAlignment;
+                    
+                    // TODO 
+                    // bounds.Y = image.Height - bounds.Height - 1;
+                    
+                    DrawText(parameters, graphics, image, line, bounds);
                 }
-
-                DrawText(parameters, graphics, image, top, topBounds, null);
-
-                DrawText(parameters, graphics, image, bottom, bottomBounds, bottomAlignment);
                   
                 using (var memoryStream = new MemoryStream())
                 {
@@ -67,34 +60,32 @@ namespace UpboatMe.Imaging
 
                 var stroke = new SolidBrush(Color.FromArgb(150, parameters.WatermarkStroke));
                 var fill = new SolidBrush(Color.FromArgb(150, parameters.WatermarkFill));
-
-                DrawText(graphics, parameters.WatermarkText, font, parameters.FontStyle, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
+                
+                DrawText(graphics, parameters.WatermarkText, font, parameters.WatermarkFontStyle, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
 
                 graphics.CompositingMode = CompositingMode.SourceCopy;
             }
         }
 
-        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, string text, Rectangle bounds, StringAlignment? lineAlignment)
+        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, LineParameters line, Rectangle bounds)
         {
             var done = false;
-            var fontSize = parameters.FontSize;
-            
+            var fontSize = line.FontSize;
+
             var stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
-            stringFormat.Alignment = parameters.TextAlignment;
+            stringFormat.Alignment = line.TextAlignment;
 
-            if (lineAlignment.HasValue)
-            {
-                stringFormat.LineAlignment = lineAlignment.Value;
-            }
+            //stringFormat.LineAlignment = lineAlignment.Value;
+            
 
-            var fontFamily = FindFont(parameters);
+            var fontFamily = FindFont(parameters, line.Font);
 
             while (!done)
             {
-                var font = new Font(fontFamily, fontSize, FontStyle.Regular);
+                var font = new Font(fontFamily, line.FontSize, FontStyle.Regular);
 
-                var size = graphics.MeasureString(text, font, bounds.Width);
+                var size = graphics.MeasureString(line.Text, font, bounds.Width);
                 
                 if (size.Height > bounds.Size.Height && fontSize > 10)
                 {
@@ -102,10 +93,10 @@ namespace UpboatMe.Imaging
                     continue;
                 }
 
-                var stroke = new SolidBrush(parameters.Stroke);
-                var fill = new SolidBrush(parameters.Fill);
+                var stroke = new SolidBrush(line.Stroke);
+                var fill = new SolidBrush(line.Fill);
 
-                DrawText(graphics, text, font, parameters.FontStyle, fontSize, stroke, parameters.StrokeWidth, fill, stringFormat, bounds);
+                DrawText(graphics, line.Text, font, line.FontStyle, fontSize, stroke, line.StrokeWidth, fill, stringFormat, bounds);
 
                 if (parameters.DebugMode)
                 {
@@ -116,15 +107,16 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private static FontFamily FindFont(RenderParameters parameters)
+        private static FontFamily FindFont(RenderParameters parameters, string font)
         {
-            var fontFamily = parameters.PrivateFonts.Families.FirstOrDefault(f => f.Name == parameters.Font)
-                             ?? FontFamily.Families.FirstOrDefault(f => f.Name == parameters.Font);
+            var fontFamily = parameters.PrivateFonts.Families.FirstOrDefault(f => f.Name == font)
+                             ?? FontFamily.Families.FirstOrDefault(f => f.Name == font);
 
             if (fontFamily == null)
             {
-                throw new ArgumentException(string.Format("Font {0} could not be found", parameters.Font));
+                throw new ArgumentException(string.Format("Font {0} could not be found", font));
             }
+
             return fontFamily;
         }
 
