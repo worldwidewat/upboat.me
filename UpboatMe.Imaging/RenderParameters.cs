@@ -24,6 +24,11 @@ namespace UpboatMe.Imaging
 
     public class LineParameters
     {
+        public LineParameters()
+        {
+            Text = string.Empty;
+        }
+
         public string Text { get; set; }
         public int FontSize { get; set; }
         public float HeightPercent { get; set; }
@@ -35,5 +40,6 @@ namespace UpboatMe.Imaging
         public FontStyle FontStyle { get; set; }
         public StringAlignment TextAlignment { get; set; }
         public bool DoForceTextToAllCaps { get; set; }
+        public bool HugBottom { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace UpboatMe.Models
         public string ImageFileName { get; private set; }
         public string Description { get; private set; }
         public IList<string> Aliases { get; set; }
-        public IReadOnlyList<LineConfig> Lines { get; private set; }
+        public IReadOnlyList<LineConfig> Lines { get; set; }
 
         public string ImageFileNameWithoutExtension
         {
@@ -22,14 +22,20 @@ namespace UpboatMe.Models
         }
 
 
-        public Meme(string description, string imageFileName, IList<string> aliases, string imageType = "image/jpg", int lines = 2)
+        public Meme(string description, string imageFileName, IList<string> aliases, string imageType = "image/jpg")
         {
             Description = description;
             ImagePath = string.Format(ImagePathFormat, imageFileName);
             ImageFileName = imageFileName;
             Aliases = aliases;
             ImageType = imageType;
-            Lines = Enumerable.Range(0, lines).Select(i => new LineConfig()).ToList().AsReadOnly();
+
+            // Default meme has 2 lines, the second one hugs the bottom of the image
+            Lines = new List<LineConfig>
+            {
+                new LineConfig(),
+                new LineConfig(hugBottom: true),
+            };
         }
     }
 
@@ -46,6 +52,7 @@ namespace UpboatMe.Models
         public bool DoForceTextToAllCaps { get; set; }
         public float HeightPercent { get; set; }
         public Rectangle? Bounds { get; set; }
+        public bool HugBottom { get; set; }
 
         public LineConfig(string stroke = "black",
             string fill = "white",
@@ -56,7 +63,8 @@ namespace UpboatMe.Models
             float heightPercent = 25,
             StringAlignment textAlignment = StringAlignment.Center,
             StringAlignment lineAlignment = StringAlignment.Near,
-            bool doForceTextToAllCaps = true)
+            bool doForceTextToAllCaps = true,
+            bool hugBottom = false)
         {
             Stroke = Color.FromName(stroke);
             Fill = Color.FromName(fill);
@@ -68,6 +76,7 @@ namespace UpboatMe.Models
             LineAlignment = lineAlignment;
             DoForceTextToAllCaps = doForceTextToAllCaps;
             FontStyle = fontStyle;
+            HugBottom = hugBottom;
         }
     }
 }

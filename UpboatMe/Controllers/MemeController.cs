@@ -66,7 +66,8 @@ namespace UpboatMe.Controllers
                     HeightPercent = l.HeightPercent,
                     Stroke = l.Stroke,
                     StrokeWidth = l.StrokeWidth,
-                    TextAlignment = l.TextAlignment
+                    TextAlignment = l.TextAlignment,
+                    HugBottom = l.HugBottom
                 }).ToList()
             };
 

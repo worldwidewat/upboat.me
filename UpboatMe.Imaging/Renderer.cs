@@ -21,12 +21,18 @@ namespace UpboatMe.Imaging
                     var maxHeightPercent = line.HeightPercent;
                     var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100));
                     var bounds = line.Bounds ?? new Rectangle(0, 0, image.Width, maxHeight);
-                    var topAlignment = line.TextAlignment;
+                    var stringFormat = new StringFormat(StringFormat.GenericTypographic);
+
+                    stringFormat.Alignment = line.TextAlignment;
+                    stringFormat.LineAlignment = StringAlignment.Near;
+
+                    if (line.HugBottom)
+                    {
+                        stringFormat.LineAlignment = StringAlignment.Far;
+                        bounds.Y = image.Height - bounds.Height - 1;
+                    }
                     
-                    // TODO 
-                    // bounds.Y = image.Height - bounds.Height - 1;
-                    
-                    DrawText(parameters, graphics, image, line, bounds);
+                    DrawText(parameters, graphics, image, line, bounds, stringFormat);
                 }
                   
                 using (var memoryStream = new MemoryStream())
@@ -67,23 +73,15 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, LineParameters line, Rectangle bounds)
+        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, LineParameters line, Rectangle bounds, StringFormat stringFormat)
         {
             var done = false;
             var fontSize = line.FontSize;
-
-            var stringFormat = new StringFormat(StringFormat.GenericTypographic);
-
-            stringFormat.Alignment = line.TextAlignment;
-
-            //stringFormat.LineAlignment = lineAlignment.Value;
-            
-
             var fontFamily = FindFont(parameters, line.Font);
 
             while (!done)
             {
-                var font = new Font(fontFamily, line.FontSize, FontStyle.Regular);
+                var font = new Font(fontFamily, fontSize, FontStyle.Regular);
 
                 var size = graphics.MeasureString(line.Text, font, bounds.Width);
                 

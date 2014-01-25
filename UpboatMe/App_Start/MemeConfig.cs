@@ -141,6 +141,7 @@ namespace UpboatMe.App_Start
             }
             batman.Lines[0].Bounds = new Rectangle(10, 5, 180, 75);
             batman.Lines[1].Bounds = new Rectangle(220, 5, 170, 75);
+            batman.Lines[1].HugBottom = false;
 
             var resharper = memes["resharpertip"];
             foreach (var line in resharper.Lines)
@@ -153,12 +154,44 @@ namespace UpboatMe.App_Start
             }
             resharper.Lines[0].Bounds = new Rectangle(78, 72, 481, 22);
             resharper.Lines[1].Bounds = new Rectangle(78, 97, 462, 22);
+            resharper.Lines[1].HugBottom = false;
 
             var doge = memes["doge"];
+            doge.Lines = Enumerable.Range(0, 6).Select(i => new LineConfig()).ToList();
             foreach (var line in doge.Lines)
             {
                 line.Font = "Comic Sans MS";
+                line.TextAlignment = StringAlignment.Near;
+                line.StrokeWidth = -1;
+                //line.FontStyle = FontStyle.Bold;
             }
+            doge.Lines[0].Bounds = new Rectangle(30, 30, 400, 100);
+            doge.Lines[0].Fill = Color.HotPink;
+            doge.Lines[0].FontSize = 50;
+            
+            doge.Lines[1].Bounds = new Rectangle(20, 120, 550, 100);
+            doge.Lines[1].TextAlignment = StringAlignment.Far;
+            doge.Lines[1].Fill = Color.ForestGreen;
+            doge.Lines[1].FontSize = 32;
+            
+            doge.Lines[2].Bounds = new Rectangle(50, 460, 400, 100);
+            doge.Lines[2].Fill = Color.Yellow;
+            doge.Lines[2].FontSize = 24;
+            
+            doge.Lines[3].Bounds = new Rectangle(20, 530, 580, 100);
+            doge.Lines[3].TextAlignment = StringAlignment.Far;
+            doge.Lines[3].Fill = Color.Blue;
+            doge.Lines[3].FontSize = 20;
+
+            doge.Lines[4].Bounds = new Rectangle(20, 350, 510, 100);
+            doge.Lines[4].TextAlignment = StringAlignment.Far;
+            doge.Lines[4].Fill = Color.Orange;
+            doge.Lines[4].FontSize = 36;
+
+            doge.Lines[5].Bounds = new Rectangle(20, 220, 560, 100);
+            doge.Lines[5].TextAlignment = StringAlignment.Far;
+            doge.Lines[5].Fill = Color.Red;
+            doge.Lines[5].FontSize = 22;
         }
     }
 }
