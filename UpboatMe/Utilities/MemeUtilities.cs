@@ -62,9 +62,11 @@ namespace UpboatMe.Utilities
             // so we're basically delimiting on slashes
             // if there are surprise slashes, they'll end up in the second line
             
-            var firstSlash = url.IndexOf('/');
-            var secondSlash = url.IndexOf('/', firstSlash + 1);
+           
+            
 
+            var firstSlash = url.IndexOf('/');
+            
             if (firstSlash > 0)
             {
                 result.Name = url.Substring(0, firstSlash);
@@ -76,14 +78,9 @@ namespace UpboatMe.Utilities
                 return result;
             }
 
-            if (secondSlash > 0)
+            if (url.Length > firstSlash)
             {
-                result.Top = url.Substring(firstSlash + 1, secondSlash - firstSlash - 1);
-                result.Bottom = url.Substring(secondSlash + 1);
-            }
-            else
-            {
-                result.Top = url.Substring(firstSlash + 1);
+                result.Lines = url.Substring(firstSlash + 1).Split(new[] { '/' }, StringSplitOptions.None).ToList();
             }
 
             return result;

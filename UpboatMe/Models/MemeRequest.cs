@@ -11,15 +11,13 @@ namespace UpboatMe.Models
     public class MemeRequest
     {
         public string Name { get; set; }
-        public string Top { get; set; }
-        public string Bottom { get; set; }
         public bool IsDebugMode { get; set; }
+        public List<string> Lines { get; set; }
 
         public MemeRequest()
         {
             Name = "";
-            Top = "";
-            Bottom = "";
+            Lines = new List<string>();
         }
 
         private static Regex _StripRegex = new Regex(@"&?debugmode=true|\.png$|\.jpe?g$", RegexOptions.Compiled | RegexOptions.IgnoreCase);

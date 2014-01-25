@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -26,8 +27,7 @@ namespace UpboatMe.Controllers
             {
                 // TODO: update this flow to return a proper HTTP 404 code, too
                 meme = GlobalMemeConfiguration.NotFoundMeme;
-                memeRequest.Top = "404";
-                memeRequest.Bottom = "Y U NO USE VALID MEME NAME?";
+                memeRequest.Lines = new List<string> { "404", "Y U NO USE VALID MEME NAME?" };
             }
 
             // if we want to do this earlier in the process consider
@@ -43,36 +43,45 @@ namespace UpboatMe.Controllers
             var renderParameters = new RenderParameters
             {
                 FullImagePath = HttpContext.Server.MapPath(meme.ImagePath),
-                TopLineHeightPercent = meme.TopLineHeightPercent,
-                TopLineBounds = meme.TopLineBounds,
-                TextAlignment = meme.TextAlignment,
-                BottomLineHeightPercent = meme.BottomLineHeightPercent,
-                BottomLineBounds = meme.BottomLineBounds,
-                Fill = meme.Fill,
-                Stroke = meme.Stroke,
-                Font = meme.Font,
-                FontSize = meme.FontSize,
-                StrokeWidth = meme.StrokeWidth,
                 DebugMode = memeRequest.IsDebugMode,
                 FullWatermarkImageFilePath = HttpContext.Server.MapPath("~/Content/UpBoatWatermark.png"),
                 WatermarkImageHeight = 25,
                 WatermarkImageWidth = 25,
                 WatermarkText = "upboat.me",
                 WatermarkFont = "Arial",
+                WatermarkFontStyle = FontStyle.Regular,
                 WatermarkFontSize = 9,
                 WatermarkStroke = Color.Black,
                 WatermarkFill = Color.White,
                 WatermarkStrokeWidth = 1,
                 PrivateFonts = MemeConfig.PrivateFontCollection,
-                FontStyle = meme.FontStyle,
+                Lines = meme.Lines.Select(l => new LineParameters
+                {
+                    Bounds = l.Bounds,
+                    DoForceTextToAllCaps = l.DoForceTextToAllCaps,
+                    Fill = l.Fill,
+                    Font = l.Font,
+                    FontSize = l.FontSize,
+                    FontStyle = l.FontStyle,
+                    HeightPercent = l.HeightPercent,
+                    Stroke = l.Stroke,
+                    StrokeWidth = l.StrokeWidth,
+                    TextAlignment = l.TextAlignment,
+                    HugBottom = l.HugBottom
+                }).ToList()
             };
+
+            for(var x = 0; x < renderParameters.Lines.Count; x++)
+            {
+                if (x < memeRequest.Lines.Count)
+                {
+                    renderParameters.Lines[x].Text = memeRequest.Lines[x].SanitizeMemeText(renderParameters.Lines[x].DoForceTextToAllCaps);
+                }
+            }
 
             var renderer = new Renderer();
 
-            var bytes = renderer.Render(
-                renderParameters, 
-                memeRequest.Top.SanitizeMemeText(meme.DoForceTextToAllCaps), 
-                memeRequest.Bottom.SanitizeMemeText(meme.DoForceTextToAllCaps));
+            var bytes = renderer.Render(renderParameters);
 
             Analytics.TrackMeme(HttpContext, memeRequest.Name);
 
@@ -138,16 +147,15 @@ namespace UpboatMe.Controllers
             {
                 // TODO: update this flow to return a proper HTTP 404 code, too
                 memeRequest.Name = "ihyk";
-                memeRequest.Top = "I'll-have-you-know-I-tried-other-meme-generators";
-                memeRequest.Bottom = "and-only-wasted-hours-and-hours-of-my-life";
+                memeRequest.Lines = new List<string>() { "I'll-have-you-know-I-tried-other-meme-generators", "and-only-wasted-hours-and-hours-of-my-life" };
             }
 
             var viewModel = new BuilderViewModel
             {
                 Memes = GlobalMemeConfiguration.Memes.GetMemes(),
                 SelectedMeme = meme != null ? meme.Aliases.First() : memeRequest.Name,
-                Top = memeRequest.Top,
-                Bottom = memeRequest.Bottom
+                Top = memeRequest.Lines.Count > 0 ? memeRequest.Lines[0] : string.Empty,
+                Bottom = memeRequest.Lines.Count > 1 ? memeRequest.Lines[1] : string.Empty
             };
 
             return View(viewModel);

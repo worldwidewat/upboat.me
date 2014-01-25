@@ -9,16 +9,31 @@ namespace UpboatMe.Imaging
 {
     public class Renderer
     {
-        public byte[] Render(RenderParameters parameters, string top, string bottom)
+        public byte[] Render(RenderParameters parameters)
         {
             using (var image = Image.FromFile(parameters.FullImagePath))
             using (var graphics = Graphics.FromImage(image))
             {
                 DrawWatermark(parameters, graphics, image);
 
-                DrawText(parameters, graphics, image, top, true);
+                foreach (var line in parameters.Lines)
+                {
+                    var maxHeightPercent = line.HeightPercent;
+                    var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100));
+                    var bounds = line.Bounds ?? new Rectangle(0, 0, image.Width, maxHeight);
+                    var stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
-                DrawText(parameters, graphics, image, bottom, false);
+                    stringFormat.Alignment = line.TextAlignment;
+                    stringFormat.LineAlignment = StringAlignment.Near;
+
+                    if (line.HugBottom)
+                    {
+                        stringFormat.LineAlignment = StringAlignment.Far;
+                        bounds.Y = image.Height - bounds.Height - 1;
+                    }
+                    
+                    DrawText(parameters, graphics, image, line, bounds, stringFormat);
+                }
                   
                 using (var memoryStream = new MemoryStream())
                 {
@@ -51,34 +66,24 @@ namespace UpboatMe.Imaging
 
                 var stroke = new SolidBrush(Color.FromArgb(150, parameters.WatermarkStroke));
                 var fill = new SolidBrush(Color.FromArgb(150, parameters.WatermarkFill));
-
-                DrawText(graphics, parameters.WatermarkText, font, parameters.FontStyle, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
+                
+                DrawText(graphics, parameters.WatermarkText, font, parameters.WatermarkFontStyle, parameters.WatermarkFontSize, stroke, parameters.WatermarkStrokeWidth, fill, StringFormat.GenericTypographic, bounds);
 
                 graphics.CompositingMode = CompositingMode.SourceCopy;
             }
         }
 
-        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, string text, bool isTop)
+        private void DrawText(RenderParameters parameters, Graphics graphics, Image image, LineParameters line, Rectangle bounds, StringFormat stringFormat)
         {
             var done = false;
-            var fontSize = parameters.FontSize;
-            var maxHeightPercent = isTop ? parameters.TopLineHeightPercent : parameters.BottomLineHeightPercent;
-            var maxHeight = (int)Math.Ceiling(image.Height * (maxHeightPercent / 100));
-            var stringFormat = new StringFormat(StringFormat.GenericTypographic);
-
-            var bounds = (isTop ? parameters.TopLineBounds : parameters.BottomLineBounds)
-                                    ?? new Rectangle(0, 0, image.Width, maxHeight);
-
-            
-            stringFormat.Alignment = parameters.TextAlignment;
-
-            var fontFamily = FindFont(parameters);
+            var fontSize = line.FontSize;
+            var fontFamily = FindFont(parameters, line.Font);
 
             while (!done)
             {
                 var font = new Font(fontFamily, fontSize, FontStyle.Regular);
 
-                var size = graphics.MeasureString(text, font, bounds.Width);
+                var size = graphics.MeasureString(line.Text, font, bounds.Width);
                 
                 if (size.Height > bounds.Size.Height && fontSize > 10)
                 {
@@ -86,17 +91,10 @@ namespace UpboatMe.Imaging
                     continue;
                 }
 
+                var stroke = new SolidBrush(line.Stroke);
+                var fill = new SolidBrush(line.Fill);
 
-                if (!isTop && parameters.BottomLineBounds == null)
-                {
-                    bounds.Y = image.Height - bounds.Height - 1;
-                    stringFormat.LineAlignment = StringAlignment.Far;
-                }
-
-                var stroke = new SolidBrush(parameters.Stroke);
-                var fill = new SolidBrush(parameters.Fill);
-
-                DrawText(graphics, text, font, parameters.FontStyle, fontSize, stroke, parameters.StrokeWidth, fill, stringFormat, bounds);
+                DrawText(graphics, line.Text, font, line.FontStyle, fontSize, stroke, line.StrokeWidth, fill, stringFormat, bounds);
 
                 if (parameters.DebugMode)
                 {
@@ -107,15 +105,16 @@ namespace UpboatMe.Imaging
             }
         }
 
-        private static FontFamily FindFont(RenderParameters parameters)
+        private static FontFamily FindFont(RenderParameters parameters, string font)
         {
-            var fontFamily = parameters.PrivateFonts.Families.FirstOrDefault(f => f.Name == parameters.Font)
-                             ?? FontFamily.Families.FirstOrDefault(f => f.Name == parameters.Font);
+            var fontFamily = parameters.PrivateFonts.Families.FirstOrDefault(f => f.Name == font)
+                             ?? FontFamily.Families.FirstOrDefault(f => f.Name == font);
 
             if (fontFamily == null)
             {
-                throw new ArgumentException(string.Format("Font {0} could not be found", parameters.Font));
+                throw new ArgumentException(string.Format("Font {0} could not be found", font));
             }
+
             return fontFamily;
         }
 
