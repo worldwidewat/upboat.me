@@ -3,17 +3,29 @@
     
     $("#builder-form").on("submit", function(e) {
         var name = $(this).find('[name=name]').val();
-        var top = encodeURIComponent($(this).find('[name=top]').val()) || "-";
-        var bottom = encodeURIComponent($(this).find('[name=bottom]').val());
 
+        var lines = [];
+        $.each($(this).find('.builder-line'), function (index, item) {
+            lines.push($(item).val() || '-');
+        });
+        
         var url = $(this).attr('action')
             + "/" + name
-            + "/" + top
-            + "/" + bottom
+            + "/" + lines.join('/')
             + ".jpg";
 
         e.preventDefault();
         window.location.href = url;
+    });
+
+    $('#builder-form select[name=name]').change(function () {
+        $('#builder-form').find('.builder-line').remove();
+
+        var count = $(this).find('option:selected').attr('data-line-count');
+
+        for (var x = count; x > 0; x--) {
+            $('<input type="text" class="builder-line" placeholder="line ' + x + '"/>').insertAfter('#builder-form select[name=name]');
+        }
     });
 
     $("#share-url").on("click", function (e) {

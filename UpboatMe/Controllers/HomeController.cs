@@ -53,8 +53,7 @@ namespace UpboatMe.Controllers
                 BuilderViewModel = new BuilderViewModel
                 {
                     Memes = memes,
-                    Top = "top-line",
-                    Bottom = "bottom-line",
+                    Lines = new List<string>(),
                     SelectedMeme = memes.First().Aliases.First()
                 }
             };
