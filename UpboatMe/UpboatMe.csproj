@@ -158,6 +158,7 @@
     <Compile Include="Models\MemeDebugViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\StringExtensionMethods.cs" />
+    <Compile Include="Utilities\ThreadRandom.cs" />
     <Compile Include="Utilities\UrlHelperExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
