@@ -10,9 +10,8 @@ namespace UpboatMe.Models
     public class BuilderViewModel
     {
         public string SelectedMeme { get; set; }
-        public string Top { get; set; }
-        public string Bottom { get; set; }
         public IList<Meme> Memes { get; set; }
+        public List<string> Lines { get; set; }
 
         private readonly Regex _previewUrlStripper = new Regex(@"\s+", RegexOptions.Compiled);
         public MvcHtmlString GetPreviewUrl(UrlHelper helper)
@@ -23,7 +22,7 @@ namespace UpboatMe.Models
                 root += "/";
             }
 
-            var path = string.Format("{0}{1}/{2}/{3}", root, SelectedMeme, Top, Bottom);
+            var path = string.Format("{0}{1}/{2}", root, SelectedMeme, string.Join("/", Lines));
             var strippedPath = _previewUrlStripper.Replace(path, "-");
             var trimmedPath = strippedPath.TrimEnd('/');
             var pathWithExtension = trimmedPath + ".jpg";
@@ -33,8 +32,8 @@ namespace UpboatMe.Models
 
         public string GetAltText()
         {
-            return string.Format("{0}:{1}{2}{1}{3}",
-                                 SelectedMeme, Environment.NewLine, Top, Bottom);
+            return string.Format("{0}:{1}{2}",
+                                 SelectedMeme, Environment.NewLine, string.Join(Environment.NewLine, Lines));
         }
 
         public string GetShareText()

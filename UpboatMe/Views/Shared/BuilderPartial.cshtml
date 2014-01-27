@@ -5,14 +5,25 @@
 <div class="row">
     <div class="large-6 columns">
         <form id="builder-form" action="@Url.Action("Builder", "Meme", new { url = "" })">
-            @Html.DropDownList("name", new SelectList(Model.Memes.Select(m => new { Value = m.Aliases.First(), Text = m.Description }), "Value", "Text", Model.SelectedMeme))
-            <input name="top" type="text" id="first-line" placeholder="Top Line" value="@Model.Top" />
-            <input name="bottom" type="text" id="second-line" placeholder="Bottom Line" value="@Model.Bottom" />
+            <select name="name">
+                @for (var x = 0; x < Model.Memes.Count; x++)
+                {
+                    <option data-line-count="@Model.Memes[x].Lines.Count" value="@Model.Memes[x].Aliases.First()" @(Model.Memes[x].Aliases.First() == Model.SelectedMeme ? "selected='selected'" : "")>
+                        @Model.Memes[x].Description
+                    </option>
+                }
+            </select>
+
+            @for (var x = 0; x < Model.Lines.Count; x++)
+            {
+                <input type="text" class="builder-line" placeholder="line @x" value="@Model.Lines[x]"/>
+            }
+            
             <div class="text-right">
                 <input class="small button" type="submit" value="Create!" id="create-meme" />
             </div>
         </form>
-        @if (!string.IsNullOrEmpty(Model.Top) || !string.IsNullOrEmpty(Model.Bottom))
+        @if (Model.Lines != null && Model.Lines.Any(l => !string.IsNullOrEmpty(l)))
         {
             <div>
                 <h3 id="share">Share it!</h3>
