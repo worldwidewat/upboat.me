@@ -145,7 +145,6 @@ namespace UpboatMe.Controllers
             var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, memeRequest.Name);
             if (meme == null)
             {
-                // TODO: update this flow to return a proper HTTP 404 code, too
                 memeRequest.Name = "ihyk";
                 memeRequest.Lines = new List<string>() { "I'll-have-you-know-I-tried-other-meme-generators", "and-only-wasted-hours-and-hours-of-my-life" };
             }

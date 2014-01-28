@@ -4,6 +4,7 @@
 *.suo
 *.user
 *.ncrunch*
+_NCrunch_UpboatMe/
 bin/
 obj/
 local_settings.py

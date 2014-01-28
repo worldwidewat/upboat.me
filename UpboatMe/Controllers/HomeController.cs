@@ -5,6 +5,7 @@ using System.Web.UI;
 using UpboatMe.Models;
 using System.Linq;
 using System.Web.Hosting;
+using UpboatMe.Utilities;
 
 namespace UpboatMe.Controllers
 {
@@ -15,6 +16,12 @@ namespace UpboatMe.Controllers
         public ActionResult Index()
         {
             var memes = GlobalMemeConfiguration.Memes.GetMemes();
+
+            // note: since this method uses output caching, you should really only expect 
+            // the value to change once per minute
+            var randomIndex = ThreadRandom.Next(0, memes.Count);
+            var randomMeme = memes[randomIndex];
+
             var root = HostingEnvironment.ApplicationVirtualPath ?? "";
             if (!root.EndsWith("/"))
             {
@@ -53,11 +60,11 @@ namespace UpboatMe.Controllers
                 BuilderViewModel = new BuilderViewModel
                 {
                     Memes = memes,
-                    Lines = new List<string>(),
-                    SelectedMeme = memes.First().Aliases.First()
+                    Lines = Enumerable.Repeat("", randomMeme.Lines.Count).ToList(),
+                    SelectedMeme = randomMeme.Aliases.First()
                 }
             };
-
+            
             return View(viewModel);
         }
 
