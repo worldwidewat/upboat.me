@@ -45,7 +45,7 @@ something that we can't merge later!
 * Submit your changes (included your name on the CLA file) to us as a pull request
 
 ## Additional Resources
-* [Michael](http://twitter.com/mharen) and [Mark](http://twitte.com/pwninstein) on Twitter
+* [Michael](http://twitter.com/mharen) and [Mark](http://twitter.com/pwninstein) on Twitter
 * [General GitHub documentation](http://help.github.com/)
 * [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
 
