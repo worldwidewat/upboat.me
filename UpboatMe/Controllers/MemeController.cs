@@ -153,7 +153,7 @@ namespace UpboatMe.Controllers
             {
                 Memes = GlobalMemeConfiguration.Memes.GetMemes(),
                 SelectedMeme = meme != null ? meme.Aliases.First() : memeRequest.Name,
-                Lines = memeRequest.Lines
+                Lines = meme.Lines.Select((item, index) => memeRequest.Lines.Count > index ? memeRequest.Lines[index] : string.Empty).ToList()
             };
 
             return View(viewModel);

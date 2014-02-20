@@ -16,7 +16,7 @@
 
             @for (var x = 0; x < Model.Lines.Count; x++)
             {
-                <input type="text" class="builder-line" placeholder="line @x" value="@Model.Lines[x]"/>
+                <input type="text" class="builder-line" placeholder="line @(x + 1)" value="@Model.Lines[x]"/>
             }
             
             <div class="text-right">
