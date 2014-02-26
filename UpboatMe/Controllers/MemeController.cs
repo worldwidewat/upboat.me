@@ -143,17 +143,32 @@ namespace UpboatMe.Controllers
             var memeRequest = MemeRequest.FromUrl(url, Server);
 
             var meme = MemeUtilities.FindMeme(GlobalMemeConfiguration.Memes, memeRequest.Name);
+
+
+            int memeLineCount;
+
             if (meme == null)
             {
                 memeRequest.Name = "ihyk";
-                memeRequest.Lines = new List<string>() { "I'll-have-you-know-I-tried-other-meme-generators", "and-only-wasted-hours-and-hours-of-my-life" };
+                memeRequest.Lines = new List<string>() { "I'll have you know I tried other meme generators", "and only wasted hours and hours of my life" };
+                memeLineCount = GlobalMemeConfiguration.Memes[memeRequest.Name].Lines.Count;
             }
+            else
+            {
+                memeLineCount = meme.Lines.Count;
+            }
+
+            var lines = Enumerable.Range(0, memeLineCount)
+                .Select((item, index)
+                    => memeRequest.Lines.Count > index
+                        ? memeRequest.Lines[index]
+                        : string.Empty).ToList();
 
             var viewModel = new BuilderViewModel
             {
                 Memes = GlobalMemeConfiguration.Memes.GetMemes(),
-                SelectedMeme = meme != null ? meme.Aliases.First() : memeRequest.Name,
-                Lines = meme.Lines.Select((item, index) => memeRequest.Lines.Count > index ? memeRequest.Lines[index] : string.Empty).ToList()
+                SelectedMeme = memeRequest.Name,
+                Lines = lines
             };
 
             return View(viewModel);
