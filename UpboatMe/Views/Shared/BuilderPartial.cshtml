@@ -1,6 +1,7 @@
 ﻿@model BuilderViewModel
 @{
     var previewUrl = Model.GetPreviewUrl(Url);
+    var isMemeReady = Model.Lines != null && Model.Lines.Any(l => !string.IsNullOrEmpty(l));
 }
 <div class="row">
     <div class="large-6 columns">
@@ -23,7 +24,7 @@
                 <input class="small button" type="submit" value="Create!" id="create-meme" />
             </div>
         </form>
-        @if (Model.Lines != null && Model.Lines.Any(l => !string.IsNullOrEmpty(l)))
+        @if (isMemeReady)
         {
             <div>
                 <h3 id="share">Share it!</h3>
@@ -53,6 +54,15 @@
         }
     </div>
     <div class="large-6 columns">
-        <img id="meme-preview" src="@(previewUrl)" alt="@(@Model.GetAltText())" title="@(@Model.GetAltText())"/>
+        @if (isMemeReady)
+        {
+            <a href="@previewUrl">
+                <img id="meme-preview" src="@(previewUrl)" alt="@(@Model.GetAltText())" title="@(@Model.GetAltText())"/>
+            </a>
+        }
+        else
+        {
+            <img id="meme-preview" src="@(previewUrl)" alt="@(@Model.GetAltText())" title="@(@Model.GetAltText())"/>
+        }
     </div>
 </div>
