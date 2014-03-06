@@ -25,15 +25,14 @@ something that we can't merge later!
 
 * Add a blank template image to [`UpboatMe/Images/Originals`](https://github.com/worldwidewat/upboat.me/tree/master/UpboatMe/Images/Original)
     * We will use this to generate a smaller image in a minute
-* Re-save your "raw" template as a relatively low quality png to [`UpboatMe/Images`](https://github.com/worldwidewat/upboat.me/tree/master/UpboatMe/Images) with the following settings (this often has a *dramatic* impact on file size):
+* Re-save your "raw" template as a relatively low quality jpg to [`UpboatMe/Images`](https://github.com/worldwidewat/upboat.me/tree/master/UpboatMe/Images) with the following settings (this often has a *dramatic* impact on file size):
     * Width <= 400px
-    * Type: png
-    * Bit depth: 8-bit (many apps, like [Paint.Net](http://www.getpaint.net/), let you set this when you save)
+    * Type: jpg
+    * Quality: reasonable
     * If you can't get the file size down, don't worry about it. Commit anyway (we'll fix it up!)
 * Include both the original _and_ the smaller version with your commit (so we can rebuild the smaller one later if we need to)
 * Update [`UpboatMe/App_Start/MemeConfig.cs`](https://github.com/worldwidewat/upboat.me/blob/master/UpboatMe/App_Start/MemeConfig.cs) 
-  with the new meme's metadata (it's pretty obvious...)
-    * Put your new meme in alphabetical order with the others (please!)
+  with the new meme's metadata (it's pretty obvious...) *if necessary* (standard memes are handled automatically)
 * If you didn't add the new image from within Visual Studio, be sure to include the new image in the project file. Do this by 
   clicking the "Show all files" button in Solution Explorer, then right click on the image and choose "Include in project"
 * Test your new meme (don't forget to rebuild!)
