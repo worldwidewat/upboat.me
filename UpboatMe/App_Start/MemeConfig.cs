@@ -106,8 +106,8 @@ namespace UpboatMe.App_Start
 
         public static void RegisterManualMemes(MemeConfiguration memes)
         {
-            var batmanFontPath = HttpRuntime.AppDomainAppPath + @"Fonts\SFActionManExtended.ttf";
-            PrivateFontCollection.AddFontFile(batmanFontPath);
+            var sfActionManExtendedFontPath = HttpRuntime.AppDomainAppPath + @"Fonts\SFActionManExtended.ttf";
+            PrivateFontCollection.AddFontFile(sfActionManExtendedFontPath);
 
             // overrides
             memes["10guy"].Aliases.Add("tenguy");
@@ -130,6 +130,7 @@ namespace UpboatMe.App_Start
             memes["toystoryeverywhere"].Aliases.Add("buzzwoody", "xxeverywhere");
             memes["unhelpfulhighschoolteacher"].Aliases.Add("scumbagteacher");
             memes["mckaylamaroneynotimpressed"].Aliases.Add("nim", "um", "unimpressedmckayla");
+            memes["csisunglasses"].Aliases.Add("csi", "sunglasses", "yeeaaaahh");
 
             var batman = memes["batmanslappingrobin"];
             foreach (var line in batman.Lines)
@@ -192,6 +193,20 @@ namespace UpboatMe.App_Start
             doge.Lines[5].TextAlignment = StringAlignment.Far;
             doge.Lines[5].Fill = Color.Red;
             doge.Lines[5].FontSize = 22;
+
+            var csi = memes["csisunglasses"];
+            csi.Lines = Enumerable.Range(0, 4).Select(i => new LineConfig()).ToList();
+            foreach (var line in csi.Lines)
+            {
+                line.Fill = Color.Black;
+                line.Font = "SF Action Man Extended";
+                line.StrokeWidth = -1;
+                line.TextAlignment = StringAlignment.Center;
+            }
+            csi.Lines[0].Bounds = new Rectangle(12, 18, 231, 58);
+            csi.Lines[1].Bounds = new Rectangle(190, 94, 78, 18);
+            csi.Lines[2].Bounds = new Rectangle(311, 33, 207, 61);
+            csi.Lines[3].Bounds = new Rectangle(35, 342, 196, 49);
         }
     }
 }
