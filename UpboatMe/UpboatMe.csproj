@@ -378,6 +378,7 @@
     <Content Include="Images\0180-confession-bear.jpg" />
     <Content Include="Images\0181-doge.jpg" />
     <Content Include="Images\0182-csi-sunglasses.jpg" />
+    <Content Include="Images\0183-bender-blackjack.jpg" />
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\NewRelic.Agent.Core.dll" />
     <Content Include="newrelic\NewRelic.Profiler.dll" />
