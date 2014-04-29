@@ -14,3 +14,11 @@
 <div class="row"><div class="large-12 columns"><h2>examples</h2></div></div>
 
 @Html.Partial("RecentMemes", Model.RecentMemes)
+
+@section scripts {
+    @Scripts.Render("~/bundles/builder")
+    <script type="text/javascript">
+        var rootUrl = '@Url.Action("Index", "Home", null, Request.Url.Scheme)';
+        builder.init(rootUrl);
+    </script>
+}

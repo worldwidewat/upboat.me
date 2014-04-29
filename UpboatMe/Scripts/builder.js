@@ -70,7 +70,7 @@
         $('#share-pi').attr('href', 'http://pinterest.com/pin/create/button/?url=' + shareUrl + '&media=' + shareUrl + '&description=' + shareText);
     },
     updateUrlState: function (memePath) {
-        if (history && history.pushState) {
+        if (this.builderPath && history && history.pushState) {
             history.pushState({ meme: this.currentMeme, lines: this.lines }, 'Builder', '/' + this.builderPath + memePath);
         }
     }
