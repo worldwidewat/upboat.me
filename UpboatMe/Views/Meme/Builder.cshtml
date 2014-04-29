@@ -4,4 +4,13 @@
     ViewBag.Title = "Builder";
 }
 
+
 @Html.Partial("BuilderPartial", Model)
+@section scripts {
+    @Scripts.Render("~/bundles/builder")
+    <script type="text/javascript">
+        var rootUrl = '@Url.Action("Index", "Home", null, Request.Url.Scheme)';
+        var builderPath = 'Builder/';
+        builder.init(rootUrl, builderPath);
+    </script>
+}

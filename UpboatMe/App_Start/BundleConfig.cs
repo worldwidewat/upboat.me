@@ -30,6 +30,9 @@ namespace UpboatMe
 
             bundles.Add(new ScriptBundle("~/bundles/site")
                             .Include("~/Scripts/site.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/builder")
+                            .Include("~/Scripts/builder.js"));
         }
     }
 }

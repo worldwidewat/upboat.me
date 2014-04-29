@@ -5,7 +5,7 @@
 }
 <div class="row">
     <div class="large-6 columns">
-        <form id="builder-form" action="@Url.Action("Builder", "Meme", new { url = "" })">
+        <div id="builder-form">
             <select name="name">
                 @for (var x = 0; x < Model.Memes.Count; x++)
                 {
@@ -17,13 +17,9 @@
 
             @for (var x = 0; x < Model.Lines.Count; x++)
             {
-                <input type="text" class="builder-line" placeholder="line @(x + 1)" value="@Model.Lines[x]"/>
+                <input type="text" class="builder-line" placeholder="line @(x + 1)" value="@Model.Lines[x]" />
             }
-            
-            <div class="text-right">
-                <input class="small button" type="submit" value="Create!" id="create-meme" />
-            </div>
-        </form>
+        </div>
         @if (isMemeReady)
         {
             <div>
@@ -35,17 +31,17 @@
                 </div>
                 <div class="row" style="margin-top: 1em; margin-bottom: 1em;">
                     <div class="large-12 columns text-right">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=@(previewUrl)" target="_blank">
+                        <a id="share-fb" href="https://www.facebook.com/sharer/sharer.php?u=@(previewUrl)" target="_blank">
                             <img src="@Url.VersionedContent("~/Content/social/24px/facebook.png")" alt="Share to Facebook" title="Share to Facebook" />
                         </a>
-                        <a href="https://twitter.com/share?url=@(previewUrl)&via=upboatme&text=@(Model.GetShareText())" target="_blank">
+                        <a id="share-tw" href="https://twitter.com/share?url=@(previewUrl)&via=upboatme&text=@(Model.GetShareText())" target="_blank">
                             <img src="@Url.VersionedContent("~/Content/social/24px/twitter.png")" alt="Share to Twitter" title="Share to Twitter" />
                         </a>
-                        <a href="http://www.reddit.com/r/AdviceAnimals/submit?title=@(Model.GetShareText())&url=@(previewUrl)" target="_blank">
+                        <a id="share-re" href="http://www.reddit.com/r/AdviceAnimals/submit?title=@(Model.GetShareText())&url=@(previewUrl)" target="_blank">
                             <img src="@Url.VersionedContent("~/Content/social/24px/reddit.png")" alt="Share to Reddit" title="Share to Reddit" />
                         </a>
 
-                        <a href="http://pinterest.com/pin/create/button/?url=@(previewUrl)&media=@(previewUrl)&description=@(Model.GetShareText())" target="_blank">
+                        <a id="share-pi" href="http://pinterest.com/pin/create/button/?url=@(previewUrl)&media=@(previewUrl)&description=@(Model.GetShareText())" target="_blank">
                             <img src="@Url.VersionedContent("~/Content/social/24px/pinterest.png")" alt="Pin it" title="Pin it" />
                         </a>
                     </div>
