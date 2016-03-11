@@ -407,7 +407,6 @@
     <Content Include="Fonts\SFActionManExtended.ttf" />
     <Content Include="Fonts\ShyFoundry Freeware EULA.pdf" />
     <Content Include="Fonts\SFActionManExtended-Italic.ttf" />
-    <Content Include="newrelic\newrelic.config" />
     <Content Include="newrelic\extensions\extension.xsd">
       <SubType>Designer</SubType>
     </Content>
