@@ -380,7 +380,7 @@
     <Content Include="Images\0182-csi-sunglasses.jpg" />
     <Content Include="Images\0183-blackjack-bender.jpg" />
     <Content Include="Images\0184-bad-joke-yoda.jpg" />
-    <Content Include="Images\0185-phteven.png" />
+    <Content Include="Images\0185-phteven.jpg" />
     <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
     <Content Include="newrelic\NewRelic.Agent.Core.dll" />
     <Content Include="newrelic\NewRelic.Profiler.dll" />
