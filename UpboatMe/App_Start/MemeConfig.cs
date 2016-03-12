@@ -131,7 +131,6 @@ namespace UpboatMe.App_Start
             memes["unhelpfulhighschoolteacher"].Aliases.Add("scumbagteacher");
             memes["mckaylamaroneynotimpressed"].Aliases.Add("nim", "um", "unimpressedmckayla");
             memes["csisunglasses"].Aliases.Add("csi", "sunglasses", "yeeaaaahh");
-            memes["badjokeyoda"].Aliases.Add("bjy", "jokeyoda", "yodajoke");
 
             var batman = memes["batmanslappingrobin"];
             foreach (var line in batman.Lines)
