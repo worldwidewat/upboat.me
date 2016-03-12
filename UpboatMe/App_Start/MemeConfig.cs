@@ -207,11 +207,6 @@ namespace UpboatMe.App_Start
             csi.Lines[1].Bounds = new Rectangle(190, 94, 78, 18);
             csi.Lines[2].Bounds = new Rectangle(311, 33, 207, 61);
             csi.Lines[3].Bounds = new Rectangle(35, 342, 196, 49);
-
-            var jokeYoda = memes["badjokeyoda"];
-            jokeYoda.Lines = Enumerable.Range(0, 2).Select(i => new LineConfig()).ToList();
-            jokeYoda.Lines[0].Bounds = new Rectangle(12, 7, 368, 95);
-            jokeYoda.Lines[1].Bounds = new Rectangle(12, 416, 368, 95);
         }
     }
 }
